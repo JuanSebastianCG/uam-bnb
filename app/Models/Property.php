@@ -38,5 +38,9 @@ class Property extends Model
     {
         return $this->hasMany(Characteristic::class);
     }
+    public function photograph()
+    {
+        return $this->hasMany(Photograph::class);
+    }
 
 }
