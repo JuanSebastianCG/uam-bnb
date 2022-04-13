@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Rental_availability extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'availability',
+        'start_date',
+        'departure_date',
+    ];
+
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
 }

@@ -46,5 +46,9 @@ class Property extends Model
     {
         return $this->hasMany(Photograph::class);
     }
+    public function rental_availability()
+    {
+        return $this->hasMany(Rental_availability::class);
+    }
 
 }
