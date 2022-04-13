@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Property extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = [
+        'name',
+        'description',
+        'area',
+        'capacity',
+        'daily_Lease_Value',
+        'latitude',
+        'longitude',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
