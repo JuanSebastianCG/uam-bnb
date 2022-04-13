@@ -34,6 +34,10 @@ class Property extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function qualification()
+    {
+        return $this->hasMany(Qualification::class);
+    }
     public function characteristic()
     {
         return $this->hasMany(Characteristic::class);

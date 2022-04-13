@@ -50,6 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+    public function qualification()
+    {
+        return $this->hasMany(Qualification::class);
+    }
     public function bill()
     {
         return $this->hasMany(Bill::class);
