@@ -19,22 +19,22 @@ class Characteristics_of_propertiesSeeder extends Seeder
     {
 
             $p = new Characteristic_of_property();
-            $p->charactristic_id = "1";
+            $p->characteristic_id = "1";
             $p->property_id = "1";
             $p->save();
 
             $p = new Characteristic_of_property();
-            $p->charactristic_id = "2";
+            $p->characteristic_id = "2";
             $p->property_id = "1";
             $p->save();
 
             $p = new Characteristic_of_property();
-            $p->charactristic_id = "3";
+            $p->characteristic_id = "3";
             $p->property_id = "1";
             $p->save();
 
             $p = new Characteristic_of_property();
-            $p->charactristic_id = "2";
+            $p->characteristic_id = "2";
             $p->property_id = "2";
             $p->save();
 

@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
         $this->call([UsersSeeder::class]);
         $this->call([PropertiesSeeder::class]);
         $this->call([CharacteristicsSeeder::class]);
+        $this->call([Characteristics_of_propertiesSeeder::class]);
         $this->call([Rental_availabilitiesSeeder::class]);
         $this->call([PhotographsSeeder::class]);
-        $this->call([PropertiesSeeder::class]);
         $this->call([QualificationsSeeder::class]);
-        $this->call([Rental_availabilitiesSeeder::class]);
+        $this->call([CommentsSeeder::class]);
+        $this->call([BillsSeeder::class]);
     }
 }

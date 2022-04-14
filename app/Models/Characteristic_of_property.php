@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Characteristic_of_property extends Model
 {
     use HasFactory;
-
+    public $table = "characteristics_of_properties";
+    protected $fillable = [
+    ];
 
     public function property()
     {
@@ -19,5 +21,5 @@ class Characteristic_of_property extends Model
         return $this->belongsTo(Characteristic::class);
     }
 
-    
+
 }

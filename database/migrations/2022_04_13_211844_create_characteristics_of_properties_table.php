@@ -15,10 +15,11 @@ class CreateCharacteristicsOfPropertiesTable extends Migration
     {
         Schema::create('characteristics_of_properties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('charactristic_id')->references('id')->on('characteristics');
-            $table->foreignId('property_id')->references('id')->on('properties');
-            $table->timestamps();
 
+            $table->foreignId('property_id')->references('id')->on('properties');
+            $table->foreignId('characteristic_id')->references('id')->on('characteristics');
+
+            $table->timestamps();
         });
     }
 
