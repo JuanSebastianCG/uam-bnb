@@ -37,7 +37,7 @@ class PropertiesSeeder extends Seeder
         $p->type = "apartment";
         $p->latitude = "5.067";
         $p->longitude = "-75.517";
-        $p->user_id= "2";
+        $p->user_id= "1";
         $p->save();
 
         $p = new Property();

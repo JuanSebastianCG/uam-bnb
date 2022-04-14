@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Characteristics_of_propertys extends Model
+class Characteristic_of_property extends Model
 {
     use HasFactory;
+
 
     public function property()
     {
@@ -18,4 +19,5 @@ class Characteristics_of_propertys extends Model
         return $this->belongsTo(Characteristic::class);
     }
 
+    
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Characteristics_of_propertys;
+use App\Models\Characteristic_of_property;
 use Illuminate\Http\Request;
 
-class Characteristics_of_propertysController extends Controller
+class Characteristic_of_propertyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class Characteristics_of_propertysController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Characteristics_of_propertys  $characteristics_of_propertys
+     * @param  \App\Models\Characteristic_of_property  $characteristic_of_property
      * @return \Illuminate\Http\Response
      */
-    public function show(Characteristics_of_propertys $characteristics_of_propertys)
+    public function show(Characteristic_of_property $characteristic_of_property)
     {
         //
     }
@@ -52,10 +52,10 @@ class Characteristics_of_propertysController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Characteristics_of_propertys  $characteristics_of_propertys
+     * @param  \App\Models\Characteristic_of_property  $characteristic_of_property
      * @return \Illuminate\Http\Response
      */
-    public function edit(Characteristics_of_propertys $characteristics_of_propertys)
+    public function edit(Characteristic_of_property $characteristic_of_property)
     {
         //
     }
@@ -64,10 +64,10 @@ class Characteristics_of_propertysController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Characteristics_of_propertys  $characteristics_of_propertys
+     * @param  \App\Models\Characteristic_of_property  $characteristic_of_property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Characteristics_of_propertys $characteristics_of_propertys)
+    public function update(Request $request, Characteristic_of_property $characteristic_of_property)
     {
         //
     }
@@ -75,10 +75,10 @@ class Characteristics_of_propertysController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Characteristics_of_propertys  $characteristics_of_propertys
+     * @param  \App\Models\Characteristic_of_property  $characteristic_of_property
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Characteristics_of_propertys $characteristics_of_propertys)
+    public function destroy(Characteristic_of_property $characteristic_of_property)
     {
         //
     }

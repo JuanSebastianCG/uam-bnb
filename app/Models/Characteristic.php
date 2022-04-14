@@ -13,9 +13,9 @@ class Characteristic extends Model
         'name',
     ];
 
-    public function characteristics_of_propertys()
+    public function characteristic_of_property()
     {
-        return $this->hasMany(Characteristics_of_propertys::class);
+        return $this->hasMany(Characteristic_of_property::class);
     }
 
 }
