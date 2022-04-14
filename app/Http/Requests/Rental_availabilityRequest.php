@@ -13,7 +13,7 @@ class Rental_availabilityRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class Rental_availabilityRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'availability' => 'required',
+            'start_date' => 'required|string|max:50',
+            'departure_date' => 'required|min:1|max:1000'
         ];
     }
 }

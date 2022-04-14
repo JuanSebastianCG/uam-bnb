@@ -13,7 +13,7 @@ class PropertyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class PropertyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|max:50',
+            'description' => 'required|string|max:50',
+            'area' => 'required|min:1|max:1000',
+            'capacity' => 'required|min:1|max:1000',
+            'daily_Lease_Value' => 'required|min:1|max:1000',
+            'type' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required'
         ];
     }
 }

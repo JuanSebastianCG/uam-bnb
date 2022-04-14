@@ -13,7 +13,7 @@ class CharacteristicRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,9 +22,11 @@ class CharacteristicRequest extends FormRequest
      * @return array
      */
     public function rules()
+
     {
+        ;
         return [
-            //
+            'name' => 'required|string|max:50'
         ];
     }
 }

@@ -13,7 +13,7 @@ class BillRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class BillRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'rental_value' => 'required|min:0|max:1000',
+            'cleaning_cost' => 'required|min:0|max:1000',
+            'service_cost' => 'required|min:0|max:1000',
+            'paid_out' => 'required',
+
         ];
     }
 }

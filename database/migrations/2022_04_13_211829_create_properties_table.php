@@ -14,7 +14,7 @@ class CreatePropertiesTable extends Migration
     public function up()
     {
         Schema::create('properties', function (Blueprint $table) {
-       $table->id();
+            $table->id();
             $table->string('name');
             $table->string('description');
             $table->smallInteger('area');

@@ -13,7 +13,7 @@ class Characteristic_of_propertyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class Characteristic_of_propertyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
         ];
     }
 }
