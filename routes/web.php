@@ -23,16 +23,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('properties', App\Http\Controllers\PropertyController::class);
     Route::resource('characteristics', App\Http\Controllers\CharacteristicController::class);
     Route::resource('characteristics_of_properties', App\Http\Controllers\Characteristic_of_propertyController::class);
     Route::resource('rental_availabilities', App\Http\Controllers\Rental_availabilityController::class);
-    Route::resource('photographs', App\Http\Controllers\PhotographController::class);
+    Route::resource('photographs', App\Http\Controllers\PhotographController::class)->except(['index']);
     Route::resource('qualifications', App\Http\Controllers\QualificationController::class);
     Route::resource('comments', App\Http\Controllers\CommentController::class);
     Route::resource('bills', App\Http\Controllers\BillController::class);
+
+    Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
 
 
 

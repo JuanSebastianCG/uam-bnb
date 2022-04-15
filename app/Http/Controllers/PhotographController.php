@@ -3,7 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photograph;
+use App\Models\User;
+use App\Models\Property;
+use DB;
+use File;
+
+use App\Http\Requests\PhotographRequest;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PhotographController extends Controller
 {
@@ -12,9 +20,15 @@ class PhotographController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($properties_id)
     {
-        //
+   
+        $property = Property::find($properties_id );
+        $user = Auth::user();
+        $photos = Photograph::where('property_id',$properties_id )->orderBy('created_at','DESC')->paginate(10);
+
+        return view('photograph.index', compact('photos','user','property'));
+
     }
 
     /**
@@ -22,9 +36,10 @@ class PhotographController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create( Request $request)
     {
-        //
+        $properties_id = request()->get('properties_id');
+        return view('photograph.create', compact('properties_id'));
     }
 
     /**
@@ -33,43 +48,28 @@ class PhotographController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhotographRequest $request)
     {
-        //
-    }
+        $properties_id = request()->get('properties_id');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Photograph  $photograph
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Photograph $photograph)
-    {
-        //
-    }
+        if ($request->has('images')) {
+            foreach ($request->file('images') as $image ) {
+                /* nombrar la imagen */
+                $imageName = $properties_id.'-image-'.time().rand(1,1000).'.'.$image->extension();
+                /* mover al archivo publico */
+                $image->move(public_path('property_images'), $imageName);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Photograph  $photograph
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Photograph $photograph)
-    {
-        //
-    }
+                /* guardar en la base de datos */
+                 Photograph::create([
+                    'property_id'=>$properties_id,
+                    'url_image'=>$imageName
+                 ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Photograph  $photograph
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Photograph $photograph)
-    {
-        //
+            }
+        }
+
+        return back()->with('added', 'ok');
+
     }
 
     /**
@@ -80,6 +80,8 @@ class PhotographController extends Controller
      */
     public function destroy(Photograph $photograph)
     {
-        //
+        File::delete("property_images/{$photograph->url_image}");
+        $photograph->delete();
+        return back()->with('deleted', 'ok');
     }
 }

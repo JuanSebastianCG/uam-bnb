@@ -9,8 +9,10 @@ class Photograph extends Model
 {
     use HasFactory;
 
+    protected $guarded=[];
     protected $fillable = [
         'url_image',
+        'property_id'
     ];
 
 

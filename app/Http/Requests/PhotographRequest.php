@@ -24,7 +24,8 @@ class PhotographRequest extends FormRequest
     public function rules()
     {
         return [
-            'url_image' => 'required'
+            
+            'url_image' => "required|image|mimes:jpeg,png|max:3000"
         ];
     }
 }
