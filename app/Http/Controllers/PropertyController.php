@@ -16,7 +16,11 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $properties = $user->property()
+        ->orderBy('created_at', 'desc')->get();
 
+        return view('properties.index', compact('properties', 'user'));
     }
 
     /**
@@ -65,7 +69,11 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        //
+        if($property->user_id==Auth::id()){
+            return view('properties.edit', compact('property'));
+        }else {
+            return redirect(route('home'));
+        }
     }
 
     /**

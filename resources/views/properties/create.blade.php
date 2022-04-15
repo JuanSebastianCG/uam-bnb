@@ -57,8 +57,8 @@
                         <div class="mb-1">
                             <label for="type" class="h5"> Tipo de propiedad </label>
                             <select name="type" class="form-select">
-                                <option value="1">Casa</option>
-                                <option value="2">Apartamento</option>
+                                <option value="house">Casa</option>
+                                <option value="apartment">Apartamento</option>
                             </select>
                         </div>
                     </div>
