@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PropertyRequest;
 
 class PropertyController extends Controller
 {
@@ -14,7 +16,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -24,7 +26,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return view('properties.create');
     }
 
     /**
@@ -33,9 +35,15 @@ class PropertyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PropertyRequest $request)
     {
-        //
+        $user = Auth::user();
+        $property = new Property();
+        $property->fill($request->input());
+        $property->user_id = Auth::id();
+        $property->save();
+
+        return redirect(route('home', $user->id));
     }
 
     /**
