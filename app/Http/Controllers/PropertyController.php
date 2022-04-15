@@ -6,6 +6,7 @@ use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PropertyRequest;
+use App\Models\Photograph;
 
 class PropertyController extends Controller
 {
@@ -20,7 +21,9 @@ class PropertyController extends Controller
         $properties = $user->property()
         ->orderBy('created_at', 'desc')->get();
 
-        return view('properties.index', compact('properties', 'user'));
+        $photos = Photograph::all();
+
+        return view('properties.index', compact('properties', 'user','photos'));
     }
 
     /**

@@ -22,24 +22,13 @@ class PhotographController extends Controller
      */
     public function index($properties_id)
     {
-   
+
         $property = Property::find($properties_id );
         $user = Auth::user();
         $photos = Photograph::where('property_id',$properties_id )->orderBy('created_at','DESC')->paginate(10);
 
         return view('photograph.index', compact('photos','user','property'));
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create( Request $request)
-    {
-        $properties_id = request()->get('properties_id');
-        return view('photograph.create', compact('properties_id'));
     }
 
     /**
@@ -51,7 +40,7 @@ class PhotographController extends Controller
     public function store(PhotographRequest $request)
     {
         $properties_id = request()->get('properties_id');
-
+        
         if ($request->has('images')) {
             foreach ($request->file('images') as $image ) {
                 /* nombrar la imagen */

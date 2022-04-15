@@ -33,7 +33,6 @@
 <script>
     $('.formEliminar').submit(function(e){
         e.preventDefault();
-
         Swal.fire({
         title: '¿Estas seguro?',
         text: "No podrás revertir esto!",

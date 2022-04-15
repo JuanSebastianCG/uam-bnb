@@ -1,16 +1,24 @@
-<div class="mb-2">
-    <div class="card">
 
-        <div class="card-body">
+   <div class="col-sm-3 m-5 ">
+        <div class="card text-white bg-dark" style="width: 23rem;">
 
-            <div class="row align-center">
-                <div class="col-10">
+        @foreach ($photos as $photo)
+            @if ($photo->property_id == $property->id)
+                <img class="card-img-top" src="/property_images/{{$photo->url_image}}" alt="Card image cap">
+                @break
+            @endif
+        @endforeach
+
+            <h4><div class="card-header">Nombre: {{ $property->name }}</div></h4>
+            <div class="card-body">
 
                     <p class="card-text"> Tipo de propiedad: {{ $property->type }}</p>
                     <p class="card-text"> Nombre: {{ $property->name }}</p>
-                    <p></p>
-                </div>
+
             </div>
         </div>
     </div>
-</div>
+
+
+
+
