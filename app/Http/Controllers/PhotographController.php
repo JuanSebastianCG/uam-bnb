@@ -25,9 +25,14 @@ class PhotographController extends Controller
 
         $property = Property::find($properties_id );
         $user = Auth::user();
-        $photos = Photograph::where('property_id',$properties_id )->orderBy('created_at','DESC')->paginate(10);
 
-        return view('photograph.index', compact('photos','user','property'));
+        if ($property->user_id == $user->id ) {
+
+            $photos = Photograph::where('property_id',$properties_id )->orderBy('created_at','DESC')->paginate(10);
+            return view('photograph.index', compact('photos','user','property'));
+        }
+
+        return view('home', compact('user'));
 
     }
 
@@ -40,7 +45,7 @@ class PhotographController extends Controller
     public function store(PhotographRequest $request)
     {
         $properties_id = request()->get('properties_id');
-        
+
         if ($request->has('images')) {
             foreach ($request->file('images') as $image ) {
                 /* nombrar la imagen */
@@ -69,7 +74,9 @@ class PhotographController extends Controller
      */
     public function destroy(Photograph $photograph)
     {
-        File::delete("property_images/{$photograph->url_image}");
+        if ($photograph->url_image != 'defaultImage.jpg') {
+            File::delete("property_images/{$photograph->url_image}");
+        }
         $photograph->delete();
         return back()->with('deleted', 'ok');
     }
