@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -13,9 +14,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserUpdateRequest $request, User $user)
     {
-        return dd('Hola');
+        $user = Auth()->user();
+        if(Auth::id() == $user->id){
+            $user->age = $request->age;
+            $user->email = $request->email;
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->save();
+
+            return view('auth.edit', compact('user'))->with('added', 'ok');
+        }else{
+            return redirect(route('welcome'));
+        }
     }
 
     /**
@@ -71,17 +83,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        return dd('Hola');
-        if(Auth::user() == $user){
-            $user = Auth()->user();
-            $user->fill($request->input());
-            return dd($user);
-            $user->save();
 
-            return view('home', compact('user'));
-        }else{
-            return redirect(route('home'));
-        }
     }
 
     /**

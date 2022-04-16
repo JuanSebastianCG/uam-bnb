@@ -4,8 +4,6 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-
-
 <!-- borrado -->
 @if(session('deleted')=='ok')
     <script>
@@ -22,6 +20,19 @@
         Swal.fire({
         icon: 'success',
         title: 'Agregado con exito :)',
+        showConfirmButton: false,
+        timer: 1500
+        })
+
+    </script>
+@endif
+
+
+@if(session('updated')=='ok')
+    <script>
+        Swal.fire({
+        icon: 'success',
+        title: 'Actualizado con exito :)',
         showConfirmButton: false,
         timer: 1500
         })

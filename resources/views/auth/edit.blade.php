@@ -2,14 +2,24 @@
 
 @section('content')
     <div class="container">
-        <form method="PUT" action="{{ route('users.update', $user->id) }}">
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form method="PUT" action="{{ route('users.index', $user->id) }}">
             @csrf
 
             <div class="row mb-3">
                 <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name">
 
                     @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -37,13 +47,7 @@
                 <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
 
                 <div class="col-md-6">
-                    <input id="phone" type="number" min="0" minlength="10"  class="form-control @error('phone') is-invalid @enderror" name="password" required autocomplete="new-password" value="{{ $user->phone }}">
-
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}">
                 </div>
             </div>
 
@@ -51,7 +55,7 @@
                 <label for="age" class="col-md-4 col-form-label text-md-end">{{ __('Edad') }}</label>
 
                 <div class="col-md-6">
-                    <input id="age" type="number" min="9" class="form-control" name="password_confirmation" required autocomplete="new-password" value="{{ $user->age }}">
+                    <input id="age" type="number" min="9" class="form-control" name="age" value="{{ $user->age }}">
                 </div>
             </div>
             <center>
@@ -66,4 +70,6 @@
 
         </form>
     </div>
+
+    @include('layouts.sweetalert')
 @endsection
