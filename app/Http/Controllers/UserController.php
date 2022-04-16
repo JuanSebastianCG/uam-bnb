@@ -25,7 +25,7 @@ class UserController extends Controller
             $user->save();
 
             $comprobado = true;
-            return view('auth.edit', compact('user','comprobado'));
+            return view('auth.show', compact('user','comprobado'));
         }else{
             return redirect(route('welcome'))->with('deleted', 'ok');;
         }
@@ -60,7 +60,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $user = Auth()->user();
+        return view('auth.show', compact('user'));
     }
 
     /**
