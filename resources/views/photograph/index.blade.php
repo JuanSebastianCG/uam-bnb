@@ -3,6 +3,8 @@
 @section('content')
 
 <div class="container">
+@include('layouts.subview-form-errors')
+
     <h4 >Fotos de {{ $property->name}}</h4>
     <div class="row">
         <form action="{{ route('photographs.store',['properties_id' => $property->id] )}}" method="POST" enctype="multipart/form-data">

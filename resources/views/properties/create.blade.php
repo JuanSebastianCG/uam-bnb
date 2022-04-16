@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@include('layouts.subview-form-errors')
 
 <form action="{{ route('properties.store') }}" method="POST">
         @csrf
@@ -80,6 +80,6 @@
         </div>
 
     </form>
-    
+
     @include('layouts.sweetalert')
     @endsection

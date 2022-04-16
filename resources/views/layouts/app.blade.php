@@ -27,6 +27,9 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nadvar-side.css') }}" rel="stylesheet">
 
+    <!-- mapbox  -->
+    @yield('links')
+
 
 </head>
 <body>

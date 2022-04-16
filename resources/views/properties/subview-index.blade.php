@@ -1,6 +1,7 @@
 
-   <div class="col-sm-3 m-5 ">
-        <div class="card text-white bg-dark" style="width: 23rem;">
+   <div class="col-sm-3 m-5 " >
+       <div class="card text-white bg-primary mb-3" style="width: 23rem;">
+        <a  target="_blank" href="{{ route('properties.show', $property, $user) }}" style="flex: 1;">
 
         @for ($i = 0; $i < count($photos); $i++)
             @if ($photos[$i]->property_id == $property->id && $photos[$i]->url_image != 'defaultImage.jpg' )
@@ -11,17 +12,19 @@
 
             @endif
          @endfor
+         <blockquote class="blockquote">
+            <h4 class="text-white"><p class="ml-3 mt-3">{{ $property->name }}</p></h4>
+        </blockquote>
 
-            <h4><div class="card-header">Nombre: {{ $property->name }}</div></h4>
             <div class="card-body">
 
-                    <p class="card-text"> Tipo de propiedad: {{ __($property->type) }}</p>
-                    <p class="card-text"> Nombre: {{ $property->name }}</p>
+                    <p class="card-text text-white"> Tipo de propiedad: {{ __($property->type) }}</p>
+                    <p class="card-text text-white"> Nombre: {{ $property->name }}</p>
 
-            </div>
+                </div>
+            </a>
         </div>
     </div>
-
 
 
 
