@@ -1,91 +1,83 @@
+
 @extends('layouts.app')
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col s6">
-           <h4>AÑADIR UNA PROPIEDAD</h4>
+
+<form action="{{ route('properties.store') }}" method="POST">
+        @csrf
+        <div class="container">
+            <div class="row">
+
+
+            <div class="form-group">
+            <label class="col-form-label mt-4" for="inputDefault">Nombre del inmobiliario</label>
+            <input type="text" class="form-control" placeholder="Ingreselo aqui" id="inputDefault" name="name">
+            </div>
+
+
+            <div class="form-group">
+            <label for="exampleTextarea" class="form-label mt-4">Descripcion</label>
+            <textarea class="form-control" id="exampleTextarea" rows="3" name="description"></textarea>
+            </div>
+
+
+            <div class="form-group col-4">
+            <label class="col-form-label mt-4" for="inputDefault">Area</label>
+            <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="area">
+            </div>
+
+            <div class="form-group col-4">
+                <label class="col-form-label mt-4" for="inputDefault">Capacidad</label>
+                <input type="number"  class="form-control" placeholder="Numero" id="inputDefault" name="capacity">
+            </div>
+
+            <div class="form-group col-4">
+            <label class="col-form-label mt-4" for="inputDefault">Valor Diario</label>
+            <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="daily_Lease_Value">
+            </div>
+
+            <div class="form-group col-4">
+            <label for="exampleSelect1" class="form-label mt-4">Tipo de nmobiliario</label>
+            <select class="form-select" id="exampleSelect1">
+            <option value="house">Casa</option>
+            <option value="apartment">Apartamento</option>
+            </select>
+            </div>
+
+            <div class="form-group col-4">
+            <label class="col-form-label mt-3" for="inputDefault">latitude</label>
+            <input type="number" step="0.0000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="latitude">
+            </div>
+
+            <div class="form-group col-4">
+            <label class="col-form-label mt-3" for="inputDefault">longitude</label>
+            <input type="number" step="0.00000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="longitude">
+            </div>
+
+            <p class="mb-4">Caracteristicas</p>
+
+            <div class="row ">
+            @forelse($characteristics as $characteristic)
+                <div class="col-2">
+                    <div class="form-check">
+                    <input name="checkbox[]" type="checkbox" class="btn-check" id="{{$characteristic->name}}" autocomplete="off" value="{{$characteristic->id}}">
+                    <label class="btn btn-outline-primary" for="{{$characteristic->name}}">{{$characteristic->name}}</label><br>
+                        </label>
+                    </div>
+                </div>
+
+            @empty
+            <option value="-1">no hay ninguno</option>
+            @endforelse
+            </div>
+            </div>
+            <span class="text-center ">
+                <div class="mt-5" >
+                <button type="submit" class="btn btn-primary">Agregar inmobiliario</button>
+                </div>
+            </span>
         </div>
-    </div>
-    <div class="row">
-        {!! Form::open(['route' => 'properties.store', 'method'=>'post']) !!}
-            <form>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="name" class="h5"> Nombre de su propiedad </label>
-                            {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="description" class="h5"> Descripcion </label>
-                            {!! Form::text('description', null, ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="area" class="h5"> Area de la propiedad </label>
-                            {!! Form::number('area', null, ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="capacity" class="h5"> Capacidad de personas </label>
-                            {!! Form::number('capacity', null, ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="daily_Lease_Value" class="h5"> Precio diario </label>
-                            {!! Form::number('daily_Lease_Value', null, ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="type" class="h5"> Tipo de propiedad </label>
-                            <select name="type" class="form-select">
-                                <option value="house">Casa</option>
-                                <option value="apartment">Apartamento</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="latitude" class="h5"> Latitud </label>
-                            {!! Form::number('latitude', null, ['class' => 'form-control', 'step'=>'any']) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4">
-                        <div class="mb-1">
-                            <label for="longitude" class="h5"> Longitud </label>
-                            {!! Form::number('longitude', null, ['class' => 'form-control', 'step'=>'any']) !!}
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-success btn-lg">   Añadir   </button>
-
-            </form>
-        {!! Form::close() !!}
-    </div>
-</div>
-
-@endsection
-
+    </form>
+    @endsection

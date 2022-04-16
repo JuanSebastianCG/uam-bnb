@@ -24,7 +24,7 @@ class Characteristic_of_propertyRequest extends FormRequest
     public function rules()
     {
         return [
-            
+
         ];
     }
 }

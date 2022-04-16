@@ -25,7 +25,7 @@ class PropertyRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
-            'description' => 'required|string|max:50',
+            'description' => 'required|string|max:300',
             'area' => 'required|min:1|max:1000',
             'capacity' => 'required|min:1|max:1000',
             'daily_Lease_Value' => 'required|min:1|max:1000',
