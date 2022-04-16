@@ -35,7 +35,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
 
-
-
 });
 
