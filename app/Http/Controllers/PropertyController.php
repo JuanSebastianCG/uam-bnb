@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\Characteristic;
+use App\Models\Characteristic_of_property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PropertyRequest;
@@ -33,7 +35,9 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('properties.create');
+
+        $characteristics = Characteristic::all();
+        return view('properties.create', compact('characteristics'));
     }
 
     /**
@@ -42,15 +46,35 @@ class PropertyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PropertyRequest $request)
+    public function store(Request $request)
     {
+
+
         $user = Auth::user();
         $property = new Property();
+
         $property->fill($request->input());
         $property->user_id = Auth::id();
         $property->save();
 
-        return redirect(route('home', $user->id));
+        /* agregar categoria */
+        $categories = $request->input('checkbox');
+        if ($request->has('checkbox')) {
+            foreach ($categories as $categorie) {
+
+                $characteristic = Characteristic::find($categorie);
+
+                $characteristic_of_property = new Characteristic_of_property();
+                $characteristic_of_property->property_id = $property->id;
+                $characteristic_of_property->characteristic_id = (int)$characteristic->id;
+
+                $characteristic_of_property->save();
+
+            }
+        }
+
+
+        return redirect(route('properties.index', $user))->with('added', 'ok');
     }
 
     /**

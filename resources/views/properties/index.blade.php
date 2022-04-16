@@ -5,7 +5,7 @@
 
 
 
-
+<!-- side var -->
 <div id="wrapper" class="toggled">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -20,16 +20,13 @@
         </ul>
     </div>
 </div>
-<!-- /#wrapper -->
 
+<!-- propiedades -->
 <div class="container">
     <h4 >Propiedades de {{ $user->name}}</h4>
     <div class="row">
-
         @forelse($properties as $property)
-        <!-- iamgenes  -->
         @include('properties.subview-index')
-
         @empty
             <div class="card mb-2" >
                 <div class="alert alert-info" role="alert">
@@ -37,11 +34,10 @@
                 </div>
             </div>
         @endforelse
-
     </div>
-
-
 </div>
+
+
 @include('layouts.sweetalert')
 
 

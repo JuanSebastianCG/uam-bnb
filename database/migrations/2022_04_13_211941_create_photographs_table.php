@@ -15,7 +15,7 @@ class CreatePhotographsTable extends Migration
     {
         Schema::create('photographs', function (Blueprint $table) {
             $table->id();
-            $table->string('url_image');
+            $table->string('url_image')->default('defaultImage.jpg');
 
             $table->foreignId('property_id')->references('id')->on('properties');
             $table->timestamps();
