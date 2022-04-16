@@ -25,7 +25,7 @@
         <!-- iamgenes  -->
         <div class="col-sm-3 m-5 ">
             <div class="card" style="width: 23rem;">
-            <img class="card-img-top" src="/property_images/{{$photo->url_image}}" alt="Card image cap">
+            <img class="card-img-top" height="350px" src="/property_images/{{$photo->url_image}}" alt="Card image cap">
                 <div class="card-body">
 
                  <h6 class="card-subtitle mb-2 text-muted">{{ $photo->created_at->diffForHumans()}}</h6>

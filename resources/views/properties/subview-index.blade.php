@@ -5,10 +5,10 @@
 
         @for ($i = 0; $i < count($photos); $i++)
             @if ($photos[$i]->property_id == $property->id && $photos[$i]->url_image != 'defaultImage.jpg' )
-                <img class="card-img-top" src="/property_images/{{$photos[$i]->url_image}}" alt="Card image cap">
+                <img class="card-img-top"  height="300px" src="/property_images/{{$photos[$i]->url_image}}" alt="Card image cap">
                 @break
             @elseif($i+1 == count($photos))
-            <img class="card-img-top" src="/property_images/defaultImage.jpg" alt="Card image cap">
+            <img class="card-img-top" height="300px" src="/property_images/defaultImage.jpg" alt="Card image cap">
 
             @endif
          @endfor

@@ -18,6 +18,8 @@ const marker1 = new mapboxgl.Marker()
 .setLngLat([ -75.517, 5.067])
 .addTo(map);
 
-
+map.on('load', function () {
+    map.resize();
+});
 
 </script>

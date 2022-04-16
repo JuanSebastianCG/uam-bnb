@@ -14,37 +14,72 @@
 
 <!-- propiedades -->
 <div class="container" >
+
     <div class="container " id="mapa">
         <div class="row">
+            <h3 class="mt-4 mb-4 ml-3 text-white"> {{ $property->name}}</h3>
 
-            <h3 class="mt-2 "> {{ $property->name}}</h3>
-            <div id="carouselExampleControls" class="carousel slide col-6" data-ride="carousel">
-                
+            <div id="carouselExampleControls" class="carousel slide col-6 ml-3" data-ride="carousel">
                 <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img class="d-block w-100" src="..." alt="First slide">
+                       @for ($i = 0; $i < count($photos); $i++)
+                        @if ($i == 0 )
+                            <div class="carousel-item active">
+                            <img class="d-block w-100"  height="350px" src="/property_images/{{$photos[$i]->url_image}}" alt="{{$i}} slide">
+                            </div>
+                            @else
+                            <div class="carousel-item">
+                            <img class="d-block w-100" height="350px" src="/property_images/{{$photos[$i]->url_image}}" alt="{{$i}} slide">
+                            </div>
+
+                            @endif
+                        @endfor
                 </div>
-                <div class="carousel-item">
-                <img class="d-block w-100" src="..." alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                <img class="d-block w-100" src="..." alt="Third slide">
-                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="mb-4 col-6" id='map' style='width: 600px; height: 350px;'></div>
         </div>
-
-        <div class="mb-4 col-6" id='map' style='width: 400px; height: 300px;'></div>
     </div>
 
+  <div class="container mt-3" id="mapa">
+        <div class="row">
+
+            <h4 class="ml-3 mt-4 mb-4 " id="title"> Caracteristicas</h4>
+            <p class="ml-4 " id="text">{{$property->description}}</p>
+
+            <ul class="mb-5" >
+            <li class="ml-5" id="text"> Area:   {{$property->area}} m2 </li>
+            <li class="ml-5" id="text"> Valor Diario:   {{$property->daily_Lease_Value}}$ </li>
+            <li class="ml-5" id="text"> Tipo:   {{__($property->type)}} </li>
+            <li class="ml-5" id="text"> Capacidad:   {{$property->capacity}} Personas </li>
+            <li class="ml-5" id="text"> longitude:   {{$property->longitude}}  </li>
+            <li class="ml-5 " id="text"> latitude:   {{$property->latitude}}  </li>
+            </ul>
+        </div>
     </div>
+
+    <div class="container mt-3" id="mapa">
+        <div class="row">
+        <h4 class="ml-3 mt-4 mb-4 " id="title"> Este inmobiliario tiene...</h4>
+        @forelse($characteristics as $characteristic)
+                <h4 class="ml-3 mt-4 mb-4 col-2 " id="bttn"> {{$characteristic->name}}</h4>
+            @empty
+                <div class="card mb-2" >
+                    <div class="alert alert-info" role="alert">
+                        No trene atributos
+                    </div>
+                </div>
+            @endforelse
+        </div>
+    </div>
+
+
 </div>
 
 

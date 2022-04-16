@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\Characteristic;
 use App\Models\Characteristic_of_property;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PropertyRequest;
@@ -86,16 +88,22 @@ class PropertyController extends Controller
      */
     public function show(Property $property, User $user)
     {
-
         $user = Auth::user();
+        $characteristic_of_property =  Characteristic_of_property::where('property_id',$property->id )->get();
+        $characteristics = collect( new Characteristic);
 
-        if ($property->user_id == $user->id ) {
-            $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->paginate(10);
-            return view('photograph.index', compact('photos','user','property'));
+
+        foreach ($characteristic_of_property as $characteristic_idFind) {
+            $characteristics->add(Characteristic::find($characteristic_idFind->characteristic_id));
         }
 
+        if ($property->user_id == $user->id ) {
 
-        return view('properties.show', compact('property','user','photos'));
+            $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->paginate(10);
+
+            return view('properties.show', compact('property','user','photos','characteristics'));
+        }
+        return dd("nope");
     }
 
     /**

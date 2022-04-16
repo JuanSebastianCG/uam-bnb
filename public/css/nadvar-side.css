@@ -119,10 +119,28 @@
     }
 
     #map{
-        width: 300px;
+    width: 300px;
+    height: 300px;
+    background-color: aliceblue;
+    }
+    #text{
+      color: #fff;
+        font-size: 20px;
+        margin-left: 40px;
 
-        height: 200vh;
-        }
+    }
+
+    #bttn{
+        color:#000;
+        font-size: 25px;
+        background-color: #fff;
+      }
+
+    #title{
+        color: #fff;
+          font-size: 25px;
+      }
+
 
     a{
         text-decoration: none;
