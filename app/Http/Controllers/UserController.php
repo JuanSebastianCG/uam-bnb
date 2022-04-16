@@ -24,9 +24,10 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->save();
 
-            return view('auth.edit', compact('user'))->with('added', 'ok');
+            $comprobado = true;
+            return view('auth.edit', compact('user','comprobado'));
         }else{
-            return redirect(route('welcome'));
+            return redirect(route('welcome'))->with('deleted', 'ok');;
         }
     }
 

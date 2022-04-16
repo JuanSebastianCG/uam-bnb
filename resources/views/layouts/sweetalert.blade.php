@@ -27,10 +27,9 @@
     </script>
 @endif
 
-
-@if(session('updated')=='ok')
+@if($comprobado ?? ''==1)
     <script>
-        Swal.fire({
+ Swal.fire({
         icon: 'success',
         title: 'Actualizado con exito :)',
         showConfirmButton: false,
@@ -39,6 +38,7 @@
 
     </script>
 @endif
+
 
 <!-- eliminar -->
 <script>

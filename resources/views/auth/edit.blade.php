@@ -12,7 +12,8 @@
                 </ul>
             </div>
         @endif
-        <form method="PUT" action="{{ route('users.index', $user->id) }}">
+
+        <form method="PUT" action="{{ route('users.index', $user->id) }}" class="formEditar">
             @csrf
 
             <div class="row mb-3">
