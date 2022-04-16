@@ -39,6 +39,18 @@
     </script>
 @endif
 
+@if($creado ?? ''==1)
+    <script>
+ Swal.fire({
+        icon: 'success',
+        title: 'Cuenta creada con éxito',
+        showConfirmButton: false,
+        timer: 1500
+        })
+
+    </script>
+@endif
+
 
 <!-- eliminar -->
 <script>

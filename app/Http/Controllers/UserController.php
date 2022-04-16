@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -36,9 +37,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserRequest $request)
     {
-        //
+        return view('auth.register');
     }
 
     /**
@@ -49,7 +50,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
