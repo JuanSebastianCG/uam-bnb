@@ -80,4 +80,6 @@
         </div>
 
     </form>
+    
+    @include('layouts.sweetalert')
     @endsection

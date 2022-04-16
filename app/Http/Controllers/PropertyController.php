@@ -74,7 +74,7 @@ class PropertyController extends Controller
         }
 
 
-        return redirect(route('properties.index', $user));
+        return redirect(route('properties.index', $user))->with('added', 'ok');
     }
 
     /**

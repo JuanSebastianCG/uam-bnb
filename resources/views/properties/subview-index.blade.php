@@ -15,7 +15,7 @@
             <h4><div class="card-header">Nombre: {{ $property->name }}</div></h4>
             <div class="card-body">
 
-                    <p class="card-text"> Tipo de propiedad: {{ $property->type }}</p>
+                    <p class="card-text"> Tipo de propiedad: {{ __($property->type) }}</p>
                     <p class="card-text"> Nombre: {{ $property->name }}</p>
 
             </div>
