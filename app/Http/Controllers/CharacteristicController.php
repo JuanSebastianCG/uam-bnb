@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Characteristic;
 use Illuminate\Http\Request;
+use App\Http\Requests\CharacteristicRequest;
 
 class CharacteristicController extends Controller
 {
@@ -24,7 +25,7 @@ class CharacteristicController extends Controller
      */
     public function create()
     {
-        //
+        return view('characteristics.create');
     }
 
     /**
@@ -33,9 +34,13 @@ class CharacteristicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CharacteristicRequest $request)
     {
-        //
+        $characteristic = new Characteristic();
+        $characteristic->fill($request->input());
+        $characteristic->save();
+
+        return redirect(route('welcome'));
     }
 
     /**
