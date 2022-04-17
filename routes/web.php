@@ -30,7 +30,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('characteristics_of_properties', App\Http\Controllers\Characteristic_of_propertyController::class);
     Route::resource('rental_availabilities', App\Http\Controllers\Rental_availabilityController::class);
     Route::resource('photographs', App\Http\Controllers\PhotographController::class)->except(['index']);
-    Route::resource('qualifications', App\Http\Controllers\QualificationController::class);
     Route::resource('comments', App\Http\Controllers\CommentController::class);
     Route::resource('bills', App\Http\Controllers\BillController::class);
 
@@ -40,3 +39,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
     Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');
+    Route::DELETE('destroyQualification/{id}',[App\Http\Controllers\QualificationController::class,'destroy'])->name('destroyQualification');
