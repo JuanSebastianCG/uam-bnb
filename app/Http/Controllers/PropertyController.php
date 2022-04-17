@@ -91,24 +91,25 @@ class PropertyController extends Controller
      */
     public function show(Property $property, User $user)
     {
-       
+
         $user = Auth::user();
-        $characteristic_of_property =  Characteristic_of_property::where('property_id',$property->id )->get();
-        $characteristics = collect( new Characteristic);
 
+            if ($property->user_id == $user->id ) {
 
-        foreach ($characteristic_of_property as $characteristic_idFind) {
-            $characteristics->add(Characteristic::find($characteristic_idFind->characteristic_id));
+            $qualifications = $this->counterQualification($property->id);
 
-        }
+            $characteristic_of_property =  Characteristic_of_property::where('property_id',$property->id )->get();
+            $characteristics = collect( new Characteristic);
 
-        if ($property->user_id == $user->id ) {
+            foreach ($characteristic_of_property as $characteristic_idFind) {
+                $characteristics->add(Characteristic::find($characteristic_idFind->characteristic_id));
+            }
 
-            $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->paginate(10);
+                $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->paginate(10);
+                return view('properties.show', compact('property','user','photos','characteristics','qualifications'));
+            }
 
-            return view('properties.show', compact('property','user','photos','characteristics'));
-        }
-        return dd("nope");
+        return redirect("route('login')");
     }
 
     /**
@@ -135,7 +136,7 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
-        //
+        
     }
 
     /**

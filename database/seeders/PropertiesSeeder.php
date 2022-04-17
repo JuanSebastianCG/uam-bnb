@@ -40,6 +40,7 @@ class PropertiesSeeder extends Seeder
         $p->user_id= "1";
         $p->save();
 
+
         $p = new Property();
         $p->name = "hogar dulce hogar";
         $p->description = "lugar para vacaciones";
