@@ -26,6 +26,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nadvar-side.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/normalView.css') }}" rel="stylesheet">
 
     <!-- mapbox  -->
     @yield('links')
@@ -34,7 +35,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

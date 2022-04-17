@@ -15,11 +15,11 @@
 <!-- propiedades -->
 <div class="container" >
 
-    <div class="container " id="mapa">
+    <div class="container " id="Contenedor">
         <div class="row">
             <h3 class="mt-4 mb-4 ml-3 text-white"> {{ $property->name}}</h3>
 
-            <div id="carouselExampleControls" class="carousel slide col-6 ml-3" data-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide col-5 ml-3" data-ride="carousel">
                 <div class="carousel-inner">
                        @for ($i = 0; $i < count($photos); $i++)
                         @if ($i == 0 )
@@ -43,15 +43,17 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <div class="mb-4 col-6" id='map' style='width: 600px; height: 350px;'></div>
+            <div class="mb-4 col-7" id='map' style='width: 700px; height: 350px;'></div>
         </div>
     </div>
 
-  <div class="container mt-3" id="mapa">
+  <div class="container mt-3" id="Contenedor">
         <div class="row">
 
             <h4 class="ml-3 mt-4 mb-4 " id="title"> Caracteristicas</h4>
+            <div class="container">
             <p class="ml-4 " id="text">{{$property->description}}</p>
+            </div>
 
             <ul class="mb-5" >
             <li class="ml-5" id="text"> Area:   {{$property->area}} m2 </li>
@@ -64,7 +66,7 @@
         </div>
     </div>
 
-    <div class="container mt-3" id="mapa">
+    <div class="container mt-3" id="Contenedor">
         <div class="row">
         <h4 class="ml-3 mt-4 mb-4 " id="title"> Este inmobiliario tiene...</h4>
         @forelse($characteristics as $characteristic)
