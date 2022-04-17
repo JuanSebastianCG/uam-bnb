@@ -23,15 +23,15 @@ const property = {!! json_encode($property) !!};
 
 
 $.ajax({
-        type:'POST',
-        url:'{!!URL::to('likesDislikesAdministrator')!!}',
+        type:'GET',
+        url:'{!!URL::to('lookForQualification')!!}',
         data:{'type':type,'user': user,'property': property},
             success:function(data){
              console.log(data);
 
             },
             error:function(){
-
+                console.log(JSON.stringify(error));
             }
 			});
 }

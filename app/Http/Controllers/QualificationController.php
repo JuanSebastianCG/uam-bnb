@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class QualificationController extends Controller
 {
 
-    public function likesDislikesAdministrator(Request $request )
+    public function lookForQualification(Request $request )
     {
 
 
@@ -16,13 +16,7 @@ class QualificationController extends Controller
         $property = request()->property;
         $type = request()->type;
         $qualification = Qualification::where('user_id', '=', $user['id'])->where('property_id', '=', $property['id'])->get();
-        $qualification->delete();
-        $data = "zz";
-
-
-
-
-
+        
 
         return response()->json($data);
     }

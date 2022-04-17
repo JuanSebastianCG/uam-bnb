@@ -35,8 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('bills', App\Http\Controllers\BillController::class);
 
     Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
-    
+
 
 });
 
-    Route::get('likesDislikesAdministrator',[App\Http\Controllers\QualificationController::class,'likesDislikesAdministrator'])->name('likesDislikesAdministrator');
+    Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');

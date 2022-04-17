@@ -95,7 +95,7 @@
 </div>
 
 
-@include('qualification.qualificationjs')
+@include('qualification.qjs')
 @include('layouts.sweetalert')
 @include('layouts.mapbox')
 @endsection
