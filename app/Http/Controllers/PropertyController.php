@@ -27,10 +27,14 @@ class PropertyController extends Controller
 
         $user = Auth::user();
         $properties = $user->property()
-        ->orderBy('created_at', 'desc')->get();
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        $photos = Photograph::all();
-
+        $photos = collect(new Photograph);
+        for ($i=0; $i < count($properties); $i++) {
+            $photos->push(Photograph::where("property_id","=",$properties[$i]->id)->orderBy('created_at', 'desc')->first());
+        }
+    
         return view('properties.index', compact('properties', 'user','photos'));
     }
 
@@ -136,7 +140,7 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
-        
+
     }
 
     /**
