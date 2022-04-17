@@ -38,3 +38,4 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+    Route::get('likesDislikesAdministrator',[App\Http\Controllers\QualificationController::class,'likesDislikesAdministrator'])->name('likesDislikesAdministrator');

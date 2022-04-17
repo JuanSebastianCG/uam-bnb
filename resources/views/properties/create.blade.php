@@ -58,18 +58,18 @@
             <p class="mb-4">Caracteristicas</p>
 
             <div class="row ">
-            @forelse($characteristics as $characteristic)
-                <div class="col-2">
-                    <div class="form-check">
-                    <input name="checkbox[]" type="checkbox" class="btn-check" id="{{$characteristic->name}}" autocomplete="off" value="{{$characteristic->id}}">
-                    <label class="btn btn-outline-primary" for="{{$characteristic->name}}">{{$characteristic->name}}</label><br>
-                        </label>
+                @forelse($characteristics as $characteristic)
+                    <div class="col-2">
+                        <div class="form-check">
+                        <input name="checkbox[]" type="checkbox" class="btn-check" id="{{$characteristic->name}}" autocomplete="off" value="{{$characteristic->id}}">
+                        <label class="btn btn-outline-primary" for="{{$characteristic->name}}">{{$characteristic->name}}</label><br>
+                            </label>
+                        </div>
                     </div>
-                </div>
 
-            @empty
-            <option value="-1">no hay ninguno</option>
-            @endforelse
+                @empty
+                <option value="-1">no hay ninguno</option>
+                @endforelse
             </div>
             </div>
             <span class="text-center ">

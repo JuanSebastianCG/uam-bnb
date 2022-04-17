@@ -20,7 +20,7 @@ class QualificationsSeeder extends Seeder
         $p = new Qualification();
         $p->type = "like";
         $p->property_id = "1";
-        $p->user_id = "2";
+        $p->user_id = "1";
         $p->save();
 
         $p = new Qualification();

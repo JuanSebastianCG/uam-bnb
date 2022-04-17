@@ -95,6 +95,7 @@ class PropertyController extends Controller
 
         foreach ($characteristic_of_property as $characteristic_idFind) {
             $characteristics->add(Characteristic::find($characteristic_idFind->characteristic_id));
+
         }
 
         if ($property->user_id == $user->id ) {

@@ -9,17 +9,14 @@
 @section('content')
 @include('layouts.subview-form-errors')
 
-
-<!-- side var -->
-
 <!-- propiedades -->
 <div class="container" >
 
     <div class="container " id="Contenedor">
         <div class="row">
             <h3 class="mt-4 mb-4 ml-3 text-white"> {{ $property->name}}</h3>
-
-            <div id="carouselExampleControls" class="carousel slide col-5 ml-3" data-ride="carousel">
+        <!-- fotos  -->
+            <div id="carouselExampleControls" class="carousel slide col-5 ml-3 mr-3" data-ride="carousel">
                 <div class="carousel-inner">
                        @for ($i = 0; $i < count($photos); $i++)
                         @if ($i == 0 )
@@ -43,8 +40,21 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <!-- mapa -->
             <div class="mb-4 col-7" id='map' style='width: 700px; height: 350px;'></div>
         </div>
+
+    <!-- likes -->
+        <div id="likedislike">
+            <button type="button" class="btn btn-outline-success like" id="like">Like
+                <span class="likes">0</span>
+            </button>
+            <button type="button" class="btn btn-outline-danger dislike" id="dislike">Dislike
+                <span class="dislikes">0</span>
+            </button>
+        </div>
+
+
     </div>
 
   <div class="container mt-3" id="Contenedor">
@@ -85,6 +95,7 @@
 </div>
 
 
+@include('qualification.qualificationjs')
 @include('layouts.sweetalert')
 @include('layouts.mapbox')
 @endsection
