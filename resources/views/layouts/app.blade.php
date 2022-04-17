@@ -106,6 +106,9 @@
                                         {{ __('Perfíl') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('qualifications.index') }}">
+                                        {{ __('Calificaciones') }}
+                                    </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
