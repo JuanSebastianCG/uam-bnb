@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Characteristic;
 use Illuminate\Http\Request;
 use App\Http\Requests\CharacteristicRequest;
+use Illuminate\Support\Facades\DB;
 
 class CharacteristicController extends Controller
 {
@@ -15,7 +16,9 @@ class CharacteristicController extends Controller
      */
     public function index()
     {
-        //
+        $characteristics = DB::table('characteristics')->simplePaginate(3);
+
+        return view('characteristics.index', compact('characteristics'));
     }
 
     /**
