@@ -5,26 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Qualification;
 use Illuminate\Http\Request;
 
+use App\Http\Traits\QueryTrait;
+
 class QualificationController extends Controller
 {
 
+    use QueryTrait;
+
     public function lookForQualification(Request $request )
     {
+
         $qualification = Qualification::where('user_id', '=', request()->user['id'])->where('property_id', '=', request()->property['id'])->get();
         return response()->json($qualification);
     }
 
     public function allQualifications( $properties_id )
     {
-
-
-        $likes = Qualification::where('property_id', '=', $properties_id)->where('type', '=', 'like')->get();
-        $dislikes = Qualification::where('property_id', '=', $properties_id)->where('type', '=', 'dislike')->get();
-        $likes = $likes->count();
-        $dislikes = $dislikes->count();
-        return response()->json(['likes' => $likes , 'dislikes' => $dislikes]);
-
-
+        return response()->json( $this->counterQualification($properties_id ));
     }
 
     public function store(Request $request)

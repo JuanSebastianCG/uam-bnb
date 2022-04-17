@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\Characteristic;
 use App\Models\Characteristic_of_property;
-
+use App\Http\Traits\QueryTrait;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +15,8 @@ use App\Models\User;
 
 class PropertyController extends Controller
 {
+    use QueryTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +24,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
         $properties = $user->property()
         ->orderBy('created_at', 'desc')->get();
@@ -88,6 +91,7 @@ class PropertyController extends Controller
      */
     public function show(Property $property, User $user)
     {
+       
         $user = Auth::user();
         $characteristic_of_property =  Characteristic_of_property::where('property_id',$property->id )->get();
         $characteristics = collect( new Characteristic);

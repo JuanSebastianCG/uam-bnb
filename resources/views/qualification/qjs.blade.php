@@ -21,6 +21,32 @@ $(function() {
 
 
 
+function likesDislikesCounter() {
+
+var likes = document.getElementById('likes');
+var dislikes = document.getElementById('dislikes');
+console.log(likes)
+
+
+var  url =   '{{ route("allQualifications", ":id") }}'
+url = url.replace(':id', property['id'])
+
+$.ajax({
+    type:'GET',
+    url:url,
+        success:function(data){
+            console.log(data)
+             likes.textContent = data['likes'];
+            dislikes.textContent = data['dislikes']; 
+        },
+        error:function(){
+            console.log(JSON.stringify(error));
+        }
+    });
+
+}
+
+
 /* buscar  */
 function lookForQuailification(type){
 console.log(type)
@@ -51,32 +77,6 @@ $.ajax({
 }
 
 
-
-
-function likesDislikesCounter() {
-
-    var likes = document.getElementById('likes');
-    var dislikes = document.getElementById('dislikes');
-console.log(likes)
-
-
-    var  url =   '{{ route("allQualifications", ":id") }}'
-    url = url.replace(':id', property['id'])
-
-    $.ajax({
-        type:'GET',
-        url:url,
-            success:function(data){
-
-                likes.textContent = data['likes'];
-                dislikes.textContent = data['dislikes'];
-            },
-            error:function(){
-                console.log(JSON.stringify(error));
-            }
-		});
-
-}
 
 
 /* eliminar */
@@ -156,9 +156,6 @@ $.ajax({
 
 }
 
-$(document).ready(function() {
-    console.log(likesDislikesCounter());
-});
 
 </script>
 
