@@ -11,20 +11,20 @@
 
 
             <div class="form-group">
-            <label class="col-form-label mt-4" for="inputDefault">Nombre del inmobiliario</label>
-            <input type="text" class="form-control" placeholder="Ingreselo aqui" id="inputDefault" name="name">
+                <label class="col-form-label mt-4" for="inputDefault">Nombre del inmobiliario</label>
+                <input type="text" class="form-control" placeholder="Ingreselo aqui" id="inputDefault" name="name">
             </div>
 
 
             <div class="form-group">
-            <label for="exampleTextarea" class="form-label mt-4">Descripcion</label>
-            <textarea class="form-control" id="exampleTextarea" rows="3" name="description"></textarea>
+                <label for="exampleTextarea" class="form-label mt-4">Descripcion</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3" name="description"></textarea>
             </div>
 
 
             <div class="form-group col-4">
-            <label class="col-form-label mt-4" for="inputDefault">Area</label>
-            <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="area">
+                <label class="col-form-label mt-4" for="inputDefault">Area</label>
+                <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="area">
             </div>
 
             <div class="form-group col-4">
@@ -33,48 +33,60 @@
             </div>
 
             <div class="form-group col-4">
-            <label class="col-form-label mt-4" for="inputDefault">Valor Diario</label>
-            <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="daily_Lease_Value">
+                <label class="col-form-label mt-4" for="inputDefault">Valor Diario</label>
+                <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="daily_Lease_Value">
             </div>
 
             <div class="form-group col-4">
-            <label for="exampleSelect1" class="form-label mt-4">Tipo de nmobiliario</label>
-            <select class="form-select" id="exampleSelect1">
-            <option value="house">Casa</option>
-            <option value="apartment">Apartamento</option>
-            </select>
+                <label for="exampleSelect1" class="form-label mt-4">Tipo de nmobiliario</label>
+                <select class="form-select" id="exampleSelect1">
+                    <option value="house">Casa</option>
+                    <option value="apartment">Apartamento</option>
+                </select>
             </div>
 
             <div class="form-group col-4">
-            <label class="col-form-label mt-3" for="inputDefault">latitude</label>
-            <input type="number" step="0.0000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="latitude">
+                <label class="col-form-label mt-3" for="inputDefault">latitude</label>
+                <input type="number" step="0.0000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="latitude">
             </div>
 
             <div class="form-group col-4">
-            <label class="col-form-label mt-3" for="inputDefault">longitude</label>
-            <input type="number" step="0.00000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="longitude">
+                <label class="col-form-label mt-3" for="inputDefault">longitude</label>
+                <input type="number" step="0.00000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="longitude">
             </div>
 
             <p class="mb-4">Caracteristicas</p>
 
             <div class="row ">
-            @forelse($characteristics as $characteristic)
-                <div class="col-2">
-                    <div class="form-check">
-                    <input name="checkbox[]" type="checkbox" class="btn-check" id="{{$characteristic->name}}" autocomplete="off" value="{{$characteristic->id}}">
-                    <label class="btn btn-outline-primary" for="{{$characteristic->name}}">{{$characteristic->name}}</label><br>
-                        </label>
-                    </div>
-                </div>
+                    @forelse($characteristics as $characteristic)
+                        <div class="col">
+                            <div class="form-check">
+                                <input name="checkbox[]" type="checkbox" class="btn-check" id="{{$characteristic->name}}" autocomplete="off" value="{{$characteristic->id}}">
+                                <label class="btn btn-outline-primary" for="{{$characteristic->name}}">{{$characteristic->name}}</label><br>
+                            </div>
+                        </div>
+                    @empty
+                        <option value="-1">No hay ninguna característica</option>
+                    @endforelse
+            </div>
 
-            @empty
-            <option value="-1">no hay ninguno</option>
-            @endforelse
+            <div class="row">
+                <div class="col-6">
+                    <h6 style="color: black" class="text-dark">
+                        <br><br>
+                        ¿No encuentras la característica que buscas?
+                        <a href="{{ route('characteristics.create') }}" style="color:rgb(255, 4, 4)">
+                            {{-- <i class="fa-solid fa-pencil "></i> --}}
+                            {{ __('Crea una') }}
+                        </a>
+                    </h6>
+                </div>
             </div>
+
             </div>
-            <span class="text-center ">
+                <span class="text-center ">
                 <div class="mt-5" >
-                <button type="submit" class="btn btn-primary">Agregar inmobiliario</button>
+                    <button type="submit" class="btn btn-primary">Agregar inmobiliario</button>
                 </div>
             </span>
         </div>

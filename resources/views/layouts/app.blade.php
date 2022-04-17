@@ -66,9 +66,26 @@
                                 </li>
                             @endif
                         @else
+                            @if (Auth()->user()->status == 'admin')
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Características
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('characteristics.create') }}">
+                                            Añadir característica
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('characteristics.index') }}">
+                                            Ver características
+                                        </a>
+                                    </div>
+                                </li>
+                            @endif
+
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Administrar Propiedades
+                                    Propiedades
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('properties.create') }}">
@@ -78,7 +95,6 @@
                                         Ver Propiedades
                                     </a>
                                 </div>
-
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -45,7 +45,7 @@ class CharacteristicController extends Controller
             $characteristic->fill($request->input());
             $characteristic->save();
             $creado = true;
-            return redirect('/characteristics');
+            return redirect('/home');
         }else{
             return view('welcome');
         }

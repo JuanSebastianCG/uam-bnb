@@ -31,7 +31,7 @@
                 <div class="row mb-6">
                     <div class="col-md-3 offset-md-5">
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Crear') }}
+                            {{ __('Editar') }}
                         </button>
                     </div>
                 </div>
