@@ -43,7 +43,7 @@
     <script>
  Swal.fire({
         icon: 'success',
-        title: 'Cuenta creada con éxito',
+        title: 'Creación realizada con éxito',
         showConfirmButton: false,
         timer: 1500
         })

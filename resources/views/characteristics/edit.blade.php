@@ -18,13 +18,13 @@
                 <br>
             </div>
 
-            <form method="PUT" action="{{ route('characteristics.update') }}">
+            <form method="PUT" action="{{ route('characteristics.show', $characteristic->id) }}">
                 @csrf
                 <div class="row mb-3">
                     <label for="name" class="col-md-3 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                     <div class="col-md-7">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $characteristic->name }}" required autocomplete="name" autofocus>
                     </div>
                 </div>
 

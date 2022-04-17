@@ -28,7 +28,7 @@ class UserController extends Controller
             $comprobado = true;
             return view('auth.show', compact('user','comprobado'));
         }else{
-            return redirect(route('welcome'))->with('deleted', 'ok');;
+            return redirect(route('welcome'))->with('deleted', 'ok');
         }
     }
 
@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**

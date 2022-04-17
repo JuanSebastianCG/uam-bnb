@@ -16,9 +16,9 @@ class CharacteristicController extends Controller
      */
     public function index()
     {
+        $user = Auth()->user();
         $characteristics = DB::table('characteristics')->simplePaginate(3);
-
-        return view('characteristics.index', compact('characteristics'));
+        return view('characteristics.index', compact('characteristics', 'user'));
     }
 
     /**
@@ -39,11 +39,16 @@ class CharacteristicController extends Controller
      */
     public function store(CharacteristicRequest $request)
     {
-        $characteristic = new Characteristic();
-        $characteristic->fill($request->input());
-        $characteristic->save();
-
-        return redirect(route('welcome'));
+        $user = Auth()->user();
+        if($user->status == 'admin'){
+            $characteristic = new Characteristic();
+            $characteristic->fill($request->input());
+            $characteristic->save();
+            $creado = true;
+            return redirect('/characteristics');
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -52,9 +57,17 @@ class CharacteristicController extends Controller
      * @param  \App\Models\Characteristic  $characteristic
      * @return \Illuminate\Http\Response
      */
-    public function show(Characteristic $characteristic)
+    public function show(CharacteristicRequest $request, Characteristic $characteristic)
     {
-        //
+        $user = Auth()->user();
+        if($user->status == 'admin'){
+            $characteristic->fill($request->input());
+            $characteristic->save();
+            $comprobado = false;
+            return redirect('/characteristics');
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -65,7 +78,7 @@ class CharacteristicController extends Controller
      */
     public function edit(Characteristic $characteristic)
     {
-        //
+        return view('characteristics.edit', compact('characteristic'));
     }
 
     /**
@@ -75,7 +88,7 @@ class CharacteristicController extends Controller
      * @param  \App\Models\Characteristic  $characteristic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Characteristic $characteristic)
+    public function update(CharacteristicRequest $request, Characteristic $characteristic)
     {
         //
     }
@@ -88,6 +101,12 @@ class CharacteristicController extends Controller
      */
     public function destroy(Characteristic $characteristic)
     {
-        //
+        $user = Auth()->user();
+        if($user->status == 'admin'){
+            $characteristic->delete();
+            return redirect('/characteristics');
+        }else{
+            return view('welcome');
+        }
     }
 }
