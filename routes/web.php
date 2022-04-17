@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('characteristics_of_properties', App\Http\Controllers\Characteristic_of_propertyController::class);
     Route::resource('rental_availabilities', App\Http\Controllers\Rental_availabilityController::class);
     Route::resource('photographs', App\Http\Controllers\PhotographController::class)->except(['index']);
+    Route::resource('qualifications', App\Http\Controllers\QualificationController::class)->except(['show']);;
     Route::resource('comments', App\Http\Controllers\CommentController::class);
     Route::resource('bills', App\Http\Controllers\BillController::class);
 
@@ -37,6 +38,5 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
-
-    Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');
-    Route::DELETE('destroyQualification/{id}',[App\Http\Controllers\QualificationController::class,'destroy'])->name('destroyQualification');
+Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');
+Route::GET('allQualifications/{properties_id}',[App\Http\Controllers\QualificationController::class,'allQualifications'])->name('allQualifications');
