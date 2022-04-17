@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('bills', App\Http\Controllers\BillController::class);
 
     Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
+    
 
 });
 
