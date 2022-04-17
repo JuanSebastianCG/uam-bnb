@@ -25,15 +25,10 @@
 <div class="container">
     <h4 >Propiedades de {{ $user->name}}</h4>
     <div class="row">
-        @forelse($properties as $property)
+     @for($i = 0; $i < count($properties); $i++)
         @include('properties.subview-index')
-        @empty
-            <div class="card mb-2" >
-                <div class="alert alert-info" role="alert">
-                    No trene unmuebles
-                </div>
-            </div>
-        @endforelse
+
+      @endfor
     </div>
 </div>
 
