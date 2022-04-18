@@ -10,11 +10,13 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    Filtros
-                </a>
+
+
+
             </li>
             <li>
+                <label for="start" class="h5">Fecha de Inicio:</label>
+                <input name="startDate" id="startDate" type="date" class="form-control" placeholder="fecha de inicio"/>
                 <a href="#">hola</a>
             </li>
         </ul>
@@ -34,6 +36,7 @@
 
 
 @include('layouts.sweetalert')
+@include('properties.filterIndex')
 
 
 

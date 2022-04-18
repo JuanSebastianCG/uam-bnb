@@ -18,6 +18,7 @@ class PropertiesSeeder extends Seeder
 
         $p = new Property();
         $p->name = "hogar dulce hogar";
+        $p->city = "Manizales";
         $p->description = "lugar para vacaciones";
         $p->area = 20;
         $p->capacity = 12;
@@ -30,6 +31,7 @@ class PropertiesSeeder extends Seeder
 
         $p = new Property();
         $p->name = "hogar dulce hogar 2";
+        $p->city = "Manizales";
         $p->description = "lugar para pasarla bien";
         $p->area = 40;
         $p->capacity = 2;
@@ -43,6 +45,7 @@ class PropertiesSeeder extends Seeder
 
         $p = new Property();
         $p->name = "hogar dulce hogar";
+        $p->city = "Manizales";
         $p->description = "lugar para vacaciones";
         $p->area = 20;
         $p->capacity = 12;

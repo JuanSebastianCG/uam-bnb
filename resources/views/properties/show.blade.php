@@ -67,6 +67,7 @@
                 <li class="ml-5" id="text"> Valor Diario: {{ $property->daily_Lease_Value }}$ </li>
                 <li class="ml-5" id="text"> Tipo: {{ __($property->type) }} </li>
                 <li class="ml-5" id="text"> Capacidad: {{ $property->capacity }} Personas </li>
+                <li class="ml-5 " id="text"> Ciudad: {{ $property->city }} </li>
                 <li class="ml-5" id="text"> longitude: {{ $property->longitude }} </li>
                 <li class="ml-5 " id="text"> latitude: {{ $property->latitude }} </li>
             </ul>
@@ -102,9 +103,9 @@
                         <h4 class="ml-3 card-title col-auto">hasta&nbsp;&nbsp;&nbsp;  {{ date('d-m-Y', strtotime($rental_availability->departure_date)) }}</h4>
                         @if ($rental_availability->availability)
 
-                        <p class="card-text ml-4 " id="disponiblidadTrue" >Disponiblidad : disponible</p>
+                        <p class="card-text ml-4 " id="disponiblidadTrue" >Disponible</p>
                         @else
-                        <p class="card-text ml-4" id="disponiblidadFalse">Disponiblidad : No disponible</p>
+                        <p class="card-text ml-4" id="disponiblidadFalse"> No Disponible</p>
 
                         @endif
                         </div>

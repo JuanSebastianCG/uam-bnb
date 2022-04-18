@@ -24,7 +24,7 @@
 
             <div class="form-group col-4">
                 <label class="col-form-label mt-4" for="inputDefault">Area</label>
-                <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="area">
+                <input type="number" step="0.000001" class="form-control" placeholder="m2" id="inputDefault" name="area">
             </div>
 
             <div class="form-group col-4">
@@ -34,11 +34,11 @@
 
             <div class="form-group col-4">
                 <label class="col-form-label mt-4" for="inputDefault">Valor Diario</label>
-                <input type="number" step="0.000001" class="form-control" placeholder="Numero" id="inputDefault" name="daily_Lease_Value">
+                <input type="number" step="0.000001" class="form-control" placeholder="$" id="inputDefault" name="daily_Lease_Value">
             </div>
 
             <div class="form-group col-4">
-                <label for="exampleSelect1" class="form-label mt-4">Tipo de nmobiliario</label>
+                <label for="exampleSelect1" class="form-label mt-4">Tipo de inmobiliario</label>
                 <select class="form-select" id="exampleSelect1">
                     <option value="house">Casa</option>
                     <option value="apartment">Apartamento</option>
@@ -53,6 +53,11 @@
             <div class="form-group col-4">
                 <label class="col-form-label mt-3" for="inputDefault">longitude</label>
                 <input type="number" step="0.00000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="longitude">
+            </div>
+
+            <div class="form-group mb-5">
+                <label class="col-form-label mt-3" for="inputDefault">Ciudad</label>
+                <input type="text" class="form-control" placeholder="Ingreselo aqui" id="inputDefault" name="city">
             </div>
 
             <p class="mb-4">Caracteristicas</p>
