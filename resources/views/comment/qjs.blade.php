@@ -94,6 +94,7 @@ function errorSA(error) {
                 commentSection += "<label for='MakeCommentSection' class='form-label mt-2 '>Editar comentario</label>";
                 commentSection += " <textarea class='form-control' id='editTextField' rows='3' name='text'></textarea>";
                 commentSection +=" <button type='button' class='btn btn-outline-primary mt-2' onClick='editQualificationInput(this.id)' id='" + comments[i]['id'] + "'>Editar</button>";
+                commentSection +="  <button type='button' class='btn btn-outline-primary mt-2'  onClick='allComents()'>cancelar</button>";
                 commentSection += "  </div>";
             } else {
                 commentSection += "<div class='card border-dark mb-3' style='' id='commentCard'>"
@@ -196,4 +197,7 @@ function errorSA(error) {
         });
 
     }
+
+
+
 </script>
