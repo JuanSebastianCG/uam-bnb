@@ -67,6 +67,12 @@ function addFieldswithOptionalException(comments, userComment, diffForHumans,  e
     let commentSection="";
 
     for (let i = 0; i < comments.length; i++) {
+        if (exception == i) {
+            commentSection += 
+
+
+
+        }else{
          commentSection += "<div class='card border-dark mb-3' style='' id='commentCard'>"
          commentSection += "<div class='card-body'>"
          commentSection += " <div class='row'>"
@@ -74,21 +80,21 @@ function addFieldswithOptionalException(comments, userComment, diffForHumans,  e
 
         if (userComment[i]['id'] == user['id']) {
             commentSection += "<button class='deleteIcon2 btn col-auto ml-4 ' onClick='deleteQualification(this.id)' id='"+comments[i]['id'] +"'><i class='ml-1 fa-solid fa-trash' ></i> </button>"
-            commentSection += "<button class='updateIcon btn col-auto' id='"+comments[i]['id'] +"' ><i class='ml-auto fa-solid fa-pen-to-square' ></i> </button>"
-
+            commentSection += "<button class='updateIcon btn col-auto' onClick='editQualification(this.id)' id='"+comments[i]['id'] +"' ><i class='ml-auto fa-solid fa-pen-to-square' ></i> </button>"
 
         }
          commentSection += "<h6 class='card-subtitle mb-2 text-muted'>"+diffForHumans[i]+"</h6>"
          commentSection += "<p class='card-text'>"+ comments[i]['text'] +"</p>"
          commentSection += "</div></div></div>"
-         console.log(commentSection);
-         $('.commentsSection').append(commentSection);
         }
+
+    }
+    $('.commentsSection').append(commentSection);
+    console.log(commentSection);
 }
 
 
 /* ======== eliminar ======== */
-
  function deleteQualification(id) {
     var  url =   '{{route("comments.destroy", ":id") }}'
     url = url.replace(':id', id)
@@ -102,7 +108,6 @@ function addFieldswithOptionalException(comments, userComment, diffForHumans,  e
         confirmButtonText: 'si, eliminalo!'
         }).then((result) => {
         if (result.isConfirmed) {
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -127,15 +132,13 @@ function addFieldswithOptionalException(comments, userComment, diffForHumans,  e
                     }
                 });
             }
-
-
         });
 
  }
 
 
-/* editar comentarios */
-function editQualification(id, type) {
+//============ editar =============
+function editQualification(id) {
 
     console.log(" a editar "+ id);
     var  url =   '{{ route("qualifications.update", ":id") }}'
