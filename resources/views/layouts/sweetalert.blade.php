@@ -29,7 +29,7 @@
 
 @if($comprobado ?? ''==1)
     <script>
- Swal.fire({
+    Swal.fire({
         icon: 'success',
         title: 'Actualizado con exito :)',
         showConfirmButton: false,

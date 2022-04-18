@@ -100,6 +100,7 @@ class PropertyController extends Controller
     {
         $user = Auth::user();
         $qualifications = $this->counterQualification($property->id);
+        $comments = $this->listOfComments($property->id);
         $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->get();
 
 
@@ -109,12 +110,6 @@ class PropertyController extends Controller
             $characteristics->add(Characteristic::find($characteristic_idFind->characteristic_id));
         }
 
-        $comments = Comment::where('property_id',$property->id)->orderBy('created_at','DESC')->paginate(10);
-        $userComments = collect(new User);
-        for ($i=0; $i < count($comments); $i++) {
-            $userComments->push(User::find($comments[$i]->user_id));
-        }
-
 
         return view('properties.show', compact(
             'property',
@@ -122,8 +117,7 @@ class PropertyController extends Controller
             'photos',
             'characteristics',
             'qualifications',
-            'comments',
-            'userComments'));
+            'comments'));
 
     }
 

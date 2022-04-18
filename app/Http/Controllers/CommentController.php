@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -33,9 +34,15 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $coment = new Comment();
+        $coment->user_id = request()->user['id'];
+        $coment->property_id = request()->property['id'];
+        $coment->text =request()->text ;
+        $coment->save();
+
+        return response()->json(['success'=>'agregado con exito']);
     }
 
     /**
@@ -69,7 +76,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+
     }
 
     /**

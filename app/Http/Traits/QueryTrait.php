@@ -3,6 +3,8 @@
 namespace App\Http\Traits;
 
 use App\Models\Qualification;
+use App\Models\Comment;
+use App\Models\User;
 
 trait QueryTrait
 {
@@ -19,6 +21,18 @@ trait QueryTrait
           ];
     }
 
+    function listOfComments($properties_id){
+
+        $comments = Comment::where('property_id','=',$properties_id)->orderBy('created_at','DESC')->paginate(10);
+        $userComments = collect(new User);
+        for ($i=0; $i < count($comments); $i++) {
+            $userComments->push(User::find($comments[$i]->user_id));
+        }
+        return [
+            'comments' => $comments,
+            'userComments' => $userComments
+          ];
+    }
 
 
 }

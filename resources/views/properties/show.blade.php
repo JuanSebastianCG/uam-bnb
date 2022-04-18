@@ -45,36 +45,27 @@
         </div>
 
     <!-- likes -->
-        <div id="likedislike">
-            <button type="button" class="btn btn-outline-success like" id="like">Like
-                <span class="likes" id="likes">{{$qualifications['likes']}}</span>
-            </button>
-            <button type="button" class="btn btn-outline-danger dislike" id="dislike">Dislike
-                <span class="dislikes" id="dislikes">{{$qualifications['dislikes']}}</span>
-            </button>
-        </div>
-
-
+    @include('qualification.qualificationButtons')
     </div>
 
-  <div class="container mt-3" id="Contenedor">
-        <div class="row">
+    <div class="container mt-3" id="Contenedor">
+            <div class="row">
 
-            <h4 class="ml-3 mt-4 mb-4 " id="title"> Caracteristicas</h4>
-            <div class="container">
-            <p class="ml-4 " id="text">{{$property->description}}</p>
+                <h4 class="ml-3 mt-4 mb-4 " id="title"> Caracteristicas</h4>
+                <div class="container">
+                <p class="ml-4 " id="text">{{$property->description}}</p>
+                </div>
+
+                <ul class="mb-5" >
+                <li class="ml-5" id="text"> Area:   {{$property->area}} m2 </li>
+                <li class="ml-5" id="text"> Valor Diario:   {{$property->daily_Lease_Value}}$ </li>
+                <li class="ml-5" id="text"> Tipo:   {{__($property->type)}} </li>
+                <li class="ml-5" id="text"> Capacidad:   {{$property->capacity}} Personas </li>
+                <li class="ml-5" id="text"> longitude:   {{$property->longitude}}  </li>
+                <li class="ml-5 " id="text"> latitude:   {{$property->latitude}}  </li>
+                </ul>
             </div>
-
-            <ul class="mb-5" >
-            <li class="ml-5" id="text"> Area:   {{$property->area}} m2 </li>
-            <li class="ml-5" id="text"> Valor Diario:   {{$property->daily_Lease_Value}}$ </li>
-            <li class="ml-5" id="text"> Tipo:   {{__($property->type)}} </li>
-            <li class="ml-5" id="text"> Capacidad:   {{$property->capacity}} Personas </li>
-            <li class="ml-5" id="text"> longitude:   {{$property->longitude}}  </li>
-            <li class="ml-5 " id="text"> latitude:   {{$property->latitude}}  </li>
-            </ul>
         </div>
-    </div>
 
     <div class="container mt-3" id="Contenedor">
         <div class="row">
@@ -93,17 +84,24 @@
 
 
     <div class="container mt-3" id="Contenedor">
-    <h4 class="ml-3 mt-4 mb-4 " id="title"> Comentarios</h4>
-    @for ($i = 0; $i < count($comments); $i++)
 
-    <div class="card border-dark mb-3" style="">
-            <div class="card-body">
-                <h4 class="card-title" id="">{{ $userComments[$i]->name }}</h4>
-                <p class="card-text">{{ $comments[$i]->text }}</p>
-            </div>
+    <h4 class="ml-3 mt-4 mb-4 " id="title"> Comentarios</h4>
+
+    <!-- crear comentario -->
+        <div class="form-group mt-4">
+        <label for="commentSection" class="form-label mt-4 ">Agregar comentario</label>
+        <textarea class="form-control" id="commentSection" rows="3" name="text"></textarea>
+        <button type="button" class="btn btn-outline-light" id="sendComment">enviar</button>
         </div>
 
-    @endfor
+        @for ($i = 0; $i < count($comments['comments']); $i++)
+        <div class="card border-dark mb-3" style="">
+                <div class="card-body">
+                    <h4 class="card-title" id="">{{ $comments['userComments'][$i]->name }}</h4>
+                    <p class="card-text">{{ $comments['comments'][$i]->text }}</p>
+                </div>
+            </div>
+        @endfor
 
 
 
@@ -111,7 +109,7 @@
 
 
 @include('qualification.qjs')
-@include('layouts.sweetalert')
+@include('comment.qjs')
 @include('layouts.mapbox')
 @endsection
 
