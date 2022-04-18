@@ -46,27 +46,6 @@ class CommentController extends Controller
         return response()->json(['success'=>'agregado con exito']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -75,9 +54,15 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update($comment, Request $request)
     {
 
+
+        $commentEdit = Comment::find($comment);
+        $commentEdit->text = $request->text;
+        $commentEdit->save();
+
+        return response()->json(['success'=>'se edito con exito']);
     }
 
     /**

@@ -102,7 +102,7 @@
             <button type="button" class="btn btn-outline-primary mt-2" id="sendComment">enviar</button>
         </div>
 
-
+        {{-- mostrar comentarios --}}
         <div id="commentsSection" class="commentsSection">
             @for ($i = 0; $i < count($comments['comments']); $i++)
                 <div class="card border-dark mb-3" style="" id="commentCard">
@@ -111,10 +111,10 @@
                             <h4 class="card-title col-10 mr-5" id="">{{ $comments['userComments'][$i]->name }}</h4>
 
                             @if ($comments['userComments'][$i]->id === $user->id)
-                                <button class=" deleteIcon btn col-auto ml-4 " onClick="deleteQualification(this.id)"
+                                <button class=" deleteIcon btn col-auto ml-4 " onClick="allComents(this.id)"
                                     id="{{ $comments['comments'][$i]->id }}"><i class="ml-1 fa-solid fa-trash"></i>
                                 </button>
-                                <button class=" updateIcon btn col-auto" onClick="editQualification(this.id)"
+                                <button class=" updateIcon btn col-auto" onClick="allComents(this.id)"
                                     id="{{ $comments['comments'][$i]->id }}"><i
                                         class="ml-auto fa-solid fa-pen-to-square"></i> </button>
                             @endif
