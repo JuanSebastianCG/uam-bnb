@@ -16,7 +16,7 @@ $(function() {
 function likesDislikesCounter() {
 var likes = document.getElementById('likes');
 var dislikes = document.getElementById('dislikes');
-
+console.log(likes)
 var  url =   '{{ route("allQualifications", ":id") }}'
 url = url.replace(':id', property['id'])
 $.ajax({
@@ -118,3 +118,4 @@ $.ajax({
    });
 }
 </script>
+

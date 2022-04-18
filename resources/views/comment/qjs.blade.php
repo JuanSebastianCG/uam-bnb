@@ -102,7 +102,7 @@ function errorSA(error) {
                 commentSection += "<h4 class='card-title col-10 mr-5' id=''>" + userComment[i]['name'] + "</h4>"
 
                 if (userComment[i]['id'] == user['id']) {
-                    commentSection +="<button class='deleteIcon btn col-auto ml-4' onClick='deleteQualification(this.id)' id='" + comments[i]['id'] + "'><i class='ml-1 fa-solid fa-trash' ></i> </button>"
+                    commentSection +="<button class='deleteIcon btn col-auto ml-4' onClick='deleteComment(this.id)' id='" + comments[i]['id'] + "'><i class='ml-1 fa-solid fa-trash' ></i> </button>"
                     commentSection +="<button class='updateIcon btn col-auto' onClick='allComents(this.id)' id='" + comments[i]['id'] + "' ><i class='ml-auto fa-solid fa-pen-to-square' ></i> </button>"
 
                 }
@@ -117,7 +117,7 @@ function errorSA(error) {
 
 
     /* ======== eliminar ======== */
-    function deleteQualification(id) {
+    function deleteComment(id) {
         var url = '{{ route('comments.destroy', ':id') }}'
         url = url.replace(':id', id)
         Swal.fire({
