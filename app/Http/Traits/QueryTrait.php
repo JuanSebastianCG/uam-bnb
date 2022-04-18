@@ -29,7 +29,7 @@ trait QueryTrait
 
         for ($i=0; $i < count($comments); $i++) {
             $userComments->push(User::find($comments[$i]->user_id));
-            $commentsDiffForHuman->push($comments[$i]->created_at->diffForHumans());
+            $commentsDiffForHuman->push($comments[$i]->updated_at->diffForHumans());
         }
         return [
             'comments' => $comments,

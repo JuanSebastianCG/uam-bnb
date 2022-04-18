@@ -96,6 +96,16 @@
         <h4 class="mt-4 mb-4 " id="title"> Comentarios</h4>
 
         <!-- crear comentario -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="form-group mt-1">
             <label for="MakeCommentSection" class="form-label mt-2 ">Agregar comentario</label>
             <textarea class="form-control" id="MakeCommentSection" rows="3" name="text"></textarea>

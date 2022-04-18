@@ -35,15 +35,19 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request)
+    public function store(Request $request)
     {
+
+        if ($request->text == null) {
+            return response()->json(['success'=>'No puede colocar campos vacios']);
+        }
         $coment = new Comment();
         $coment->user_id = request()->user['id'];
         $coment->property_id = request()->property['id'];
         $coment->text =request()->text ;
         $coment->save();
+        return response()->json(['success'=>'exito']);
 
-        return response()->json(['success'=>'agregado con exito']);
     }
 
 
@@ -58,11 +62,14 @@ class CommentController extends Controller
     {
 
 
+        if ($request->text == null) {
+            return response()->json(['success'=>'no puede colocar campos vacios']);
+        }
         $commentEdit = Comment::find($comment);
         $commentEdit->text = $request->text;
         $commentEdit->save();
 
-        return response()->json(['success'=>'se edito con exito']);
+        return response()->json(['success'=>'exito']);
     }
 
     /**
@@ -76,7 +83,7 @@ class CommentController extends Controller
 
         $qualification = Comment::find($comment)->delete();
         if ($qualification) {
-            return response()->json(['success'=>'eliminado con exito']);
+            return response()->json(['success'=>'exito']);
         }else {
             return response()->json(['success'=>'no se elimino nada']);
         }

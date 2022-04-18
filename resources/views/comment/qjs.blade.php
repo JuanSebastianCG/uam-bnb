@@ -4,11 +4,33 @@
 @endsection
 
 <script>
+
+function succedSA() {
+        Swal.fire({
+                    icon: 'success',
+                    title: 'Creación realizada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+            }
+function errorSA(error) {
+            Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error,
+
+        })
+    }
+
+
+
     /* ======== agregar ======== */
     $(function() {
         $(document).on('click', '#sendComment', function(e) {
             e.preventDefault();
             let text = document.getElementById('MakeCommentSection').value;
+            text.value="";
             createComment(text)
         });
     });
@@ -28,18 +50,15 @@
                 'text': text
             },
             success: function(data) {
-                console.log(data);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Creación realizada con éxito',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                allComents();
+               if (data['success'] == "exito"){
+                   succedSA();
+                   allComents();
+               }else{
+                    errorSA(data['success'])
+
+               }
             },
-            error: function() {
-                console.log(JSON.stringify(error));
-            }
+
         });
     }
 
@@ -163,9 +182,13 @@
                 'text': text
             },
             success: function(data) {
-                console.log(data);
+                if (data['success'] == "exito"){
+                    console.log(data);
+                    succedSA();
+                }else{
+                    errorSA(data['success'])
+                }
                 allComents();
-
             },
             error: function() {
                 console.log(JSON.stringify(error));
