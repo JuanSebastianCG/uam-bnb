@@ -37,7 +37,7 @@ class Rental_availabilitiesSeeder extends Seeder
         $p->availability = true;
         $p->start_date = date("2022-02-17");
         $p->departure_date = date("2022-05-17");
-        $p->property_id = "2";
+        $p->property_id = "1";
         $p->save();
 
 

@@ -90,9 +90,45 @@
         </div>
     </div>
 
+    <!-- Fechas disponibles -->
+    <div class="container mt-3 grayContainer">
+        <h4 class="ml-3 mt-4 mb-4 " id="title"> Fechas disponibles</h4>
+        @forelse($rental_availabilities as $rental_availability)
+            <div class="ml-4 card border-dark mb-3 " id="grayCard" style="">
+                <div class="row">
+                    <div class="card-body col-9">
+                        <div class="row">
+                        <h4 class="ml-3 card-title col-auto">{{ date('d-m-Y', strtotime($rental_availability->start_date)) }}</h4>
+                        <h4 class="ml-3 card-title col-auto">hasta&nbsp;&nbsp;&nbsp;  {{ date('d-m-Y', strtotime($rental_availability->departure_date)) }}</h4>
+                        @if ($rental_availability->availability)
+
+                        <p class="card-text ml-4 " id="disponiblidadTrue" >Disponiblidad : disponible</p>
+                        @else
+                        <p class="card-text ml-4" id="disponiblidadFalse">Disponiblidad : No disponible</p>
+
+                        @endif
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg col-auto mr-4" id="grayButton" >Comprar</button>
+                </div>
+
+            </div>
+        @empty
+            <div class="card mb-2">
+                <div class="alert alert-info" role="alert">
+                    No trene fotos este inmueble
+                </div>
+            </div>
+        @endforelse
+
+
+    </div>
 
     <div class="container mt-5" id="Contenedor">
 
+        <div class="TopBlack"></div>
         <h4 class="mt-4 mb-4 " id="title"> Comentarios</h4>
 
         <!-- crear comentario -->

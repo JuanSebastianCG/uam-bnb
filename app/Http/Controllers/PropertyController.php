@@ -8,6 +8,7 @@ use App\Models\Characteristic_of_property;
 use App\Models\Comment;
 use App\Models\Photograph;
 use App\Models\User;
+use App\Models\Rental_availability;
 
 
 use App\Http\Traits\QueryTrait;
@@ -99,6 +100,8 @@ class PropertyController extends Controller
     public function show(Property $property, User $user)
     {
         $user = Auth::user();
+        $rental_availabilities = Rental_availability::where('property_id',"=",$property->id)->orderBy('created_at','DESC')->get();
+
         $qualifications = $this->counterQualification($property->id);
         $comments = $this->listOfComments($property->id);
         $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->get();
@@ -117,7 +120,8 @@ class PropertyController extends Controller
             'photos',
             'characteristics',
             'qualifications',
-            'comments'));
+            'comments',
+            'rental_availabilities'));
 
     }
 
