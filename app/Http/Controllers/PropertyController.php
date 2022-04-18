@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\Characteristic;
 use App\Models\Characteristic_of_property;
+use App\Models\Comment;
+use App\Models\Photograph;
+use App\Models\User;
+
+
 use App\Http\Traits\QueryTrait;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PropertyRequest;
-use App\Models\Photograph;
-use App\Models\User;
 
 class PropertyController extends Controller
 {
@@ -34,8 +37,8 @@ class PropertyController extends Controller
         for ($i=0; $i < count($properties); $i++) {
             $photos->push(Photograph::where("property_id","=",$properties[$i]->id)->orderBy('created_at', 'desc')->first());
         }
-    
-        return view('properties.index', compact('properties', 'user','photos'));
+
+    return view('properties.index', compact('properties', 'user','photos'));
     }
 
     /**
@@ -97,23 +100,32 @@ class PropertyController extends Controller
     {
 
         $user = Auth::user();
+        $qualifications = $this->counterQualification($property->id);
+        $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->get();
 
-            if ($property->user_id == $user->id ) {
 
-            $qualifications = $this->counterQualification($property->id);
+        $characteristic_of_property =  Characteristic_of_property::where('property_id',$property->id )->get();
+        $characteristics = collect( new Characteristic);
+        foreach ($characteristic_of_property as $characteristic_idFind) {
+            $characteristics->add(Characteristic::find($characteristic_idFind->characteristic_id));
+        }
 
-            $characteristic_of_property =  Characteristic_of_property::where('property_id',$property->id )->get();
-            $characteristics = collect( new Characteristic);
+        $comments = Comment::where('property_id',$property->id)->orderBy('created_at','DESC')->paginate(10);
+        $userComments = collect(new User);
+        for ($i=0; $i < count($comments); $i++) {
+            $userComments->push(User::find($comments[$i]->user_id));
+        }
 
-            foreach ($characteristic_of_property as $characteristic_idFind) {
-                $characteristics->add(Characteristic::find($characteristic_idFind->characteristic_id));
-            }
 
-                $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->paginate(10);
-                return view('properties.show', compact('property','user','photos','characteristics','qualifications'));
-            }
+        return view('properties.show', compact(
+            'property',
+            'user',
+            'photos',
+            'characteristics',
+            'qualifications',
+            'comments',
+            'userComments'));
 
-        return redirect("route('login')");
     }
 
     /**

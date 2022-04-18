@@ -92,6 +92,21 @@
     </div>
 
 
+    <div class="container mt-3" id="Contenedor">
+    <h4 class="ml-3 mt-4 mb-4 " id="title"> Comentarios</h4>
+    @for ($i = 0; $i < count($comments); $i++)
+
+    <div class="card border-dark mb-3" style="">
+            <div class="card-body">
+                <h4 class="card-title" id="">{{ $userComments[$i]->name }}</h4>
+                <p class="card-text">{{ $comments[$i]->text }}</p>
+            </div>
+        </div>
+
+    @endfor
+
+
+
 </div>
 
 
