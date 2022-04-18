@@ -39,6 +39,7 @@
         text-decoration: none;
     };
 
+    .card-subtitle {
+        float: right;
+      }
 
-
-    

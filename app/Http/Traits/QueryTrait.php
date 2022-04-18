@@ -25,12 +25,16 @@ trait QueryTrait
 
         $comments = Comment::where('property_id','=',$properties_id)->orderBy('created_at','DESC')->paginate(10);
         $userComments = collect(new User);
+        $commentsDiffForHuman = collect();
+
         for ($i=0; $i < count($comments); $i++) {
             $userComments->push(User::find($comments[$i]->user_id));
+            $commentsDiffForHuman->push($comments[$i]->created_at->diffForHumans());
         }
         return [
             'comments' => $comments,
-            'userComments' => $userComments
+            'userComments' => $userComments,
+            'commentsDiffForHuman' => $commentsDiffForHuman
           ];
     }
 

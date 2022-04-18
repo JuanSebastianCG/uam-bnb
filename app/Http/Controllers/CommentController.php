@@ -41,7 +41,7 @@ class CommentController extends Controller
         $coment->user_id = request()->user['id'];
         $coment->property_id = request()->property['id'];
         $coment->text =request()->text ;
-       // $coment->save();
+        $coment->save();
 
         return response()->json(['success'=>'agregado con exito']);
     }
@@ -86,8 +86,14 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($comment, Request $request)
     {
-        //
+
+        $qualification = Comment::find($comment)->delete();
+        if ($qualification) {
+            return response()->json(['success'=>'eliminado con exito']);
+        }else {
+            return response()->json(['success'=>'no se elimino nada']);
+        }
     }
 }

@@ -66,7 +66,7 @@
                 </ul>
             </div>
         </div>
-
+    <!-- caracteristicas -->
     <div class="container mt-3" id="Contenedor">
         <div class="row">
         <h4 class="ml-3 mt-4 mb-4 " id="title"> Este inmobiliario tiene...</h4>
@@ -94,12 +94,22 @@
         <button type="button" class="btn btn-outline-light" id="sendComment">enviar</button>
         </div>
 
-        <div id="commentsSection">
+
+        <div id="commentsSection" class="commentsSection" >
             @for ($i = 0; $i < count($comments['comments']); $i++)
-                <div class="card border-dark mb-3" style="">
+                <div class="card border-dark mb-3" style="" id="commentCard">
                     <div class="card-body">
-                        <h4 class="card-title" id="">{{ $comments['userComments'][$i]->name }}</h4>
+                        <div class="row">
+                        <h4 class="card-title col-10 mr-5" id="">{{ $comments['userComments'][$i]->name }}</h4>
+
+                        @if($comments['userComments'][$i]->id === $user->id)
+                        <button class=" deleteIcon btn col-auto ml-4 "  onClick="deleteQualification(this.id)"  id="{{ $comments['comments'][$i]->id }}"><i class="ml-1 fa-solid fa-trash" ></i> </button>
+                        <button class=" updateIcon btn col-auto" id="{{ $comments['comments'][$i]->id }}" ><i class="ml-auto fa-solid fa-pen-to-square" ></i> </button>
+                        @endif
+                        <h6 class="card-subtitle mb-2 text-muted">{{ $comments['userComments'][$i]->created_at->diffForHumans()}}</h6>
                         <p class="card-text">{{ $comments['comments'][$i]->text }}</p>
+                        </div>
+
                     </div>
                 </div>
             @endfor
