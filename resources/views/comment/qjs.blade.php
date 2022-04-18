@@ -1,18 +1,20 @@
 <!-- likes and dislike -->
 @section('js')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endsection
 
 <script>
 
-/* agregar */
+/* ======== agregar ======== */
 $(function() {
   $('#sendComment').on('click', function(e) {
-    let text = document.getElementById('commentSection').value;
-    createQualification(text)
+    let text = document.getElementById('MakeCommentSection').value;
+    createComment(text)
   });
 });
-function createQualification(text) {
-     console.log(" a crear ");
+
+function createComment(text) {
+     console.log(" a crear "+ text);
      $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -23,12 +25,14 @@ function createQualification(text) {
          url: '{{ route("comments.store") }}',
          data:{'user': user,'property': property, 'text':text},
             success:function(data){
+                console.log(data);
                 Swal.fire({
                 icon: 'success',
                 title: 'Creación realizada con éxito',
                 showConfirmButton: false,
                 timer: 1500
                 })
+                allComents();
             },
             error:function(){
                 console.log(JSON.stringify(error));
@@ -41,33 +45,35 @@ function createQualification(text) {
 
 
 
-/* listar comentarios  */
-function lookForQuailification(type){
-console.log(type)
+/* ======== listar ======== */
+function allComents(){
 
+var  url =   '{{ route("allComments", ":id") }}'
+url = url.replace(':id', property['id'])
 $.ajax({
-        type:'GET',
-        url:'{!!URL::to('lookForQualification')!!}',
-        data:{'user': user,'property': property},
-            success:function(data){
-             if (data[0]) {
-                 if (data[0]['type']!=type) {
+    type:'GET',
+    url:url,
+        success:function(data){
+        console.log(data);
+         addFieldswithOptionalException(data['comments']['data'], data['userComments'], -1 );
+        },
+        error:function(){
+            console.log(JSON.stringify(error));
+        }
+    });
 
-                    editQualification(data[0]['id'],type);
+}
 
-                 }else{
-                     deleteQualification(data[0]['id']);
-                 }
-             }else{
-                createQualification(type, user, property);
-             }
-             likesDislikesCounter();
+function addFieldswithOptionalException(comments, user, exception) {
+    console.log(comments);
+    $( "div" ).remove( "#commentsSection" );
 
-            },
-            error:function(){
-                console.log(JSON.stringify(error));
-            }
-		});
+  /*   for (let i = 0; i < comments.length; i++) {
+        var CommentSectionDiv
+        console.log(comments[i]['text']);
+
+    } */
+
 }
 
 

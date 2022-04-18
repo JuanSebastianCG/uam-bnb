@@ -89,20 +89,21 @@
 
     <!-- crear comentario -->
         <div class="form-group mt-4">
-        <label for="commentSection" class="form-label mt-4 ">Agregar comentario</label>
-        <textarea class="form-control" id="commentSection" rows="3" name="text"></textarea>
+        <label for="MakeCommentSection" class="form-label mt-4 ">Agregar comentario</label>
+        <textarea class="form-control" id="MakeCommentSection" rows="3" name="text"></textarea>
         <button type="button" class="btn btn-outline-light" id="sendComment">enviar</button>
         </div>
 
-        @for ($i = 0; $i < count($comments['comments']); $i++)
-        <div class="card border-dark mb-3" style="">
-                <div class="card-body">
-                    <h4 class="card-title" id="">{{ $comments['userComments'][$i]->name }}</h4>
-                    <p class="card-text">{{ $comments['comments'][$i]->text }}</p>
+        <div id="commentsSection">
+            @for ($i = 0; $i < count($comments['comments']); $i++)
+                <div class="card border-dark mb-3" style="">
+                    <div class="card-body">
+                        <h4 class="card-title" id="">{{ $comments['userComments'][$i]->name }}</h4>
+                        <p class="card-text">{{ $comments['comments'][$i]->text }}</p>
+                    </div>
                 </div>
-            </div>
-        @endfor
-
+            @endfor
+        </div>
 
 
 </div>

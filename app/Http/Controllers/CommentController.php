@@ -6,8 +6,13 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 
+use App\Http\Traits\QueryTrait;
+
 class CommentController extends Controller
 {
+
+    use QueryTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -18,14 +23,10 @@ class CommentController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function allComments($properties_id)
     {
-        //
+        $comments = $this->listOfComments($properties_id);
+        return response()->json($comments);
     }
 
     /**
@@ -40,7 +41,7 @@ class CommentController extends Controller
         $coment->user_id = request()->user['id'];
         $coment->property_id = request()->property['id'];
         $coment->text =request()->text ;
-        $coment->save();
+       // $coment->save();
 
         return response()->json(['success'=>'agregado con exito']);
     }
