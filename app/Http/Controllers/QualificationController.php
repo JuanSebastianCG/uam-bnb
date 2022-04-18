@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Qualification;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Models\Property;
 
 use App\Http\Traits\QueryTrait;
 
@@ -11,6 +14,16 @@ class QualificationController extends Controller
 {
 
     use QueryTrait;
+
+
+    public function index()
+    {
+        $user = Auth()->user();
+        $qualifications =  DB::table('qualifications')->where('user_id', '=', $user->id)->simplePaginate(4);
+        $properties = Property::All();
+
+        return view('qualification.index', compact('qualifications', 'properties'));
+    }
 
     public function lookForQualification(Request $request )
     {

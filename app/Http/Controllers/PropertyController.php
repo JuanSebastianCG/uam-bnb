@@ -98,7 +98,6 @@ class PropertyController extends Controller
      */
     public function show(Property $property, User $user)
     {
-
         $user = Auth::user();
         $qualifications = $this->counterQualification($property->id);
         $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->get();
