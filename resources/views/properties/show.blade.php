@@ -83,7 +83,7 @@
             @empty
                 <div class="card mb-2">
                     <div class="alert alert-info" role="alert">
-                        No trene atributos
+                        No tiene atributos
                     </div>
                 </div>
             @endforelse
@@ -119,7 +119,7 @@
         @empty
             <div class="card mb-2">
                 <div class="alert alert-info" role="alert">
-                    No trene fotos este inmueble
+                    No tiene fotos este inmueble
                 </div>
             </div>
         @endforelse

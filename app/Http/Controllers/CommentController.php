@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
-use App\Http\Requests\CommentRequest;
-
 use App\Http\Traits\QueryTrait;
+use App\Models\Property;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -20,7 +21,11 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth()->user();
+        $comments =  DB::table('comments')->where('user_id', '=', $user->id)->simplePaginate(4);
+        $properties = Property::All();
+
+        return view('comment.index', compact('comments', 'properties'));
     }
 
     public function allComments($properties_id)
