@@ -41,5 +41,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');
 Route::GET('allQualifications/{properties_id}',[App\Http\Controllers\QualificationController::class,'allQualifications'])->name('allQualifications');
-
 Route::GET('allComments/{properties_id}',[App\Http\Controllers\CommentController::class,'allComments'])->name('allComments');
+
+Route::GET('filterProperty',[App\Http\Controllers\PropertyController::class,'filterProperty'])->name('filterProperty');

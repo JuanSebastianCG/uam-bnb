@@ -12,6 +12,7 @@ use App\Models\Rental_availability;
 
 
 use App\Http\Traits\QueryTrait;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,58 @@ class PropertyController extends Controller
 {
     use QueryTrait;
 
+    public function filterProperty(Request $request)
+    {
+
+        $startDate =date( $request->startDate[0]);
+        $endDate= date($request->endDate[0]);
+        $price= $request->price;
+        $city= $request->city;
+        $filter = collect(new Property );
+
+        /* filtrar por acs y desc */
+        $properties = Property::all();
+        if ($price  !== 'default') {
+            $properties = Property::orderBy('daily_Lease_Value', $price)->get();
+            }
+
+        /* filtrar por ciudad */
+        if ($city != null) {
+            $properties = $properties->where('city',$city);
+        }
+
+        /* fechas disponibles de las propiedades filtradas */
+        $rental_availabilities = collect(new Rental_availability);
+        foreach ($properties as $property) {
+            if ($property->rental_availability) {
+                $rental_availabilities->push($property->rental_availability) ;
+            }
+        }
+        return response()->json($rental_availabilities);
+
+        /* filtrar por fechas disponibles */
+        if ($startDate !== null) {
+            $rental_availabilities->where("start_date",">=",$startDate)->where("availability","=",true);
+        }
+        if ($endDate !== null) {
+            $rental_availabilities->where("departure_date","<=",$endDate)->where("availability","=",true);
+        }
+
+        /* filtrar repetidos */
+        foreach ($rental_availabilities as $rental_availability) {
+        $repeated = false;
+            foreach ($filter as $aux) {
+                if ($aux->id == $rental_availability->property_id) {
+                    $repeated = true;
+                }
+            }
+            if (!$repeated) {
+                $filter = $rental_availability->property;
+            }
+        }
+
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -139,6 +192,7 @@ class PropertyController extends Controller
             return redirect(route('home'));
         }
     }
+
 
     /**
      * Update the specified resource in storage.

@@ -6,25 +6,56 @@
 
 
 <!-- side var -->
-<div id="wrapper" class="toggled">
+<div id="wrapper" class="toggled nav">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
 
 
-
-            </li>
             <li>
-                <label for="start" class="h5">Fecha de Inicio:</label>
-                <input name="startDate" id="startDate" type="date" class="form-control" placeholder="fecha de inicio"/>
-                <a href="#">hola</a>
+                <h2 id='navTitle'>Filtros</h2>
+            </li>
+
+            <li>
+                <label for="startDate" class="navLavel form-label mt-4">Fecha de Inicio</label>
+                <input name="startDate" id="startDate" type="date" class="navbarInput form-control" placeholder="fecha de inicio"/>
+            </li>
+
+            <li>
+                <label for="exampleSelect1" class="navLavel form-label mt-4">Fecha final</label>
+                <input name="endDate" id="endDate" type="date" class="navbarInput form-control" placeholder="fecha de inicio"/>
+            </li>
+
+
+            <li>
+                <div class="form-group">
+                    <label for="exampleSelect1" class="navLavel form-label mt-4">Precio</label>
+                    <select class="navbarInput form-select" id="price">
+                        <option selected value="default">Elegir orden</option>
+                        <option value="asc">Mayor Precio</option>
+                        <option value="desc">Menor precio</option>
+
+                    </select>
+                </div>
+            </li>
+
+            <li>
+                <div class="form-group">
+                    <label class="col-form-label navLavel " for="inputDefault">Ciudad</label>
+                    <input type="text" class="navbarInput form-control" placeholder="Default input" id="city">
+                </div>
+            </li>
+
+            <li>
+                <div class="form-group">
+                    <button type="button" class="btn btn-outline-light" id="filter">Filtrar</button>
+                </div>
             </li>
         </ul>
     </div>
 </div>
 
 <!-- propiedades -->
-<div class="container">
+<div class="container indexContainer">
     <h4 >Propiedades de {{ $user->name}}</h4>
     <div class="row">
      @for($i = 0; $i < count($properties); $i++)
