@@ -36,15 +36,17 @@
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"
                         id="carouselButton">
-                        <span class="carousel-control-prev-icon" aria-hidden="true" id="carouselIcon"></span>
+                        <span class="carousel-control-prev-icon" aria-hidden="true" id="carouselIcon" style="color:black"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    @include('qualification.qualificationButtons')
+
                     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"
                         id="carouselButton">
                         <span class="carousel-control-next-icon" aria-hidden="true" id="carouselIcon"></span>
                         <span class="sr-only">Next</span>
                     </a>
+                    @include('qualification.qualificationButtons')
+                    
                     <!-- likes -->
                 </div>
                 <!-- mapa -->
