@@ -38,7 +38,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    uam bnb
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -108,6 +108,10 @@
 
                                     <a class="dropdown-item" href="{{ route('qualifications.index') }}">
                                         {{ __('Calificaciones') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('comments.index') }}">
+                                        {{ __('Comentarios') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

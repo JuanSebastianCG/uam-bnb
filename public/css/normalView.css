@@ -90,10 +90,12 @@
         width: 19%;
     }
     #dislike{
-        outline:none;
+        border:none;
         background-color: transparent;
     }
-
+    #addPhoto{
+        margin-top: 5%;
+    }
     #carouselButton{
         height: 85%
     };
