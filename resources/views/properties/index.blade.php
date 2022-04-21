@@ -10,9 +10,8 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
 
-
             <li>
-                <h2 id='navTitle'>Filtros</h2>
+                <h2 id='navTitle'> Filtros </h2>
             </li>
 
             <li>
@@ -41,7 +40,7 @@
             <li>
                 <div class="form-group">
                     <label class="col-form-label navLavel " for="inputDefault">Ciudad</label>
-                    <input type="text" class="navbarInput form-control" placeholder="Default input" id="city">
+                    <input type="text" class="navbarInput form-control" placeholder="Ingrese un valor" id="city">
                 </div>
             </li>
 
@@ -56,20 +55,21 @@
 
 <!-- propiedades -->
 <div class="container indexContainer">
-    <h4 >Propiedades de {{ $user->name}}</h4>
-    <div class="row">
-     @for($i = 0; $i < count($properties); $i++)
-        @include('properties.subview-index')
 
-      @endfor
+    <center>
+        <h4 >Propiedades pertenencientes a {{ $user->name}}</h4>
+    </center>
+
+    <div class="row">
+        @for($i = 0; $i < count($properties); $i++)
+            @include('properties.subview-index')
+        @endfor
     </div>
 </div>
 
 
 @include('layouts.sweetalert')
 @include('properties.filterIndex')
-
-
 
 
 @endsection

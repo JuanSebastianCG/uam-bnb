@@ -15,6 +15,7 @@ class Property extends Model
         'description',
         'area',
         'capacity',
+        'city',
         'daily_Lease_Value',
         'latitude',
         'longitude',

@@ -92,7 +92,7 @@ class PropertyController extends Controller
             $photos->push(Photograph::where("property_id","=",$properties[$i]->id)->orderBy('created_at', 'desc')->first());
         }
 
-    return view('properties.index', compact('properties', 'user','photos'));
+        return view('properties.index', compact('properties', 'user','photos'));
     }
 
     /**
