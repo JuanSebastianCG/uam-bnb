@@ -11,7 +11,7 @@
         <ul class="sidebar-nav">
 
             <li>
-                <h2 id='navTitle'>Filtros</h2>
+                <h2 id='navTitle'> Filtros </h2>
             </li>
 
             <li>
@@ -40,7 +40,7 @@
             <li>
                 <div class="form-group">
                     <label class="col-form-label navLavel " for="inputDefault">Ciudad</label>
-                    <input type="text" class="navbarInput form-control" placeholder="Default input" id="city">
+                    <input type="text" class="navbarInput form-control" placeholder="Ingrese un valor" id="city">
                 </div>
             </li>
 

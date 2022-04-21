@@ -38,7 +38,9 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    uam bnb
+                    <img src="https://lh3.googleusercontent.com/fife/AAWUweWOYjNjPnp9VhUaTKuqAGuG4bGXcjbLZaaDgjBfJnS25RpMZSkcHIW7SootjEsda48ELCBIOEm05lNvEmw12Esg2ersGP9q3uGD0CLkZkmYQO7jA70nCNhCav23dIVcShlBDgFMD4M8c4LOyjPW5bMzLocH1rwYks2PNafzDOj81RpY6KGcIft1jp9BoKEoZHHhl45NFk1PAODayKe2llAu1wRFfq_-1hxaDc_8doJ1oRN5NqRmMzGp8CNA7a3ugs67pEP947mi_8cN6ugAwq6pKhciaVKuIQcoLVCymvfisFKaSTfTPrTXf_VKMrc1kHR4DCTQeTAhA2gevjaXdfHL0Ri-qcs4UYK9DfxGdffkGbTWFoSZb-iuyZGaFYuGCogRNeh2YOkAs-qWHMiGD-H694oZEDuDcaFZQznZaIdbnbsm5M6yMYHaDIRyaO30aoI1CezJGT0jNYz3nRH-dekmYQuYLL23F5occn8q6xhGC5EeUV1QqvB-RckHAKQQDo1xpwIh4OZKlXkepC-ptZJdYoJTyaujNn9yEPYghip0v8elsYQ5RKKf6_MU4euV0c1ITJT3zDUCjeqBF4W0ckbyRgLXUbvSU76tX_T83_N6oE-YfL51uCSYZOPN_fwezPLsrLV9JfCW8asWujCsn5aGGwvZC7JWExfzv3fnmyW5XGtoy2eMYwX5BJmLT5Zx4ekU08tb5K3qdWYNWn--ndMaLsIDP1RaNiXdY0oT-eIAN0u8kyHC6i0R1AIZr3tjbhK-Uz6FK0AbyuaNBDuZBfTky7JrHU6efXaqoYvOcoGgCtJMqBHo9wcI4uYnm3XfoqLGJU7LeaeGtuTkTAl4Q_U33Lu7HSa9DZ8NA3obsex-CR_b7PVitzfpjcVenUBS=w1122-h883"
+                    alt="" width="60px">
+                    uam-bnb
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
