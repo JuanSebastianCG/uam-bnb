@@ -27,6 +27,15 @@
                 <p class="card-text" style="color:red">Pendiente</p>
                 <p class="card-text" style="color: black">Total a pagar</p>
                 <p class="card-text" style="color:black">{{ $bill->service_cost + $bill->cleaning_cost + $bill->rental_value}}</p>
+                {!! Form::model($bill, ['method' => 'PUT', 'route' => ['bills.update', $bill->id]]) !!}
+                            {!! Form::button('<i class="btn btn-dark">Pagar</i>', [
+                                'type' => 'submit',
+                                'title' => "Pagar recibo",
+                                'class' => 'btn',
+                                'onclick' => "return confirm('¿Está seguro que quiere pagar?')"
+                            ]) !!}
+                        {!! Form::close() !!}
+
               @endif
 
 

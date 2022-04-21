@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use App\Http\Requests\BillRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
@@ -75,9 +77,15 @@ class BillController extends Controller
      * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bill $bill)
+    public function update(Request $request, $bill)
     {
-        //
+        $request->paid_out = true;
+        $bill_pago = Bill::find($bill);
+        $bill_pago->paid_out = $request->paid_out;
+        $bill_pago->save();
+
+
+        return redirect('/bills');
     }
 
     /**
@@ -86,8 +94,12 @@ class BillController extends Controller
      * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bill $bill)
+    public function destroy(Bill $bill, Request $request)
     {
         //
+    }
+
+    public function pagar(BillRequest $request, Bill $bill){
+
     }
 }
