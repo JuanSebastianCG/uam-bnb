@@ -181,19 +181,24 @@
 
     </div>
 
-    <center>
-        <div class="row">
-            <form method="POST" action="{{ route('properties.destroy', $property->id) }}" class="formEliminar">
-                <input name="_method" type="hidden" value="DELETE">
+    @if ($property->user_id == $user->id)
+        <center>
+            <div class="row">
+                <form method="POST" action="{{ route('properties.destroy', $property->id) }}" class="formEliminar">
+                    <input name="_method" type="hidden" value="DELETE">
+                    {{ csrf_field() }}
 
-                {{ csrf_field() }}
+                    <a href="{{ route('properties.edit', $property->id) }}" style="color:rgb(255, 255, 255)" class="btn btn-dark">
+                        {{ __('Editar') }}
+                    </a>
 
-                <button type="submit" class="btn btn-danger" {{-- onclick="return confirm('¿Está seguro de querer eliminar esta característica?')" --}}>
-                    {{ __('Eliminar propiedad') }}
-                </button>
-            </form>
-        </div>
-    </center>
+                    <button type="submit" class="btn btn-danger" {{-- onclick="return confirm('¿Está seguro de querer eliminar esta característica?')" --}}>
+                        {{ __('Eliminar propiedad') }}
+                    </button>
+                </form>
+            </div>
+        </center>
+    @endif
 
     @include('layouts.sweetalert')
     @include('qualification.qjs')

@@ -220,6 +220,7 @@ class PropertyController extends Controller
         $property->user_id = Auth::id();
         $property->save();
 
+        $comprobado = true;
         return redirect('/properties');
     }
 
