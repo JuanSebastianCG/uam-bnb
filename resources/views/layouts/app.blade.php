@@ -105,6 +105,9 @@
                                     <a class="dropdown-item" href="{{ route('users.show', Auth()->user()) }}">
                                         {{ __('Perfíl') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('bills.index') }}">
+                                        {{ __('Recibos') }}
+                                    </a>
 
                                     <a class="dropdown-item" href="{{ route('qualifications.index') }}">
                                         {{ __('Calificaciones') }}

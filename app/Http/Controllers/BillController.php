@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
@@ -14,7 +15,12 @@ class BillController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $bills = $user->bill()
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('bills.index', compact('user', 'bills'));
     }
 
     /**
