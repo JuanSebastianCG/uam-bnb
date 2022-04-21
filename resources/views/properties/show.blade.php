@@ -46,7 +46,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                     @include('qualification.qualificationButtons')
-                    
+
                     <!-- likes -->
                 </div>
                 <!-- mapa -->
@@ -180,6 +180,20 @@
 
 
     </div>
+
+    <center>
+        <div class="row">
+            <form method="POST" action="{{ route('properties.destroy', $characteristic->id) }}" class="formEliminar">
+                <input name="_method" type="hidden" value="DELETE">
+
+                {{ csrf_field() }}
+
+                <button type="submit" class="btn btn-danger" {{-- onclick="return confirm('¿Está seguro de querer eliminar esta característica?')" --}}>
+                    {{ __('Eliminar propiedad') }}
+                </button>
+            </form>
+        </div>
+    </center>
 
 
     @include('qualification.qjs')
