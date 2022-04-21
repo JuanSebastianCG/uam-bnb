@@ -5,7 +5,7 @@
 <div class="container">
 @include('layouts.subview-form-errors')
 
-    <h4 >Fotos de {{ $property->name}}</h4>
+    <h4 >Fotos de {{ $property->name }}</h4>
     <div class="row">
         <form action="{{ route('photographs.store',['properties_id' => $property->id] )}}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -14,12 +14,9 @@
                 <input type="file" class="form-control" name="images[]" id="" value="form-control" accept="image/*"  multiple >
             </div>
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary">guardar imagen </button>
+                <button type="submit" class="btn btn-primary">Guardar imagen </button>
             </div>
         </form>
-
-
-
 
         @forelse($photos as $photo)
         <!-- iamgenes  -->
@@ -34,26 +31,28 @@
                     @csrf
                     @method('DELETE')
                         <button type="submit" class="btn btn-primary" >
-                        eliminar imagen
+                            Eliminar imagen
                         </button>
                     </form>
                 </div>
             </div>
         </div>
 
-
         @empty
-            <div class="card mb-2" >
-                <div class="alert alert-info" role="alert">
-                    No trene fotos este inmueble
-                </div>
+
+            <div class="row">
+                <br>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+                No se poseen fotografías de este inmueble.
             </div>
         @endforelse
-
     </div>
-   <div class="mt-3">
+
+    <div class="mt-3">
         {{$photos->links()}}
-         </div>
+    </div>
 
 </div>
 @include('layouts.sweetalert')
