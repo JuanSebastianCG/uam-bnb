@@ -16,8 +16,8 @@ class CreateCharacteristicsOfPropertiesTable extends Migration
         Schema::create('characteristics_of_properties', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('property_id')->references('id')->on('properties');
-            $table->foreignId('characteristic_id')->references('id')->on('characteristics');
+            $table->foreignId('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->foreignId('characteristic_id')->references('id')->on('characteristics')->onDelete('cascade');
 
             $table->timestamps();
         });

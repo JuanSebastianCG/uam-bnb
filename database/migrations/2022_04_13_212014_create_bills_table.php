@@ -21,8 +21,8 @@ class CreateBillsTable extends Migration
             $table->float('service_cost', 8, 2);
             $table->boolean('paid_out');
 
-            $table->foreignId('property_id')->references('id')->on('properties');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

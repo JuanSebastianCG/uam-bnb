@@ -214,6 +214,12 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        $user = Auth()->user();
+        if($property->user_id == $user->id){
+            $property->delete();
+            return redirect('/properties');
+        }else{
+            return view('welcome');
+        }
     }
 }
