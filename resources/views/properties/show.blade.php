@@ -115,7 +115,7 @@
                     </div>
                     <div class="card-body col-2">
                         <center>
-                            <button type="submit" class="btn btn-success btn-ls">
+                            <button type="submit" class="btn btn-outline-success btn-ls">
                                 {{ __('Comprar') }}
                             </button>
                         </center>
