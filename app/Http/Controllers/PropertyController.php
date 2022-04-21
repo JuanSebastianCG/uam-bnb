@@ -115,8 +115,6 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $user = Auth::user();
         $property = new Property();
 
@@ -186,8 +184,22 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
+
         if($property->user_id==Auth::id()){
-            return view('properties.edit', compact('property'));
+            $user = Auth::user();
+            $rental_availabilities = Rental_availability::where('property_id',"=",$property->id)->orderBy('created_at','DESC')->get();
+
+            $qualifications = $this->counterQualification($property->id);
+            $comments = $this->listOfComments($property->id);
+            $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->get();
+
+            return view('properties.edit', compact(
+                'property',
+                'user',
+                'photos',
+                'qualifications',
+                'comments',
+                'rental_availabilities'));
         }else {
             return redirect(route('home'));
         }
@@ -203,7 +215,12 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
+        $user = Auth::user();
+        $property->fill($request->input());
+        $property->user_id = Auth::id();
+        $property->save();
 
+        return redirect('/properties');
     }
 
     /**
