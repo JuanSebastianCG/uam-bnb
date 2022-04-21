@@ -183,7 +183,7 @@
 
     <center>
         <div class="row">
-            <form method="POST" action="{{ route('properties.destroy', $characteristic->id) }}" class="formEliminar">
+            <form method="POST" action="{{ route('properties.destroy', $property->id) }}" class="formEliminar">
                 <input name="_method" type="hidden" value="DELETE">
 
                 {{ csrf_field() }}
@@ -195,7 +195,7 @@
         </div>
     </center>
 
-
+    @include('layouts.sweetalert')
     @include('qualification.qjs')
     @include('comment.qjs')
     @include('layouts.mapbox')
