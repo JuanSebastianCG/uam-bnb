@@ -46,7 +46,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                     @include('qualification.qualificationButtons')
-                    
+
                     <!-- likes -->
                 </div>
                 <!-- mapa -->
@@ -97,6 +97,8 @@
     <div class="container mt-3 grayContainer">
         <h4 class="ml-3 mt-4 mb-4 " id="title"> Fechas disponibles</h4>
         @forelse($rental_availabilities as $rental_availability)
+        <form method="POST" action="{{ route('bills.store', $property->id, $user->id) }}" >
+            {{ csrf_field() }}
             <div class="ml-4 card border-dark mb-3 " id="grayCard" style="">
                 <div class="row">
                     <div class="card-body col-9">
@@ -108,16 +110,21 @@
                         <p class="card-text ml-4 " id="disponiblidadTrue" >Disponible</p>
                         @else
                         <p class="card-text ml-4" id="disponiblidadFalse"> No Disponible</p>
-
                         @endif
                         </div>
+                    </div>
+                    <div class="card-body col-2">
+                        <center>
+                            <button type="submit" class="btn btn-outline-success btn-ls">
+                                {{ __('Comprar') }}
+                            </button>
+                        </center>
 
                     </div>
-
-                    <button type="button" class="btn btn-primary btn-lg col-auto mr-4" id="grayButton" >Comprar</button>
                 </div>
-
             </div>
+
+        </form>
         @empty
             <div class="card mb-2">
                 <div class="alert alert-info" role="alert">
@@ -181,7 +188,26 @@
 
     </div>
 
+    @if ($property->user_id == $user->id)
+        <center>
+            <div class="row">
+                <form method="POST" action="{{ route('properties.destroy', $property->id) }}" class="formEliminar">
+                    <input name="_method" type="hidden" value="DELETE">
+                    {{ csrf_field() }}
 
+                    <a href="{{ route('properties.edit', $property->id) }}" style="color:rgb(255, 255, 255)" class="btn btn-dark">
+                        {{ __('Editar') }}
+                    </a>
+
+                    <button type="submit" class="btn btn-danger" {{-- onclick="return confirm('¿Está seguro de querer eliminar esta característica?')" --}}>
+                        {{ __('Eliminar propiedad') }}
+                    </button>
+                </form>
+            </div>
+        </center>
+    @endif
+
+    @include('layouts.sweetalert')
     @include('qualification.qjs')
     @include('comment.qjs')
     @include('layouts.mapbox')

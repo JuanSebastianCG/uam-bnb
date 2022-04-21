@@ -18,8 +18,8 @@ class CreateCommentsTable extends Migration
 
             $table->string('text');
 
-            $table->foreignId('property_id')->references('id')->on('properties');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

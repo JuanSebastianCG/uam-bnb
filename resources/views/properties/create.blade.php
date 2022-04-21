@@ -6,6 +6,9 @@
 
 <form action="{{ route('properties.store') }}" method="POST">
         @csrf
+
+        <h4>Agregar una propiedad</h4>
+
         <div class="container">
             <div class="row">
 

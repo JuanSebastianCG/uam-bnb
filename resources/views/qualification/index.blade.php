@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <center>
-            <h2>Calificaciones</h2>
+            <h2>Calificaciones realizadas por {{ Auth()->User()->name }}</h2>
         </center>
         <div class="row">
             <center>
@@ -12,7 +12,12 @@
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title" style="color: rgb(255, 0, 0)">{{ $qualification->type }}</h6>
+                                @if ($qualification->type == 'like')
+                                    <h6 class="card-title" style="color: rgb(45, 181, 43)">{{ $qualification->type }}</h6>
+                                @else
+                                    <h6 class="card-title" style="color: rgb(227, 49, 49)">{{ $qualification->type }}</h6>
+                                @endif
+
                                 @foreach ($properties as $property)
                                     @if ($property->id == $qualification->property_id)
                                         <h5 class="card-text">{{ $property->name }}</h5>

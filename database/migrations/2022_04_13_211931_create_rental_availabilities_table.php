@@ -20,7 +20,7 @@ class CreateRentalAvailabilitiesTable extends Migration
             $table->date('start_date');
             $table->date('departure_date');
 
-            $table->foreignId('property_id')->references('id')->on('properties');
+            $table->foreignId('property_id')->references('id')->on('properties')->onDelete('cascade');
             $table->timestamps();
         });
     }
