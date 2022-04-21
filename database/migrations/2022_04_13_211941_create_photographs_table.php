@@ -17,7 +17,7 @@ class CreatePhotographsTable extends Migration
             $table->id();
             $table->string('url_image')->default('defaultImage.jpg');
 
-            $table->foreignId('property_id')->references('id')->on('properties');
+            $table->foreignId('property_id')->references('id')->on('properties')->onDelete('cascade');
             $table->timestamps();
         });
     }
