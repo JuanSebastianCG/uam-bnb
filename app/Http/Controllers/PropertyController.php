@@ -87,12 +87,17 @@ class PropertyController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
+        $qualifications = collect();
+        foreach ($properties as $property) {
+            $qualifications->push($this->counterQualification($property->id));
+        }
+
         $photos = collect(new Photograph);
         for ($i=0; $i < count($properties); $i++) {
             $photos->push(Photograph::where("property_id","=",$properties[$i]->id)->orderBy('created_at', 'desc')->first());
         }
 
-        return view('properties.index', compact('properties', 'user','photos'));
+        return view('properties.index', compact('properties', 'user','photos','qualifications'));
     }
 
     /**
@@ -113,7 +118,7 @@ class PropertyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PropertyRequest $request)
     {
         $user = Auth::user();
         $property = new Property();

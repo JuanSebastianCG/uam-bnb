@@ -82,6 +82,8 @@
     #caracteristicas{
         width: auto;
         border:  solid;
+        border-color: white;
+        padding: 1%;
 
         }
     #like{
@@ -99,6 +101,13 @@
     #carouselButton{
         height: 85%
     };
+
+    .buttonSetting{
+
+        margin-top: 10rem
+
+
+    }
 
 
 

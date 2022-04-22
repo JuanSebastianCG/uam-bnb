@@ -1,45 +1,37 @@
+
+
 @extends('layouts.app')
 
-
 @section('content')
+    <div class="container">
+        <center>
+            <h2 class="mb-4 mt-3">Comentarios realizados por {{ Auth()->User()->name }}</h2>
+        </center>
 
-<div class="container">
-    <h4>Comentarios</h4>
-    @forelse ($comments as $comment)
         <div class="row">
-            <div class="col-s4">
-                <center>
-                    <div class="card" style="width: 24rem;">
-                        <div class="card-header">
-                        Comentario
-                        </div>
-                        <div class="card-body">
-                        <p class="card-text">{{ $comment->text }}</p>
-                        @forelse ($properties as $property)
-                            @if ($property->id === $comment->property_id)
-                                <h5 class="card-title">{{ $property->name }}</h5>
-                            @endif
-                        @empty
+            <center>
+                @for ($i = 0; $i < count($comments); $i++)
 
-                        @endforelse
-                        <a href="{{ route('properties.show', $comment->property_id) }}" class="btn btn-sm btn-primary">Ir a la propiedad</a>
-                        </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
 
+                                    <h4 class="card-title" style="color: rgb(143, 133, 133)">{{ $properties[$i]->name }}</h4>
+                                    <h6 class="card-title" style="color: rgb(133, 133, 133)">{{ $comments[$i]->text }}</h6>
+
+                                    <a href="{{ route('properties.show', $properties[$i]->id) }}" class="btn btn-sm btn-primary">Ir a la propiedad</a>
+                            </div>
+                        </div>
                     </div>
-                </center>
 
+                <br>
+            @endfor
+            <div class="mt-2" style="color:black">
+                {{ $comments->links() }}
             </div>
-        </div>
-    @empty
 
-    <div class="card mb-2">
-        <div class="alert alert-info" role="alert">
-            No ha hecho comentarios en ningun inmueble
+            </center>
         </div>
     </div>
-
-    @endforelse
-
-</div>
-
+    @include('layouts.sweetalert')
 @endsection

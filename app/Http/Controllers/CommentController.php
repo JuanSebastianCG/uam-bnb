@@ -23,7 +23,11 @@ class CommentController extends Controller
     {
         $user = Auth()->user();
         $comments =  DB::table('comments')->where('user_id', '=', $user->id)->simplePaginate(4);
-        $properties = Property::All();
+
+        $properties = collect(new Property);
+        foreach ($comments as $comment) {
+            $properties->push(Property::find($comment->property_id));
+        }
 
         return view('comment.index', compact('comments', 'properties'));
     }

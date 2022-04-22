@@ -1,0 +1,16 @@
+
+#cardRecibo{
+
+}
+
+#pagado{
+    color: rgb(138, 201, 45);
+margin-top: 9%;
+}
+
+.BottonBlack{
+    padding: 2px 4px;
+    padding-bottom: 2%;
+    border-bottom: rgb(45, 45, 45) 1px solid;
+
+}

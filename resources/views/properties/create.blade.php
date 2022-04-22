@@ -2,14 +2,14 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.subview-form-errors')
 
 <form action="{{ route('properties.store') }}" method="POST">
-        @csrf
+    @csrf
 
-        <h4>Agregar una propiedad</h4>
 
-        <div class="container">
+    <div class="container">
+            @include('layouts.subview-form-errors')
+            <h4>Agregar una propiedad</h4>
             <div class="row">
 
 
@@ -42,7 +42,7 @@
 
             <div class="form-group col-4">
                 <label for="exampleSelect1" class="form-label mt-4">Tipo de inmobiliario</label>
-                <select class="form-select" id="exampleSelect1">
+                <select class="form-select" id="type" name="type">
                     <option value="house">Casa</option>
                     <option value="apartment">Apartamento</option>
                 </select>

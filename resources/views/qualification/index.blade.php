@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <center>
-            <h2>Calificaciones realizadas por {{ Auth()->User()->name }}</h2>
+            <h2 class="mb-4 mt-3">Calificaciones realizadas por {{ Auth()->User()->name }}</h2>
         </center>
         <div class="row">
             <center>

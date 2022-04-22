@@ -47,9 +47,10 @@ class PhotographController extends Controller
         $properties_id = request()->get('properties_id');
 
         if ($request->has('images')) {
-            foreach ($request->file('images') as $image ) {
+            foreach ($request->images as $image ) {
+
                 /* nombrar la imagen */
-                $imageName = $properties_id.'-image-'.time().rand(1,1000).'.'.$image->extension();
+                $imageName = mt_rand() .time().'.'.$image->getClientOriginalExtension();
                 /* mover al archivo publico */
                 $image->move(public_path('property_images'), $imageName);
 

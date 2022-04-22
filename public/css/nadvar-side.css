@@ -1,54 +1,86 @@
-
-
-
-  #textNav{
-
-
+#filter {
+    width: 70%;
+    margin-top: 10%;
+    margin-left: 16%;
 
 }
 
-  #filednav{
-
-
+#PropertyField {
+    margin-left: 4%;
+    margin-right: 16%;
+    margin-bottom: 3%;
+}
+a:link {text-decoration: none;}
+A {color: rgb(125, 125, 125);}
+.compact {
+    position: relative;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    text-overflow: ellipsis;
+    max-height: 60px;
+    overflow: hidden;
+  }
+  .compact span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, rgb(174, 174, 174,0.1));
+    color: red;
+    line-height: 40px;
+    text-align: right;
+    padding-right: 20px;
   }
 
 
-
-  #filter {
-      width: 70%;
-      margin-top: 10%;
-      margin-left: 16%;
-
-    }
+#card{
+    border: rgb(0, 0, 0,0.1) ;
+    padding: 5%;
+    background-color: rgb(229 229 229);
 
 
-    .nav-var {
-        background-color: black;
-    margin-left: 5%;
-    padding: 3%;
+}
+#qualification{
 
-    }
-
-  #cartas{
-    margin-left: 5%;
-    margin-right: 10%;
-
-  }
-  .indexContainer{
-
-    margin-left: 5%;
-
-  }
-
-  .navbarInput{
-
-  }
-  .navLavel{
-
-      text-transform: uppercase;
     color: #fff;
-  }
-  .navTitle{
+}
+
+.blackBotton {
+    padding: 2px 4px;
+    padding-bottom: 2%;
+    border-bottom: rgb(0, 0, 0) 2px solid;
+}
+
+.whiteBotton {
+
+    width: 95%;
+    border-bottom: rgb(255, 255, 255) 2px double;
+}
+.descriptionField{
+
+    position: relative;
+    top: 1rem;
+}
+
+.nav-var {
+    background-color: black;
+    margin-left: 2%;
+    padding: 3%;
+}
+
+.indexContainer {
+    margin-left: 5%;
+
+}
+
+.navLavel {
+
     text-transform: uppercase;
     color: #fff;
-  }
+}
+
+.navTitle {
+    text-transform: uppercase;
+    color: #fff;
+}

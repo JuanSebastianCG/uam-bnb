@@ -42,8 +42,9 @@
         </div>
 
         <!-- propiedades -->
-        <div class="indexContainer col-8">
-            <h4 class="mb-5">Propiedades de {{ $user->name }}</h4>
+        <div class=" container indexContainer col-8">
+            <h3 class="mb-5 blackBotton">Propiedades de {{ $user->name }}</h3>
+
             <div class="row">
                 @for ($i = 0; $i < count($properties); $i++)
                     @include('properties.subview-index')
