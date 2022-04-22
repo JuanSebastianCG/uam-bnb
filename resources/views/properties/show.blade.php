@@ -157,7 +157,7 @@
                             @if ($rental_availability->availability)
                                 <center>
                                     <button type="submit" class="btn btn-outline-success btn-ls">
-                                        {{ __('Comprar') }}
+                                        {{ __('Alquilar') }}
                                     </button>
                                 </center>
                             @endif
