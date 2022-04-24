@@ -15,29 +15,29 @@
 
             <div class="form-group">
                 <label class="col-form-label mt-4" for="inputDefault">Nombre del inmobiliario</label>
-                <input type="text" class="form-control" placeholder="Ingreselo aqui" id="inputDefault" name="name">
+                <input type="text" value="{{old('name')}}" class="form-control" placeholder="Ingreselo aqui" id="inputDefault" name="name">
             </div>
 
 
             <div class="form-group">
                 <label for="exampleTextarea" class="form-label mt-4">Descripcion</label>
-                <textarea class="form-control" id="exampleTextarea" rows="3" name="description"></textarea>
+                <textarea class="form-control" value="" id="exampleTextarea" rows="3" name="description">{{old('description')}}</textarea>
             </div>
 
 
             <div class="form-group col-4">
                 <label class="col-form-label mt-4" for="inputDefault">Area</label>
-                <input type="number" step="0.000001" class="form-control" placeholder="m2" id="inputDefault" name="area">
+                <input type="number" value="{{old('area')}}" step="0.000001" class="form-control" placeholder="m2" id="inputDefault" name="area">
             </div>
 
             <div class="form-group col-4">
                 <label class="col-form-label mt-4" for="inputDefault">Capacidad</label>
-                <input type="number"  class="form-control" placeholder="Numero" id="inputDefault" name="capacity">
+                <input type="number" value="{{old('capacity')}}"  class="form-control" placeholder="Numero" id="inputDefault" name="capacity">
             </div>
 
             <div class="form-group col-4">
                 <label class="col-form-label mt-4" for="inputDefault">Valor Diario</label>
-                <input type="number" step="0.000001" class="form-control" placeholder="$" id="inputDefault" name="daily_Lease_Value">
+                <input type="number" value="{{old('daily_Lease_Value')}}" step="0.000001" class="form-control" placeholder="$" id="inputDefault" name="daily_Lease_Value">
             </div>
 
             <div class="form-group col-4">
@@ -50,17 +50,17 @@
 
             <div class="form-group col-4">
                 <label class="col-form-label mt-3" for="inputDefault">latitude</label>
-                <input type="number" step="0.0000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="latitude">
+                <input type="number" step="0.0000000000001" value="{{old('latitude')}}" class="form-control" placeholder="Numero" id="inputDefault" name="latitude">
             </div>
 
             <div class="form-group col-4">
                 <label class="col-form-label mt-3" for="inputDefault">longitude</label>
-                <input type="number" step="0.00000000000001" class="form-control" placeholder="Numero" id="inputDefault" name="longitude">
+                <input type="number" step="0.00000000000001"  value="{{old('longitude')}}" class="form-control" placeholder="Numero" id="inputDefault" name="longitude">
             </div>
 
             <div class="form-group mb-5">
                 <label class="col-form-label mt-3" for="inputDefault">Ciudad</label>
-                <input type="text" class="form-control" placeholder="Ingreselo aqui" id="inputDefault" name="city">
+                <input type="text" class="form-control"  value="{{old('city')}}"  placeholder="Ingreselo aqui" id="inputDefault" name="city">
             </div>
 
             <p class="mb-4">Caracteristicas</p>

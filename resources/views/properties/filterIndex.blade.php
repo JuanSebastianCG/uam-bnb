@@ -1,45 +1,19 @@
 <script>
 
 $(function() {
-  $(document).on('click','#filter', function(e) {
+  $(document).on('click','#cleanButton', function(e) {
 
-      startDate = $('#startDate').val().split('/');
-      endDate = $('#endDate').val().split('/');
-      price = document.getElementById('price').value;
-      city = document.getElementById('city').value;
-      filterProperties(startDate,endDate,price,city)
+    city = document.getElementById('city');
+    startDate = document.getElementById('startDate');
+    endDate = document.getElementById('endDate');
+    city.value = "";
+    startDate.value = "";
+    endDate.value = "";
 
   });
 });
 
 
-function filterProperties(startDate,endDate,price,city) {
-
-var url = '{{ route('filterProperty') }}'
-
-$.ajax({
-    type: 'GET',
-    url: url,
-    data: {
-        'startDate': startDate,
-        'endDate': endDate,
-        'price': price,
-        'city': city
-                    },
-    success: function(data) {
-        console.log(data);
-
-    },
-    error: function() {
-        console.log(JSON.stringify(error));
-    }
-});
-
-}
-
-function showPropertys(Properties) {
-
-
-}
 
 </script>
+

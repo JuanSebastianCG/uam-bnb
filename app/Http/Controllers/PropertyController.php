@@ -23,88 +23,46 @@ class PropertyController extends Controller
     use QueryTrait;
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->allProperties(0);
+        return $this->allProperties($request, null);
+    }
+    public function indexUser($user, Request $request)
+    {
+
+        return $this->allProperties($request, $user);
     }
 
-    public function indexUser($user){
-        return $this->allProperties($user);
-    }
+    public function allProperties($request, $user){
 
-    public function allProperties($user){
+        $startDate =date($request->get('startDate'));
+        $endDate= date($request->get('endDate'));
+        $city= $request->get('city');
+
+        $price= $request->get('price');
+
+        $old = [
+            'starDate' => $startDate,
+            'endDate' => $endDate,
+            'city' => $city,
+            'price' => $price
+          ];
+
 
         if ($user == NULL) {
-            $properties = Property::orderBy('created_at', 'desc')
-            ->get();
+            $properties = $this->filterProperty($startDate,$endDate,$price,$city,null);
         }else{
             $user = Auth::user();
-            $properties = $user->property()
-            ->orderBy('created_at', 'desc')
-            ->get();
+            $properties =  $this->filterProperty($startDate,$endDate,$price,$city,$user);
         }
 
+        $qualifications = $this->qualifications($properties);
+        $photos = $this->firstPhotos($properties);
 
-        $qualifications = collect();
-        foreach ($properties as $property) {
-            $qualifications->push($this->counterQualification($property->id));
-        }
 
-        $photos = collect(new Photograph);
-        for ($i=0; $i < count($properties); $i++) {
-            $photos->push(Photograph::where("property_id","=",$properties[$i]->id)->orderBy('created_at', 'desc')->first());
-        }
-
-        return view('properties.index', compact('properties', 'user','photos','qualifications'));
+        return view('properties.index', compact('properties', 'user','photos','qualifications', 'old'));
     }
 
-
-
-
-
-    public function filterProperty(Request $request)
-    {
-        $startDate =date( $request->startDate[0]);
-        $endDate= date($request->endDate[0]);
-        if ($startDate == null) { $startDate = date( '2000-01-1');}
-        if ($endDate == null) { $endDate = date( '4000-01-1');}
-
-        $price= $request->price;
-        $city= $request->city;
-
-        /* fechas disponibles de las propiedades filtradas */
-        $rental_availabilities =
-        Rental_availability::all()
-        ->where("start_date",">",$startDate)
-        ->where("departure_date","<",$endDate)
-        ->where("availability","=",true);
-
-        /* propiedades dentro de las fechas */
-        $property = collect(new Property);
-        foreach ($rental_availabilities as $rental_availability) {
-            $property->push($rental_availability->property)->unique('id');;
-        }
-        $property=$property->unique();
-
-
-        /* filtrar por acs y desc */
-
-        if ($price == "asc") {
-            $property = $property->sortBy('daily_Lease_Value');
-        }
-        if ($price == "desc") {
-            $property = $property->sortByDesc('daily_Lease_Value');
-        }
-        return response()->json($property);
-
-
-        /* filtrar por ciudad */
-        if ($city != null) {
-            $property = $property->where('city',$city);
-        }
-
-        return response()->json($property);
-    }
 
     public function create()
     {
@@ -218,5 +176,80 @@ class PropertyController extends Controller
         }else{
             return view('welcome');
         }
+    }
+
+
+    /*================================================================000  */
+
+    public function qualifications($properties){
+
+        $qualifications = collect();
+
+        if ($properties->first() != null) {
+            foreach ($properties as $property) {
+                $qualifications->push($this->counterQualification($property->id));
+            }
+        }
+
+        return $qualifications;
+    }
+
+    public function firstPhotos($properties){
+
+        $photos = collect(new Photograph);
+
+        if ($properties->first() != null) {
+            foreach ($properties as $property) {
+                $photos->push(Photograph::where("property_id","=",$property->id)->orderBy('created_at', 'desc')->first());
+            }
+        }
+        return $photos;
+    }
+
+    public function filterProperty($startDate,$endDate,$price,$city,$user)
+    {
+        /* fechas disponibles de las propiedades filtradas */
+        if ($startDate != null || $endDate != null) {
+            if ($startDate == null) { $startDate = date( '2000-01-1');}
+            if ($endDate == null) { $endDate = date( '4000-01-1');}
+            $rental_availabilities =
+            Rental_availability::all()
+            ->where("start_date",">",$startDate)
+            ->where("departure_date","<",$endDate)
+            ->where("availability","=",true);
+
+
+            /* propiedades dentro de las fechas */
+            $property = collect(new Property);
+            foreach ($rental_availabilities as $rental_availability) {
+                $property->push($rental_availability->property)->unique('id');;
+            }
+            $property=$property->unique();
+        }else {
+            $property = Property::all();
+        }
+
+
+        /* filtrar por ciudad */
+        if ($city != null) {
+            $property = $property->where('city',$city);
+        }
+
+
+        /* filtrar si es para ver las propiedades de un usuario */
+        if ($user != null) {
+            $property = $property->where('user_id',$user['id']);
+        }
+
+        /* filtrar por acs y desc */
+
+        if ($price == "asc") {
+            $property = $property->sortBy('daily_Lease_Value')->values();
+        }
+        if ($price == "desc") {
+            $property = $property->sortByDesc('daily_Lease_Value')->values();
+        }
+
+        return $property;
     }
 }

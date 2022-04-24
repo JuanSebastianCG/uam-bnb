@@ -191,7 +191,9 @@
         @endif
 
         <div class="form-group mt-1">
+
             <label for="MakeCommentSection" class="form-label mt-2 ">Agregar comentario</label>
+
             <textarea class="form-control" id="MakeCommentSection" rows="3" name="text"></textarea>
             <button type="button" class="btn btn-outline-primary mt-2" id="sendComment">enviar</button>
 

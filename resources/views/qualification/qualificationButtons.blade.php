@@ -7,7 +7,7 @@
             <i class="fa-solid fa-thumbs-down"></i>
             <span class="dislikes" id="dislikes">{{ $qualifications['dislikes'] }}</span>
         </div>
-        @if (auth()->user()->id == $user->id)
+        @if ($property->user_id == $user->id)
             <a type="button" id="addPhoto" class="btn btn-outline-success"
                 href='{{ route('photos', $property->id) }}'>Agregar Foto</a>
 

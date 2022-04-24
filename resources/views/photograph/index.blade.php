@@ -15,7 +15,9 @@
             </div>
             <div class="mt-4">
                 <button type="submit" class="btn btn-primary">Guardar imagen </button>
+                <a class="btn btn-outline-danger" href="{{ route('properties.show', $property,  Auth::user() ) }}">Regresar</a>
             </div>
+
         </form>
 
         @forelse($photos as $photo)
