@@ -40,6 +40,62 @@ class Rental_availabilitiesSeeder extends Seeder
         $p->property_id = "1";
         $p->save();
 
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "2";
+        $p->save();
+
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "2";
+        $p->save();
+
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "3";
+        $p->save();
+
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "3";
+        $p->save();
+
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "3";
+        $p->save();
+
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "2";
+        $p->save();
+
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "2";
+        $p->save();
+
+        $p = new Rental_availability();
+        $p->availability = true;
+        $p->start_date = date("2022-02-17");
+        $p->departure_date = date("2022-05-17");
+        $p->property_id = "3";
+        $p->save();
+
 
     }
 }

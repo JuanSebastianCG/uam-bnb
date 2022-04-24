@@ -1,6 +1,6 @@
 <div class="col-sm-3 " id="PropertyField">
     <div class="card text-white mb-3 " id="card" style="width: 25rem; height: 36rem ;">
-        <a href="{{ route('properties.show', $properties[$i], $user) }}" style="flex: 1;">
+        <a href="{{ route('properties.show', $properties[$i],  Auth::user()) }}" style="flex: 1;">
 
 
             @if ($photos[$i] != null)

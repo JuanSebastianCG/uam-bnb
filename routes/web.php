@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('comments', App\Http\Controllers\CommentController::class);
     Route::resource('bills', App\Http\Controllers\BillController::class);
 
+    Route::get('propertiesUser/{user}', [ App\Http\Controllers\PropertyController::class,'indexUser'])->name('propertiesUser.index');
     Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
 
 

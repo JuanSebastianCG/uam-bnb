@@ -22,70 +22,28 @@ class PropertyController extends Controller
 {
     use QueryTrait;
 
-    public function filterProperty(Request $request)
-    {
 
-        $startDate =date( $request->startDate[0]);
-        $endDate= date($request->endDate[0]);
-        $price= $request->price;
-        $city= $request->city;
-        $filter = collect(new Property );
-
-        /* filtrar por acs y desc */
-        $properties = Property::all();
-        if ($price  !== 'default') {
-            $properties = Property::orderBy('daily_Lease_Value', $price)->get();
-            }
-
-        /* filtrar por ciudad */
-        if ($city != null) {
-            $properties = $properties->where('city',$city);
-        }
-
-        /* fechas disponibles de las propiedades filtradas */
-        $rental_availabilities = collect(new Rental_availability);
-        foreach ($properties as $property) {
-            if ($property->rental_availability) {
-                $rental_availabilities->push($property->rental_availability) ;
-            }
-        }
-        return response()->json($rental_availabilities);
-
-        /* filtrar por fechas disponibles */
-        if ($startDate !== null) {
-            $rental_availabilities->where("start_date",">=",$startDate)->where("availability","=",true);
-        }
-        if ($endDate !== null) {
-            $rental_availabilities->where("departure_date","<=",$endDate)->where("availability","=",true);
-        }
-
-        /* filtrar repetidos */
-        foreach ($rental_availabilities as $rental_availability) {
-        $repeated = false;
-            foreach ($filter as $aux) {
-                if ($aux->id == $rental_availability->property_id) {
-                    $repeated = true;
-                }
-            }
-            if (!$repeated) {
-                $filter = $rental_availability->property;
-            }
-        }
-
-
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        return $this->allProperties(0);
+    }
 
-        $user = Auth::user();
-        $properties = $user->property()
-        ->orderBy('created_at', 'desc')
-        ->get();
+    public function indexUser($user){
+        return $this->allProperties($user);
+    }
+
+    public function allProperties($user){
+
+        if ($user == NULL) {
+            $properties = Property::orderBy('created_at', 'desc')
+            ->get();
+        }else{
+            $user = Auth::user();
+            $properties = $user->property()
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+
 
         $qualifications = collect();
         foreach ($properties as $property) {
@@ -100,11 +58,54 @@ class PropertyController extends Controller
         return view('properties.index', compact('properties', 'user','photos','qualifications'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+
+    public function filterProperty(Request $request)
+    {
+        $startDate =date( $request->startDate[0]);
+        $endDate= date($request->endDate[0]);
+        if ($startDate == null) { $startDate = date( '2000-01-1');}
+        if ($endDate == null) { $endDate = date( '4000-01-1');}
+
+        $price= $request->price;
+        $city= $request->city;
+
+        /* fechas disponibles de las propiedades filtradas */
+        $rental_availabilities =
+        Rental_availability::all()
+        ->where("start_date",">",$startDate)
+        ->where("departure_date","<",$endDate)
+        ->where("availability","=",true);
+
+        /* propiedades dentro de las fechas */
+        $property = collect(new Property);
+        foreach ($rental_availabilities as $rental_availability) {
+            $property->push($rental_availability->property)->unique('id');;
+        }
+        $property=$property->unique();
+
+
+        /* filtrar por acs y desc */
+
+        if ($price == "asc") {
+            $property = $property->sortBy('daily_Lease_Value');
+        }
+        if ($price == "desc") {
+            $property = $property->sortByDesc('daily_Lease_Value');
+        }
+        return response()->json($property);
+
+
+        /* filtrar por ciudad */
+        if ($city != null) {
+            $property = $property->where('city',$city);
+        }
+
+        return response()->json($property);
+    }
+
     public function create()
     {
 
@@ -112,12 +113,7 @@ class PropertyController extends Controller
         return view('properties.create', compact('characteristics'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(PropertyRequest $request)
     {
         $user = Auth::user();
@@ -147,12 +143,7 @@ class PropertyController extends Controller
         return redirect(route('properties.index', $user))->with('added', 'ok');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Property  $property
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Property $property, User $user)
     {
         $user = Auth::user();
@@ -181,12 +172,7 @@ class PropertyController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Property  $property
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Property $property)
     {
 
@@ -211,13 +197,6 @@ class PropertyController extends Controller
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Property  $property
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Property $property)
     {
         $user = Auth::user();
@@ -229,12 +208,7 @@ class PropertyController extends Controller
         return redirect('/properties');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Property  $property
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Property $property)
     {
         $user = Auth()->user();

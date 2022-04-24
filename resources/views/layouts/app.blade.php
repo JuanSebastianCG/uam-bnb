@@ -73,7 +73,7 @@
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         Características
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <div class=" boderMenu dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('characteristics.create') }}">
                                             Añadir característica
                                         </a>
@@ -89,13 +89,15 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Propiedades
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="boderMenu dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('properties.create') }}">
                                         Añadir Propiedad
                                     </a>
                                     <a class="dropdown-item" href="{{ route('properties.index') }}">
                                         Ver Propiedades
                                     </a>
+
+
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -103,22 +105,27 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('users.show', Auth()->user()) }}">
-                                        {{ __('Perfíl') }}
+                                <div class="boderMenu dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('propertiesUser.index', Auth::user()) }}">
+                                        Mis Propiedades
                                     </a>
                                     <a class="dropdown-item" href="{{ route('bills.index') }}">
                                         {{ __('Recibos') }}
                                     </a>
 
+                                    <div class="BottonBlackNav"></div>
                                     <a class="dropdown-item" href="{{ route('qualifications.index') }}">
                                         {{ __('Calificaciones') }}
                                     </a>
-
                                     <a class="dropdown-item" href="{{ route('comments.index') }}">
                                         {{ __('Comentarios') }}
                                     </a>
 
+                                    <div class="BottonBlackNav"></div>
+                                    <a class="dropdown-item" href="{{ route('users.show', Auth()->user()) }}">
+                                        {{ __('Perfíl') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -150,3 +157,23 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<style>
+
+.BottonBlackNav{
+    padding: 2px 4px;
+    padding-bottom: 2%;
+    border-bottom: rgb(132, 132, 132) 1px solid;
+
+}
+.boderMenu{
+border: rgb(156, 156, 156) solid 1px;
+
+
+}
+
+
+
+
+
+</style>
