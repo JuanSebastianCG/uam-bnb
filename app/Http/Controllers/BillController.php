@@ -34,7 +34,10 @@ class BillController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+
+
+        return view('bills.create');
     }
 
     /**
@@ -45,7 +48,7 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -83,7 +86,6 @@ class BillController extends Controller
         $bill_pago = Bill::find($bill);
         $bill_pago->paid_out = $request->paid_out;
         $bill_pago->save();
-
 
         return redirect('/bills');
     }

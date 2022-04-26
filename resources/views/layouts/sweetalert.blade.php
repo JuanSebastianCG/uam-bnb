@@ -71,6 +71,26 @@
     })
 })
 </script>
+
+<script>
+    $('.formPagar').submit(function(e){
+        e.preventDefault();
+        Swal.fire({
+        title: '¿Está seguro de que desea pagar?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, deseo pagar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit();
+        }
+    })
+})
+</script>
+
 @endsection
 
 
