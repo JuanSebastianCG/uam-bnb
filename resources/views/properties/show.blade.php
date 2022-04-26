@@ -160,11 +160,16 @@
                             </center>
                         @endif
                     </div>
+
                 </div>
             </div>
         @empty
         @include('layouts.subview-for-advice')
         @endforelse
+        @if ($property->user_id == $user->id)
+
+            <center><a href="{{ route('create_renta', $property->id) }}" class="btn btn-dark">Agregar fecha</a></center>
+         @endif
 
 
     </div>
