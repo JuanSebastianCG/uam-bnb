@@ -45,9 +45,9 @@ class CharacteristicController extends Controller
             $characteristic->fill($request->input());
             $characteristic->save();
             $creado = true;
-            return redirect('/home');
+            return redirect('/characteristics');
         }else{
-            return view('welcome');
+            return redirect('/properties');
         }
     }
 
@@ -66,7 +66,7 @@ class CharacteristicController extends Controller
             $comprobado = false;
             return redirect('/characteristics');
         }else{
-            return view('welcome');
+            return redirect('/properties');
         }
     }
 
@@ -106,7 +106,7 @@ class CharacteristicController extends Controller
             $characteristic->delete();
             return redirect('/characteristics');
         }else{
-            return view('welcome');
+            return redirect('/properties');
         }
     }
 }
