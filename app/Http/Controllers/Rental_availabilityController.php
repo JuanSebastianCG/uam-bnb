@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rental_availability;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Property;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Rental_availability;
 
 class Rental_availabilityController extends Controller
 {
@@ -23,9 +25,9 @@ class Rental_availabilityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Property $property)
     {
-        return view('dates.create');
+        return view('dates.create', compact('property'));
     }
 
     /**
@@ -34,11 +36,17 @@ class Rental_availabilityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Property $property)
     {
-        
-        if ($request->start_date<= now()) {
-            return back()->with('message', ['msg', __('Fecha invalida')]);
+        $fechas = DB::table('rental_availabilities')->where('property_id', '=', $request->property_id);
+
+        if ($request->start_date<= now() ) {
+
+        }else{
+            $rental = new Rental_availability();
+            $rental->fill($request->input());
+            $rental->property_id = $property->id;
+            $rental->save();
         }
     }
 
