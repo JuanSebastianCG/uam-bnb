@@ -95,6 +95,8 @@
                 <span class="text-center ">
                 <div class="mt-5" >
                     <button type="submit" class="btn btn-primary">Agregar inmobiliario</button>
+                    <a class="btn btn-outline-danger" href="{{ URL::previous() }}">Regresar</a>
+
                 </div>
             </span>
         </div>
