@@ -65,6 +65,22 @@
                 <input type="text" class="form-control" value="{{ $property->city }}" id="inputDefault" name="city">
             </div>
 
+
+            <p class="mb-4">Caracteristicas</p>
+
+            <div class="row ">
+                    @forelse($characteristics as $characteristic)
+                        <div class="col">
+                            <div class="form-check">
+                                <input name="checkbox[]" type="checkbox" class="btn-check" id="{{$characteristic->name}}" autocomplete="off" value="{{$characteristic->id}}">
+                                <label class="btn btn-outline-primary" for="{{$characteristic->name}}">{{$characteristic->name}}</label><br>
+                            </div>
+                        </div>
+                    @empty
+                        <option value="-1">No hay ninguna característica</option>
+                    @endforelse
+            </div>
+
             </div>
                 <span class="text-center ">
                 <div class="mt-5" >
