@@ -156,6 +156,117 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </body>
+
+
+<!-- -----------------------------Footer ----------------------------->
+<footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Right -->
+    <div>
+        <br>
+        {{-- <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+        </a> --}}
+    </div>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+    <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem "></i>UAM BNB
+            </h6>
+            <p> Proyecto desarrollado por: </p>
+            <p> - Esteban Patiño Gaviria </p>
+            <p> - Santiago Jiménez Villegas </p>
+            <p> - Juan Sebastían Cardenas </p>
+            <p> - Manuel Patiño Calderon </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+            Products
+            </h6>
+            <p>
+            <a href="#!" class="text-reset">ORM</a>
+            </p>
+            <p>
+            <a href="#!" class="text-reset">laravel-Collective</a>
+            </p>
+            <p>
+            <a href="https://getbootstrap.com" class="text-reset">bootstrap</a>
+            </p>
+            <p>
+            <a href="#!" class="text-reset">Laravel</a>
+            </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+            </h6>
+            <p>
+            <a href="#!" class="text-reset">Google</a>
+            </p>
+            <p>
+            <a href="https://www.youtube.com" class="text-reset">Youtube</a>
+            </p>
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                Contact
+            </h6>
+            <p><i class="fas fa-home me-3"></i> Manizales, Colombia</p>
+            <p>
+            <i class="fas fa-envelope me-3"></i>
+            info@example.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> ########</p>
+        </div>
+        <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </div>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2022 Copyright
+    </div>
+    <!-- Copyright -->
+</footer>
+
+
 </html>
 
 <style>
