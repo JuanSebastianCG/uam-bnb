@@ -36,7 +36,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('bills/create/{property}/{availability}', [App\Http\Controllers\BillController::class, 'create'])->name('bills.create');
     Route::post('bills/store/{property}/{availability}', [App\Http\Controllers\BillController::class, 'store'])->name('bills.store');
-    Route::resource('bills', App\Http\Controllers\BillController::class);
 
     Route::get('rental_availabilities/create/{property}', [App\Http\Controllers\Rental_availabilityController::class, 'create'])->name('create_renta');
     Route::post('rental_availabilities/store/{property}', [App\Http\Controllers\Rental_availabilityController::class, 'store'])->name('store_renta');
