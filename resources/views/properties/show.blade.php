@@ -110,15 +110,15 @@
                 <li class="ml-5" id="text"> Tipo: {{ __($property->type) }} </li>
                 <li class="ml-5" id="text"> Capacidad: {{ $property->capacity }} Personas </li>
                 <li class="ml-5 " id="text"> Ciudad: {{ $property->city }} </li>
-                <li class="ml-5" id="text"> longitude: {{ $property->longitude }} </li>
-                <li class="ml-5 " id="text"> latitude: {{ $property->latitude }} </li>
+                <li class="ml-5" id="text"> Longitud: {{ $property->longitude }} </li>
+                <li class="ml-5 " id="text"> Latitud: {{ $property->latitude }} </li>
             </ul>
             <div class="ButtonBlack"></div>
         </div>
         <!-- caracteristicas -->
 
         <div class="row mb-3">
-            <h4 class="ml-3 mt-4 mb-4 " id="title"> Este inmobiliario tiene...</h4>
+            <h4 class="ml-3 mt-4 mb-4 " id="title"> Este inmobiliario cuenta con: </h4>
             &nbsp; &nbsp;&nbsp;&nbsp;
             @forelse($characteristics as $characteristic)
                 <h4 class=" ml-2 mt-4 mb-4 col-2 " id="caracteristicas"> {{ $characteristic->name }}</h4>
