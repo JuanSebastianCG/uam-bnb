@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rental_availability;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class Rental_availabilityController extends Controller
 {
@@ -24,7 +25,7 @@ class Rental_availabilityController extends Controller
      */
     public function create()
     {
-        //
+        return view('dates.create');
     }
 
     /**
@@ -35,7 +36,10 @@ class Rental_availabilityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        if ($request->start_date<= now()) {
+            return back()->with('message', ['msg', __('Fecha invalida')]);
+        }
     }
 
     /**
