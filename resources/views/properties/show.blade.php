@@ -154,7 +154,7 @@
                     <div class="card-body col-2">
                         @if ($rental_availability->availability)
                             <center>
-                                <a href="{{ route('bills.create', $property->id) }}" class="btn btn-outline-success btn-ls">
+                                <a href="{{ route('bills.create', ['property'=>$property->id, 'availability' => $rental_availability->id]) }}" class="btn btn-outline-success btn-ls">
                                     {{ __('Alquilar') }}
                                 </a>
                             </center>
