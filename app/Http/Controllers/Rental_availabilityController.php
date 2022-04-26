@@ -41,7 +41,7 @@ class Rental_availabilityController extends Controller
         $user = Auth()->user();
         $fechas = DB::table('rental_availabilities')->where('property_id', '=', $request->property_id);
 
-        if ($request->start_date< now() ) {
+        if ($request->start_date < now() ) {
 
         }else{
             $rental = new Rental_availability();

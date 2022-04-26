@@ -146,6 +146,6 @@ class BillController extends Controller
     }
 
     public function pagar(BillRequest $request, Bill $bill){
-
+        //
     }
 }
