@@ -35,8 +35,18 @@ class PhotographsSeeder extends Seeder
 
         $p = new Photograph();
         $p->property_id = "2";
+        $p->url_image = "6137721001651010347.jpg";
         $p->save();
 
+        $p = new Photograph();
+        $p->property_id = "2";
+        $p->url_image = "6137721001651010347.jpg";
+        $p->save();
+
+        $p = new Photograph();
+        $p->property_id = "2";
+        $p->url_image = "12898568421651010540.jpg";
+        $p->save();
 
     }
 }
