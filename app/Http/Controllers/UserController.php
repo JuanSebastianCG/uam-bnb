@@ -99,4 +99,13 @@ class UserController extends Controller
     {
         //
     }
+
+
+    public function userVip($user_id)
+    {
+        $user = User::find($user_id);
+        $user->status = "vip";
+        $user->save();
+        return redirect(route('propertiesUser.index', Auth::user()));
+    }
 }

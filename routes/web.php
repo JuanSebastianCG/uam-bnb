@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('rental_availabilities/store/{property}', [App\Http\Controllers\Rental_availabilityController::class, 'store'])->name('store_renta');
     Route::get('propertiesUser/{user}', [ App\Http\Controllers\PropertyController::class,'indexUser'])->name('propertiesUser.index');
     Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
+
+    Route::put('userVip/{user_id}', [App\Http\Controllers\UserController::class, 'userVip'])->name('userVip');
 });
 
 Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');
