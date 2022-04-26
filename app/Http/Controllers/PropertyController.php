@@ -142,24 +142,43 @@ class PropertyController extends Controller
             $comments = $this->listOfComments($property->id);
             $photos = Photograph::where('property_id',$property->id)->orderBy('created_at','DESC')->get();
 
+            $characteristics = Characteristic::all();
+            $characteristic_of_property =  Characteristic_of_property::where('property_id',$property->id )->get();
             return view('properties.edit', compact(
                 'property',
                 'user',
                 'photos',
                 'qualifications',
                 'comments',
-                'rental_availabilities'));
+                'rental_availabilities',
+                'characteristics', 'characteristic_of_property'));
         }else {
             return redirect(route('home'));
         }
     }
 
 
-    public function update(Request $request, Property $property)
+    public function update(PropertyRequest $request, Property $property)
     {
         $user = Auth::user();
         $property->fill($request->input());
         $property->user_id = Auth::id();
+
+        $categories = $request->input('checkbox');
+        if ($request->has('checkbox')) {
+            foreach ($categories as $categorie) {
+
+                $characteristic = Characteristic::find($categorie);
+
+                $characteristic_of_property = new Characteristic_of_property();
+                $characteristic_of_property->property_id = $property->id;
+                $characteristic_of_property->characteristic_id = (int)$characteristic->id;
+
+                $characteristic_of_property->save();
+
+            }
+        }
+
         $property->save();
 
         $comprobado = true;

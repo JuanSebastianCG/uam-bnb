@@ -28,16 +28,19 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('properties', App\Http\Controllers\PropertyController::class);
     Route::resource('characteristics', App\Http\Controllers\CharacteristicController::class);
     Route::resource('characteristics_of_properties', App\Http\Controllers\Characteristic_of_propertyController::class);
-    Route::resource('rental_availabilities', App\Http\Controllers\Rental_availabilityController::class);
+    Route::resource('rental_availabilities', App\Http\Controllers\Rental_availabilityController::class)->except(['create','store']);
     Route::resource('photographs', App\Http\Controllers\PhotographController::class)->except(['index']);
     Route::resource('qualifications', App\Http\Controllers\QualificationController::class)->except(['show']);;
     Route::resource('comments', App\Http\Controllers\CommentController::class);
-    Route::resource('bills', App\Http\Controllers\BillController::class);
+    Route::resource('bills', App\Http\Controllers\BillController::class)->except(['create', 'store']);
 
+    Route::get('bills/create/{property}/{availability}', [App\Http\Controllers\BillController::class, 'create'])->name('bills.create');
+    Route::post('bills/store/{property}/{availability}', [App\Http\Controllers\BillController::class, 'store'])->name('bills.store');
+
+    Route::get('rental_availabilities/create/{property}', [App\Http\Controllers\Rental_availabilityController::class, 'create'])->name('create_renta');
+    Route::post('rental_availabilities/store/{property}', [App\Http\Controllers\Rental_availabilityController::class, 'store'])->name('store_renta');
     Route::get('propertiesUser/{user}', [ App\Http\Controllers\PropertyController::class,'indexUser'])->name('propertiesUser.index');
     Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
-
-
 });
 
 Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');
