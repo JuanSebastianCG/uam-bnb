@@ -32,12 +32,9 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Property $property)
     {
-        $user = Auth::user();
-
-
-        return view('bills.create');
+        return view('bills.create', compact('property'));
     }
 
     /**

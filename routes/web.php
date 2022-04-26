@@ -32,12 +32,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('photographs', App\Http\Controllers\PhotographController::class)->except(['index']);
     Route::resource('qualifications', App\Http\Controllers\QualificationController::class)->except(['show']);;
     Route::resource('comments', App\Http\Controllers\CommentController::class);
-    Route::resource('bills', App\Http\Controllers\BillController::class);
+    Route::resource('bills', App\Http\Controllers\BillController::class)->except(['create']);
 
+    Route::get('bills/create/{property}', [App\Http\Controllers\BillController::class, 'create'])->name('create');
     Route::get('propertiesUser/{user}', [ App\Http\Controllers\PropertyController::class,'indexUser'])->name('propertiesUser.index');
     Route::get('photos/{properties_id}', [App\Http\Controllers\PhotographController::class, 'index'])->name('photos');
-
-
 });
 
 Route::GET('lookForQualification',[App\Http\Controllers\QualificationController::class,'lookForQualification'])->name('lookForQualification');
