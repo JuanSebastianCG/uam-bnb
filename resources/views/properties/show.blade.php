@@ -110,15 +110,15 @@
                 <li class="ml-5" id="text"> Tipo: {{ __($property->type) }} </li>
                 <li class="ml-5" id="text"> Capacidad: {{ $property->capacity }} Personas </li>
                 <li class="ml-5 " id="text"> Ciudad: {{ $property->city }} </li>
-                <li class="ml-5" id="text"> longitude: {{ $property->longitude }} </li>
-                <li class="ml-5 " id="text"> latitude: {{ $property->latitude }} </li>
+                <li class="ml-5" id="text"> Longitud: {{ $property->longitude }} </li>
+                <li class="ml-5 " id="text"> Latitud: {{ $property->latitude }} </li>
             </ul>
             <div class="ButtonBlack"></div>
         </div>
         <!-- caracteristicas -->
 
         <div class="row mb-3">
-            <h4 class="ml-3 mt-4 mb-4 " id="title"> Este inmobiliario tiene...</h4>
+            <h4 class="ml-3 mt-4 mb-4 " id="title"> Este inmobiliario cuenta con: </h4>
             &nbsp; &nbsp;&nbsp;&nbsp;
             @forelse($characteristics as $characteristic)
                 <h4 class=" ml-2 mt-4 mb-4 col-2 " id="caracteristicas"> {{ $characteristic->name }}</h4>
@@ -136,37 +136,32 @@
     <div class="container mt-3 grayContainer">
         <h4 class="ml-3 mt-4 mb-4 " id="title"> Fechas disponibles</h4>
         @forelse($rental_availabilities as $rental_availability)
-            <form method="POST" action="{{ route('bills.store', $property->id, $user->id) }}">
-                {{ csrf_field() }}
-                <div class="ml-4 card border-dark mb-3 " id="grayCard" style="">
-                    <div class="row">
-                        <div class="card-body col-9">
-                            <div class="row">
-                                <h4 class="ml-3 card-title col-auto">
-                                    {{ date('d-m-Y', strtotime($rental_availability->start_date)) }}</h4>
-                                <h4 class="ml-3 card-title col-auto">hasta&nbsp;&nbsp;&nbsp;
-                                    {{ date('d-m-Y', strtotime($rental_availability->departure_date)) }}</h4>
-                                @if ($rental_availability->availability)
-                                    <p class="card-text ml-4 " id="disponiblidadTrue">Disponible</p>
-                                @else
-                                    <p class="card-text ml-4" id="disponiblidadFalse"> No Disponible</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="card-body col-2">
+            <div class="ml-4 card border-dark mb-3 " id="grayCard" style="">
+                <div class="row">
+                    <div class="card-body col-9">
+                        <div class="row">
+                            <h4 class="ml-3 card-title col-auto">
+                                {{ date('d-m-Y', strtotime($rental_availability->start_date)) }}</h4>
+                            <h4 class="ml-3 card-title col-auto">hasta&nbsp;&nbsp;&nbsp;
+                                {{ date('d-m-Y', strtotime($rental_availability->departure_date)) }}</h4>
                             @if ($rental_availability->availability)
-                                <center>
-                                    <button type="submit" class="btn btn-outline-success btn-ls">
-                                        {{ __('Alquilar') }}
-                                    </button>
-                                </center>
+                                <p class="card-text ml-4 " id="disponiblidadTrue">Disponible</p>
+                            @else
+                                <p class="card-text ml-4" id="disponiblidadFalse"> No Disponible</p>
                             @endif
-
                         </div>
                     </div>
+                    <div class="card-body col-2">
+                        @if ($rental_availability->availability)
+                            <center>
+                                <a href="{{ route('bills.create', $property->id) }}" class="btn btn-outline-success btn-ls">
+                                    {{ __('Alquilar') }}
+                                </a>
+                            </center>
+                        @endif
+                    </div>
                 </div>
-
-            </form>
+            </div>
         @empty
         @include('layouts.subview-for-advice')
         @endforelse

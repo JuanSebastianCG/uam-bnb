@@ -32,9 +32,9 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Property $property)
     {
-        //
+        return view('bills.create', compact('property'));
     }
 
     /**
@@ -45,7 +45,7 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -83,7 +83,6 @@ class BillController extends Controller
         $bill_pago = Bill::find($bill);
         $bill_pago->paid_out = $request->paid_out;
         $bill_pago->save();
-
 
         return redirect('/bills');
     }

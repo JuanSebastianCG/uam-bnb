@@ -40,16 +40,15 @@
                             <p class="card-text">
                                 ${{ $bill->service_cost + $bill->cleaning_cost + $bill->rental_value }}
                             </p>
-                            {!! Form::model($bill, ['method' => 'PUT', 'route' => ['bills.update', $bill->id]]) !!}
-                            {!! Form::button('<i class="btn btn-dark">Pagar</i>', [
-                                'type' => 'submit',
-                                'title' => 'Pagar recibo',
-                                'class' => 'btn',
-                                'onclick' => "return confirm('¿Está seguro que quiere pagar?')",
-                            ]) !!}
-                            {!! Form::close() !!}
-                        @endif
 
+                            <form method="post" action="{{ route('bills.update', $bill->id) }}" class="formPagar">
+                                {{ csrf_field() }}
+                                {{ method_field('put') }}
+                                <button type="submit" class="btn btn-dark">
+                                    Pagar
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
                 <br>
@@ -59,4 +58,5 @@
         </div>
     </div>
 
+    @include('layouts.sweetalert')
 @endsection
