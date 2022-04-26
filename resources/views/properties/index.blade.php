@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label class="col-form-label navLavel " for="inputDefault">Ciudad</label>
                     <input type="text" value="{{ $old['city'] }}" class="navbarInput form-control" name="city"
-                        placeholder="Default input" id="city">
+                        placeholder="Seleccione una ciudad." id="city">
                 </div>
 
                 <div class="row">
@@ -57,13 +57,13 @@
         </div>
 
         </form>
-        
+
     <!-- propiedades -->
     <div class=" container indexContainer col-8">
         @if ($user == true)
-            <h3 class="mb-5 blackBotton">Propiedades de {{ $user->name }}</h3>
+            <h3 class="mb-5 blackBotton">Propiedades de {{ $user->name }}.</h3>
         @else
-            <h3 class="mb-5 blackBotton">!Hola!&nbsp;{{ Auth::user()->name }}, aqui estan todas las propeidades </h3>
+            <h3 class="mb-5 blackBotton">!Hola!&nbsp;{{ Auth::user()->name }}, aquí están todas las propiedades. </h3>
         @endif
         <div class="row propiedades">
             @php
