@@ -11,7 +11,7 @@
         <div class="nav-var col-auto ">
             <form>
                 <h2 class='navTitle'>Filtros &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src="https://cdn.icon-icons.com/icons2/1993/PNG/512/filter_filters_funnel_list_navigation_sort_sorting_icon_123212.png"
+                    <img src="https://t3.ftcdn.net/jpg/03/20/78/84/360_F_320788475_nEiLVViOBewea7taZWqNUR0lJAMTAaSo.jpg"
                         style="width: 2rem; height: 2rem; background-color: white">
                 </h2>
 

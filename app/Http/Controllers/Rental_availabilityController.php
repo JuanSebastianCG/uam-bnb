@@ -40,15 +40,29 @@ class Rental_availabilityController extends Controller
     {
         $user = Auth()->user();
         $fechas = DB::table('rental_availabilities')->where('property_id', '=', $request->property_id);
+        $start_date = $request['start_date'];
+        $departure_date = $request['departure_date'];
 
-        if ($request->start_date < now() ) {
+        if ($request->start_date < now() ||  $start_date > $departure_date) {
 
+            return redirect(route('properties.show',compact('property', 'user')))->with('error', 'ok');;
         }else{
-            $rental = new Rental_availability();
-            $rental->fill($request->input());
-            $rental->property_id = $property->id;
-            $rental->save();
-            return redirect(route('properties.show',compact('property', 'user')));
+
+            $verifyRentalStart = Rental_availability::whereBetween('start_date', [$start_date, $departure_date])->get();
+            $verifyRentalEnd = Rental_availability::whereBetween('departure_date', [$start_date, $departure_date])->get();
+
+            if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
+
+                $rental = new Rental_availability();
+                $rental->fill($request->input());
+                $rental->property_id = $property->id;
+                $rental->save();
+                return redirect(route('properties.show',compact('property', 'user')))->with('added', 'ok');
+            }else {
+                return redirect(route('properties.show',compact('property', 'user')))->with('error', 'ok');;
+
+            }
+
         }
     }
 

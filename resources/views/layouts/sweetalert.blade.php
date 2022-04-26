@@ -15,6 +15,18 @@
     </script>
 @endif
 
+<!--errro  -->
+@if(session('error')=='ok')
+    <script>
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'algo esta mal!',
+        footer: '<a href="">Puede que las fechas no esten bien?</a>'
+        })
+    </script>
+@endif
+
 @if(session('added')=='ok')
     <script>
         Swal.fire({
