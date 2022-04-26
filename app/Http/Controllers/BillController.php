@@ -45,7 +45,7 @@ class BillController extends Controller
         if($property->area <= 100){
             $clean = $price * 0.10;
         }else{
-        2    $clean = $price * 0.15;
+            $clean = $price * 0.15;
         }
 
         $service = $price * 0.23;

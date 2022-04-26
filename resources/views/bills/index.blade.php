@@ -10,7 +10,7 @@
 
         <div class="row">
             @forelse ($bills as $bill)
-                <div class="card md-2 col-4" id="cardRecibo">
+                <div class="card md-2 col-4 ml-5" id="cardRecibo">
                     <div class="card-body">
                         <h5 class="title">Recibo</h5>
                         @foreach ($properties as $property)
