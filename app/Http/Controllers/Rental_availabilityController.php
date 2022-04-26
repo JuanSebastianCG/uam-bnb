@@ -38,15 +38,17 @@ class Rental_availabilityController extends Controller
      */
     public function store(Request $request, Property $property)
     {
+        $user = Auth()->user();
         $fechas = DB::table('rental_availabilities')->where('property_id', '=', $request->property_id);
 
-        if ($request->start_date<= now() ) {
+        if ($request->start_date< now() ) {
 
         }else{
             $rental = new Rental_availability();
             $rental->fill($request->input());
             $rental->property_id = $property->id;
             $rental->save();
+            return redirect(route('properties.show',compact('property', 'user')));
         }
     }
 
