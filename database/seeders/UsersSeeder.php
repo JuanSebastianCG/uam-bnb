@@ -22,7 +22,7 @@ class UsersSeeder extends Seeder
             'phone' => "3229498780",
             'age' => 18,
             'email' => "juan.cardenas@autonoma.edu.co",
-            'password' => Hash::make('hola1234'),
+            'password' => Hash::make('juan.cardenas@autonoma.edu.co'),
             'created_at' => date("2022-03-10 01:52:43"),
             'status' => "admin",
         ]);
