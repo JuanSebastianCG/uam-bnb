@@ -16,6 +16,7 @@ class Bill extends Model
         'paid_out',
     ];
 
+
     public function user()
     {
         return $this->belongsTo(User::class);
