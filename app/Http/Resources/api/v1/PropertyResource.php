@@ -3,6 +3,8 @@
 namespace App\Http\Resources\api\v1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\api\v1\characteristic_of_propertyResource;
+use App\Http\Resources\api\v1\PhotographResource;
 
 class PropertyResource extends JsonResource
 {
@@ -21,6 +23,12 @@ class PropertyResource extends JsonResource
             'description' => $this->description,
             'area' => $this->area,
             'capacity' => $this->capacity,
+            'Daily Lease Value' => "falta",
+            'Cleaning cost daily value' => "falta",
+            'Service cost daily value' => "falta",
+            'Owners name' => $this->user->name,
+            'Features list' =>   characteristic_of_propertyResource::collection($this->characteristic_of_property),
+            'List of photographs' =>  PhotographResource::collection($this->photograph),
         ];
     }
 }

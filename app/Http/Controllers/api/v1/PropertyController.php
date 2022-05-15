@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Http\Resources\api\v1\PropertyResource;
+
+use App\Models\Property;
+use App\Models\User;
+use App\Models\Characteristic_of_property;
 
 class PropertyController extends Controller
 {
@@ -17,9 +20,11 @@ class PropertyController extends Controller
     public function index()
     {
 
-            $property = Property::orderBy('name', 'asc')->get();
 
-            return response()->json(['data' => PropertyResource::collection($property)], 200);
+        $properties = Property::orderBy('name', 'asc')->get();
+
+        //return response()->json(['data' => $properties], 200);
+            return response()->json(['data' => PropertyResource::collection($properties)], 200);
             //return response()->json(['data' => $property], 200);
     }
 
