@@ -18,8 +18,9 @@ class PropertyResource extends JsonResource
     {
         return
         [
-            'id' => $this->name,
-            'name' => $this->city,
+            'id' => $this->id,
+            'name' => $this->name,
+            'city' => $this->city,
             'description' => $this->description,
             'area' => $this->area,
             'capacity' => $this->capacity,
@@ -29,6 +30,7 @@ class PropertyResource extends JsonResource
             'Owners name' => $this->user->name,
             'Features list' =>   characteristic_of_propertyResource::collection($this->characteristic_of_property),
             'List of photographs' =>  PhotographResource::collection($this->photograph),
+            
         ];
     }
 }
