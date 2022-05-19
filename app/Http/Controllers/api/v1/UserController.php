@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\api\v1\UserResource;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -14,10 +16,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::All();
-        return response()->json(['data' => UserResource::collection($users)], 200);
+        return response()->json(auth('sanctum')->user());
     }
 
     /**
@@ -49,9 +50,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        $user = auth('sanctum')->user();
+        $user->update($request->all());
+        return response()->json(['data' => $user], 200);
     }
 
     /**
