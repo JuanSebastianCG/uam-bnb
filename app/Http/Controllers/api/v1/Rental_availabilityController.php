@@ -16,7 +16,9 @@ class Rental_availabilityController extends Controller
      */
     public function index()
     {
-        //
+        $rentals = Rental_availability::all();
+
+        return response()->json(['data' => $rentals], 201);
     }
 
     /**
