@@ -21,8 +21,9 @@ class CreateBillsTable extends Migration
             $table->float('service_cost', 8, 2);
             $table->boolean('paid_out');
 
-            $table->foreignId('property_id')->references('id')->on('properties')->onDelete('cascade');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('property_id')->references('id')->on('properties')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('rental_avalability')->nullable()->default(null)->references('id')->on('rental_availabilities')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

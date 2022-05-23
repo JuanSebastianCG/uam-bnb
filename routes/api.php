@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\v1\PropertyController;
+use App\Http\Controllers\api\v1\BillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,11 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::post('/v1/logout',[App\Http\Controllers\api\v1\AuthController::class,'logout'])->name('api.logout');
     Route::get('v1/user', [App\Http\Controllers\api\v1\UserController::class,'index']);
     Route::put('v1/user', [App\Http\Controllers\api\v1\UserController::class,'update']);
+
+    Route::apiResource('v1/bills', BillController::class);
 });
+
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

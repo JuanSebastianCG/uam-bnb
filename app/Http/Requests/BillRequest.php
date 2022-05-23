@@ -28,7 +28,6 @@ class BillRequest extends FormRequest
             'cleaning_cost' => 'required|min:0|max:1000',
             'service_cost' => 'required|min:0|max:1000',
             'paid_out' => 'required',
-
         ];
     }
 }
