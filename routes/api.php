@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\v1\PropertyController;
 use App\Http\Controllers\api\v1\BillController;
+use App\Http\Controllers\api\v1\Rental_availabilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::put('v1/user', [App\Http\Controllers\api\v1\UserController::class,'update']);
 
     Route::apiResource('v1/bills', BillController::class);
+
+    Route::apiResource('v1/rentals', Rental_availabilityController::class);
+    Route::get('v1/rentals/property/{property}', [App\Http\Controllers\api\v1\Rental_availabilityController::class,'showOfProperty']);
 });
 
 
