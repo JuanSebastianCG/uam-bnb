@@ -38,7 +38,7 @@ class Rental_availabilityController extends Controller
      */
     public function show(Rental_availability $rental)
     {
-        
+        return response()->json(['data' => $rental], 201);
     }
 
     public function showOfProperty(Property $property)
