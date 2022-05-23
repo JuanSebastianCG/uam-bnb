@@ -87,7 +87,7 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
-        //
+        
     }
 
     /**
@@ -98,7 +98,10 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        
+        $availabilityDate = Rental_availability::find($bill->rental_avalability);
+        $bill->delete();
+        $availabilityDate->delete();
+        return response(null, 204);
     }
 
     /**
@@ -127,4 +130,6 @@ class BillController extends Controller
 
         }
     }
+
+
 }
