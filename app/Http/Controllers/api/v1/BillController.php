@@ -87,7 +87,27 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
-        
+        $start_date = $request->start_date;
+        $departure_date = $request->departure_date;
+        $rental = Rental_availability::find($bill->rental_avalability);
+
+        if(now() < $start_date ){
+            if ($start_date < now() ||  $start_date > $departure_date) {
+                return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
+            }else{
+                $verifyRentalStart = Rental_availability::where('id', '<>', $rental->id)->whereBetween('start_date', [$start_date, $departure_date])->get();
+                $verifyRentalEnd = Rental_availability::where('id', '<>', $rental->id)->whereBetween('departure_date', [$start_date, $departure_date])->get();
+                if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
+                    $rental->start_date = $start_date;
+                    $rental->departure_date = $departure_date;
+                    $rental->save();
+                    return response()->json(['data' => $bill], 201);
+                }else{
+                    return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
+                }
+
+            }
+        }
     }
 
     /**
