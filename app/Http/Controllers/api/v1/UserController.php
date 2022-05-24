@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\api\v1\UserResource;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -52,8 +52,15 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+
         $user = auth('sanctum')->user();
-        $user->update($request->all());
+        if($request->password != null){
+            $user->update($request->all());
+            $user->password = Hash::make($request->password);
+        }else{
+            $user->update($request->all());
+        }
+
         return response()->json(['data' => $user], 200);
     }
 
