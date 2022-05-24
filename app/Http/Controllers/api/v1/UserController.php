@@ -53,8 +53,14 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = auth('sanctum')->user();
-        $user->update($request->all());
-        return response()->json(['data' => $user], 200);
+        $age = $request->age;
+        if($age < 0){
+            return response()->json(['message' => 'Las edad ingresada es inválida.'], 400);
+        }else{
+            $user->update($request->all());
+            return response()->json(['data' => $user], 200);
+        }
+        
     }
 
     /**
