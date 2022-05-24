@@ -62,6 +62,14 @@ class UserController extends Controller
         }
 
         return response()->json(['data' => $user], 200);
+        $age = $request->age;
+        if($age < 0){
+            return response()->json(['message' => 'Las edad ingresada es inválida.'], 400);
+        }else{
+            $user->update($request->all());
+            return response()->json(['data' => $user], 200);
+        }
+
     }
 
     /**
@@ -72,6 +80,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user = auth('sanctum')->user();
+        $user->delete();
+        return response()->json(null);
+
+
+        /* $user->update($request->all()); */
     }
 }

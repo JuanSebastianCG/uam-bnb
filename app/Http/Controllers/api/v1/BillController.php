@@ -39,7 +39,7 @@ class BillController extends Controller
     public function store(Request $request)
     {
         $user = auth('sanctum')->user();
-        $validation = $this->dateVerified($request->start_date, $request->departure_date, $request->property_id);
+        $validation = $this->dateVerified($request->start_date, $request->departure_date, $request->property_id,true);
 
         if(is_numeric($validation) ){
             $validDate = $validation;
@@ -50,14 +50,8 @@ class BillController extends Controller
 
         $property = Property::find($request->property_id);
 
-
-
         $start = Carbon::parse($request->start_date);
         $end = Carbon::parse($request->departure_date);
-
-
-
-
 
         if($validDate !== -1){
             $price = $end->diffInDays($start) * $property->daily_Lease_Value - 10;
@@ -115,14 +109,20 @@ class BillController extends Controller
         if($bill != null){
             $start_date = $request->start_date;
             $departure_date = $request->departure_date;
+
             $rental = Rental_availability::find($bill->rental_avalability);
             $user = auth('sanctum')->user();
 
-       /*      $validation = $this->dateVerified($start_date, $departure_date, $bill->property_id);
+            $rental->start_date = "9999-12-1";
+            $rental->departure_date = "9999-12-1";
+            $rental->save();
+
+
+            $validation = $this->dateVerified($start_date, $departure_date, $bill->property_id,false);
 
             if(!is_numeric($validation) ){
                 return response()->json(['message' => $validation], 400);
-            } */
+            }
 
 
             if($bill->user_id == $user->id){
@@ -184,7 +184,7 @@ class BillController extends Controller
     /**
      * Verifica que la fecha ingresada sea correcta
      */
-    public function dateVerified($start_date, $departure_date, $property_id){
+    public function dateVerified($start_date, $departure_date, $property_id,$confimation){
         $fechas = DB::table('rental_availabilities')->where('property_id', '=', $property_id);
 
         $inputs = array(
@@ -214,17 +214,22 @@ class BillController extends Controller
 
                 $verifyRentalStart = Rental_availability::whereBetween('start_date', [$start_date, $departure_date])->get();
                 $verifyRentalEnd = Rental_availability::whereBetween('departure_date', [$start_date, $departure_date])->get();
+
+
                 if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
-                    $rental = new Rental_availability();
-                    $rental->start_date = $start_date;
-                    $rental->departure_date = $departure_date;
-                    $rental->property_id = $property_id;
-                    $rental->availability = false;
-                    /* Rental_availability::create($rental); */
-                    $rental->save();
-                    return intval($rental->id);
+                    if ($confimation == true) {
+                        $rental = new Rental_availability();
+                        $rental->start_date = $start_date;
+                        $rental->departure_date = $departure_date;
+                        $rental->property_id = $property_id;
+                        $rental->availability = false;
+                        /* Rental_availability::create($rental); */
+                        $rental->save();
+                        return intval($rental->id);
+                    }
+                    return 1;
                 }else{
-                    return "esa fecha no esta disponible.";
+                    return "esa fecha no esta disponible, ya la tiene otro usuario.";
                 }
 
 
