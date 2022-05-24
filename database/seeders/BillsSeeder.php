@@ -48,14 +48,5 @@ class BillsSeeder extends Seeder
         $p->rental_avalability = "3";
         $p->save();
 
-        $p = new Bill();
-        $p->rental_value = 1000;
-        $p->cleaning_cost = 100;
-        $p->service_cost = 200.30;
-        $p->paid_out = false;
-        $p->property_id = "1";
-        $p->user_id = "1";
-        $p->rental_avalability = "1";
-        $p->save();
     }
 }

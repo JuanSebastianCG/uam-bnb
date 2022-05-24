@@ -22,7 +22,6 @@ class BillController extends Controller
     {
         $bills = Bill::All();
 
-        return response()->json($bills->rental_availability);
         return response()->json(['data' => BillResource::collection($bills)], 200);
     }
 

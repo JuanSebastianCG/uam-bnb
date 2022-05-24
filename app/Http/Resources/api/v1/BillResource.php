@@ -4,9 +4,8 @@ namespace App\Http\Resources\api\v1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\api\v1\AvailabilityResource;
-
-
 use App\Models\Rental_availability;
+
 
 class BillResource extends JsonResource
 {
@@ -18,6 +17,7 @@ class BillResource extends JsonResource
      */
     public function toArray($request)
     {
+        $dates = Rental_availability::where('id', '=', $this->rental_avalability)->get();
 
         return
         [
@@ -27,7 +27,7 @@ class BillResource extends JsonResource
             'Cleaning_cost' => $this->cleaning_cost,
             'Service_cost' => $this->service_cost,
             'Paid_out' => $this->paid_out,
-            'Dates' =>   $this->rental_availability,
+            'Dates_reserved' => AvailabilityResource::collection($dates),
         ];
     }
 }
