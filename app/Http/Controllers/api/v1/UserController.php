@@ -65,6 +65,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user = auth('sanctum')->user();
+        $user->delete();
+        return response()->json(null);
+
+
+        /* $user->update($request->all()); */
     }
 }
