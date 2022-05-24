@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Rental_availability;
 use Carbon\Carbon;
 use App\Http\Resources\api\v1\BillResource;
+use App\Models\User;
 
 class BillController extends Controller
 {
@@ -20,7 +21,9 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = Bill::All();
+        $user = auth('sanctum')->user();
+
+        $bills = Bill::where('user_id', '=', $user->id)->get();
 
         return response()->json(['data' => BillResource::collection($bills)], 200);
     }
@@ -33,6 +36,7 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth('sanctum')->user();
         $validDate = $this->dateVerified($request->start_date, $request->departure_date, $request->property_id);
         $property = Property::find($request->property_id);
         $start = Carbon::parse($request->start_date);
@@ -59,7 +63,7 @@ class BillController extends Controller
             $bill->service_cost = $service;
             $bill->paid_out = false;
             $bill->property_id = $property->id;
-            $bill->user_id = $request->user_id;
+            $bill->user_id = $user->id;
             $bill->rental_avalability = $validDate;
             $bill->save();
 
@@ -89,26 +93,34 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
-        $start_date = $request->start_date;
-        $departure_date = $request->departure_date;
-        $rental = Rental_availability::find($bill->rental_avalability);
+        if($bill != null){
+            $start_date = $request->start_date;
+            $departure_date = $request->departure_date;
+            $rental = Rental_availability::find($bill->rental_avalability);
+            $user = auth('sanctum')->user();
 
-        if(now() < $start_date ){
-            if ($start_date < now() ||  $start_date > $departure_date) {
-                return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
-            }else{
-                $verifyRentalStart = Rental_availability::where('id', '<>', $rental->id)->whereBetween('start_date', [$start_date, $departure_date])->get();
-                $verifyRentalEnd = Rental_availability::where('id', '<>', $rental->id)->whereBetween('departure_date', [$start_date, $departure_date])->get();
-                if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
-                    $rental->start_date = $start_date;
-                    $rental->departure_date = $departure_date;
-                    $rental->save();
-                    return response()->json(['data' => $bill], 201);
-                }else{
+            if($bill->user_id == $user->id){
+                if(now() < $start_date ){
+                if ($start_date < now() ||  $start_date > $departure_date) {
                     return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
+                }else{
+                    $verifyRentalStart = Rental_availability::where('id', '<>', $rental->id)->whereBetween('start_date', [$start_date, $departure_date])->get();
+                    $verifyRentalEnd = Rental_availability::where('id', '<>', $rental->id)->whereBetween('departure_date', [$start_date, $departure_date])->get();
+                        if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
+                            $rental->start_date = $start_date;
+                            $rental->departure_date = $departure_date;
+                            $rental->save();
+                            return response()->json(['data' => $bill], 201);
+                        }else{
+                            return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
+                        }
+                    }
                 }
-
+            }else{
+                return response()->json(['message' => 'Usted no posee permisos para modificar este recibo.'], 400);
             }
+        }else{
+            return response()->json(['message' => 'El recibo solicitado no existe.'], 400);
         }
     }
 
@@ -120,10 +132,25 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        $availabilityDate = Rental_availability::find($bill->rental_avalability);
-        $bill->delete();
-        $availabilityDate->delete();
-        return response(null, 204);
+        $date = Rental_availability::where('id', '=', $this->rental_avalability)->get();
+
+        if(now() <= $date->start_date){
+            if($bill != null){
+                $user = auth('sanctum')->user();
+                if($bill->user_id == $user->id){
+                    $availabilityDate = Rental_availability::find($bill->rental_avalability);
+                    $bill->delete();
+                    $availabilityDate->delete();
+                    return response(null, 204);
+                }else{
+                    return response()->json(['message' => 'Usted no posee permisos para modificar este recibo.'], 400);
+                }
+            }else{
+                return response()->json(['message' => 'El recibo solicitado no existe.'], 400);
+            }
+        }else{
+            return response()->json(['message' => 'La fecha actual ya no está habilitada para cancelar el servicio.'], 400);
+        }
     }
 
     /**
