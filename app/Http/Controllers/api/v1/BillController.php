@@ -153,7 +153,6 @@ class BillController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
@@ -178,6 +177,9 @@ class BillController extends Controller
             return response()->json(['message' => 'La fecha actual ya no está habilitada para cancelar el servicio.'], 400);
         }
     }
+
+
+
 
     /**
      * Verifica que la fecha ingresada sea correcta
