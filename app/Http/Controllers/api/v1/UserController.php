@@ -70,7 +70,7 @@ class UserController extends Controller
                 return response()->json(['data' => $user], 200);
             }
         }
-        
+
 
         /* $user = auth('sanctum')->user();
         $age = $request->age;
@@ -80,13 +80,8 @@ class UserController extends Controller
         }else{
             $user->update($request->all());
             return response()->json(['data' => $user], 200);
-<<<<<<< HEAD
-        } */
-        
-=======
         }
 
->>>>>>> 2057b4843ad0e8ff884573ea3bac2100184b4ba1
     }
 
     /**
