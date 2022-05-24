@@ -27,6 +27,11 @@ class Bill extends Model
         return $this->belongsTo(Property::class);
     }
 
+    public function rental_availability()
+    {
+        return $this->belongsTo(Rental_availability::class);
+    }
+
 
 
 }

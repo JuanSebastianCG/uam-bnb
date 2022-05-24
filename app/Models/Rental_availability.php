@@ -20,4 +20,10 @@ class Rental_availability extends Model
         return $this->belongsTo(Property::class, 'property_id');
     }
 
+    public function bill()
+    {
+        return $this->hasOne(Bill::class);
+    }
+
+
 }
