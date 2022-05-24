@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\v1\PropertyController;
 use App\Http\Controllers\api\v1\BillController;
 use App\Http\Controllers\api\v1\Rental_availabilityController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,8 +25,10 @@ Route::post('/v1/login',[App\Http\Controllers\api\v1\AuthController::class,'logi
 Route::middleware(['auth:sanctum'])->group(function() {
 
     Route::post('/v1/logout',[App\Http\Controllers\api\v1\AuthController::class,'logout'])->name('api.logout');
+    
     Route::get('v1/user', [App\Http\Controllers\api\v1\UserController::class,'index']);
     Route::put('v1/user', [App\Http\Controllers\api\v1\UserController::class,'update']);
+    Route::delete('v1/user', [App\Http\Controllers\api\v1\UserController::class,'destroy']);
 
     Route::apiResource('v1/bills', BillController::class);
 
