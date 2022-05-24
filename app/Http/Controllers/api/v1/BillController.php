@@ -9,6 +9,7 @@ use App\Models\Property;
 use Illuminate\Support\Facades\DB;
 use App\Models\Rental_availability;
 use Carbon\Carbon;
+use App\Http\Resources\api\v1\BillResource;
 
 class BillController extends Controller
 {
@@ -20,7 +21,7 @@ class BillController extends Controller
     public function index()
     {
         $bills = Bill::All();
-        return response()->json(['data' => $bills], 200);
+        return response()->json(['data' => BillResource::collection($bills)], 200);
     }
 
     /**
@@ -61,7 +62,7 @@ class BillController extends Controller
             $bill->rental_avalability = $validDate;
             $bill->save();
 
-            return response()->json(['data' => $bill], 201);
+            return response()->json(['data' => BillResource::collection($bill)], 201);
         }else{
             return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
         }

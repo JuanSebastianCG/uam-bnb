@@ -25,6 +25,7 @@ class BillsSeeder extends Seeder
         $p->paid_out = true;
         $p->property_id = "1";
         $p->user_id = "2";
+        $p->rental_avalability = "1";
         $p->save();
 
         $p = new Bill();
@@ -34,6 +35,7 @@ class BillsSeeder extends Seeder
         $p->paid_out = true;
         $p->property_id = "1";
         $p->user_id = "3";
+        $p->rental_avalability = "2";
         $p->save();
 
         $p = new Bill();
@@ -43,6 +45,7 @@ class BillsSeeder extends Seeder
         $p->paid_out = true;
         $p->property_id = "2";
         $p->user_id = "1";
+        $p->rental_avalability = "3";
         $p->save();
 
         $p = new Bill();
@@ -52,6 +55,7 @@ class BillsSeeder extends Seeder
         $p->paid_out = false;
         $p->property_id = "1";
         $p->user_id = "1";
+        $p->rental_avalability = "1";
         $p->save();
     }
 }
