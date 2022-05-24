@@ -153,7 +153,6 @@ class BillController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
@@ -178,6 +177,9 @@ class BillController extends Controller
             return response()->json(['message' => 'La fecha actual ya no está habilitada para cancelar el servicio.'], 400);
         }
     }
+
+
+
 
     /**
      * Verifica que la fecha ingresada sea correcta
@@ -233,6 +235,32 @@ class BillController extends Controller
 
 
         }
+    }
+
+
+    public function payBill(Bill $bill)
+    {
+        $user = auth('sanctum')->user();
+
+
+        if ($user->id != $bill->user_id) {
+
+            return response()->json(['data' => "no hay ningun recibo suyo con esta id."], 400);
+
+        }
+
+        if ($bill->paid_out == false) {
+                $bill->paid_out =  true;
+                $bill->save();
+                return response()->json(['data' => "su compra fue aceptada."], 400);
+
+        }else{
+
+            return response()->json(['data' => "esta recibo ya esta pagado."], 400);
+        }
+
+
+
     }
 
 

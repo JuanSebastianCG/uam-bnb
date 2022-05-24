@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use App\Http\Resources\api\v1\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2057b4843ad0e8ff884573ea3bac2100184b4ba1
 
 class UserController extends Controller
 {
@@ -81,8 +84,13 @@ class UserController extends Controller
         }else{
             $user->update($request->all());
             return response()->json(['data' => $user], 200);
+<<<<<<< HEAD
         } */
         
+=======
+        }
+
+>>>>>>> 2057b4843ad0e8ff884573ea3bac2100184b4ba1
     }
 
     /**
