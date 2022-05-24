@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use App\Http\Resources\api\v1\BillResource;
 use App\Models\User;
 
+use Validator;
+
 class BillController extends Controller
 {
     /**
@@ -37,10 +39,25 @@ class BillController extends Controller
     public function store(Request $request)
     {
         $user = auth('sanctum')->user();
-        $validDate = $this->dateVerified($request->start_date, $request->departure_date, $request->property_id);
+        $validation = $this->dateVerified($request->start_date, $request->departure_date, $request->property_id);
+
+        if(is_numeric($validation) ){
+            $validDate = $validation;
+        }else{
+
+            return response()->json(['message' => $validation], 400);
+        }
+
         $property = Property::find($request->property_id);
+
+
+
         $start = Carbon::parse($request->start_date);
         $end = Carbon::parse($request->departure_date);
+
+
+
+
 
         if($validDate !== -1){
             $price = $end->diffInDays($start) * $property->daily_Lease_Value - 10;
@@ -67,7 +84,7 @@ class BillController extends Controller
             $bill->rental_avalability = $validDate;
             $bill->save();
 
-            return response()->json(['data' => BillResource::collection($bill)], 201);
+            return response()->json(['data' => new BillResource($bill)], 201);
         }else{
             return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
         }
@@ -93,11 +110,20 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
+
+
         if($bill != null){
             $start_date = $request->start_date;
             $departure_date = $request->departure_date;
             $rental = Rental_availability::find($bill->rental_avalability);
             $user = auth('sanctum')->user();
+
+       /*      $validation = $this->dateVerified($start_date, $departure_date, $bill->property_id);
+
+            if(!is_numeric($validation) ){
+                return response()->json(['message' => $validation], 400);
+            } */
+
 
             if($bill->user_id == $user->id){
                 if(now() < $start_date ){
@@ -109,8 +135,9 @@ class BillController extends Controller
                         if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
                             $rental->start_date = $start_date;
                             $rental->departure_date = $departure_date;
+                            $rental->property_id = $bill->property_id;
                             $rental->save();
-                            return response()->json(['data' => $bill], 201);
+                            return response()->json(['data' => new BillResource($bill)], 201);
                         }else{
                             return response()->json(['message' => 'Las fechas ingresadas son inválidas.'], 400);
                         }
@@ -132,9 +159,8 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        $date = Rental_availability::where('id', '=', $this->rental_avalability)->get();
-
-        if(now() <= $date->start_date){
+        $date = Rental_availability::where('id', '=', $bill->rental_avalability)->get();
+        if(now() <= $date[0]->start_date){
             if($bill != null){
                 $user = auth('sanctum')->user();
                 if($bill->user_id == $user->id){
@@ -159,23 +185,47 @@ class BillController extends Controller
     public function dateVerified($start_date, $departure_date, $property_id){
         $fechas = DB::table('rental_availabilities')->where('property_id', '=', $property_id);
 
-        if ($start_date < now() ||  $start_date > $departure_date) {
-            return -1;
-        }else{
-            $verifyRentalStart = Rental_availability::whereBetween('start_date', [$start_date, $departure_date])->get();
-            $verifyRentalEnd = Rental_availability::whereBetween('departure_date', [$start_date, $departure_date])->get();
-            if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
-                $rental = new Rental_availability();
-                $rental->start_date = $start_date;
-                $rental->departure_date = $departure_date;
-                $rental->property_id = $property_id;
-                $rental->availability = false;
-                /* Rental_availability::create($rental); */
-                $rental->save();
-                return $rental->id;
-            }else{
-                return -1;
-            }
+        $inputs = array(
+            'start_date' => $start_date,
+            'end_date'   => $departure_date
+          );
+
+        $rules = array(
+            'start_date' => 'required|date',
+            'end_date'   => 'required|date'
+          );
+
+        $validation = Validator::make($inputs, $rules);
+
+        if( $validation->fails() )
+        {
+            return "los campos no son fechas y-m-d.";
+        }
+
+
+        if (  $start_date > $departure_date) {
+            return "la fecha de incio debe ser mayo que la de finalización.";
+        }else if($start_date < now()) {
+            return "las fecha de inicio deben ser de hoy en adelante. ";
+        }
+        else{
+
+                $verifyRentalStart = Rental_availability::whereBetween('start_date', [$start_date, $departure_date])->get();
+                $verifyRentalEnd = Rental_availability::whereBetween('departure_date', [$start_date, $departure_date])->get();
+                if ($verifyRentalStart->first() == null && $verifyRentalEnd->first() == null ) {
+                    $rental = new Rental_availability();
+                    $rental->start_date = $start_date;
+                    $rental->departure_date = $departure_date;
+                    $rental->property_id = $property_id;
+                    $rental->availability = false;
+                    /* Rental_availability::create($rental); */
+                    $rental->save();
+                    return intval($rental->id);
+                }else{
+                    return "esa fecha no esta disponible.";
+                }
+
+
 
         }
     }
