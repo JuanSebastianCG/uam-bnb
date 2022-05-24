@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\api\v1\UserResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -52,14 +53,35 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+
         $user = auth('sanctum')->user();
+        $user->update($request->all());
         $age = $request->age;
+
+        if($age < 0){
+            return response()->json(['message' => 'Las edad ingresada es inválida.'], 400);
+        }else{
+            if($request->password != null){
+                $user->update($request->all());
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return response()->json(['data' => $user], 200);
+            }else{
+                $user->update($request->all());
+                return response()->json(['data' => $user], 200);
+            }
+        }
+        
+
+        /* $user = auth('sanctum')->user();
+        $age = $request->age;
+
         if($age < 0){
             return response()->json(['message' => 'Las edad ingresada es inválida.'], 400);
         }else{
             $user->update($request->all());
             return response()->json(['data' => $user], 200);
-        }
+        } */
         
     }
 
